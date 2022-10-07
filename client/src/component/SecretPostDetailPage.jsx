@@ -1,6 +1,10 @@
 import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+import React, {useState, useEffect, useParams} from "react";
+
 
 const SecretPostDetailPage = () => {
   const [secretPostDetail, setSecretPostDetail] = useState({});

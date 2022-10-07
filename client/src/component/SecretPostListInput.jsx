@@ -30,8 +30,6 @@ const SecretPostListInput = ({ secretPost, setSecretPost, setActivity }) => {
 </tr>
 </table>
 
-
-
     </React.Fragment>);
 }
 
