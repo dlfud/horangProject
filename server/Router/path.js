@@ -45,8 +45,8 @@ router.post("/update/:id", (request, response) => {
   const sql = "UPDATE secretPost SET ? WHERE id = " + request.params.id;
   db.query(sql, request.body, function (err, result) {
     if (err) throw err;
+    response.send("success");
     console.log("비밀게시물 업데이트 완료");
-    response.redirect("/");
   });
 });
 
@@ -59,7 +59,6 @@ router.post("/delete/:id", (request, response) => {
   db.query(sql,  function (err, result) {
     if (err) throw err;
     console.log("비밀게시물 삭제 완료");
-    response.redirect("/");
   });
 });
 
