@@ -1,0 +1,17 @@
+# express (server)
+npm i express
+
+# nodemone : 파일을 변경할 때 마다 바로바로 업데이트 (server)
+npm i nodemon --save
+
+# concurrently : react 서버와 node 서버를 동시에 실행시키기 위한 모듈 (server)
+npm i concurrently --save
+
+# axios : 통신수단 (client)
+npm i axios
+
+# mysql (sever)
+npm i mysql
+
+# react-router-dom (client)
+npm i react-router-dom
