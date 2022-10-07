@@ -47,10 +47,9 @@ router.post("/update/:id", (request, response) => {
     if (err) throw err;
     response.send("success");
     console.log("비밀게시물 업데이트 완료");
-<<<<<<< Updated upstream
-=======
+
     response.send("성공^^");
->>>>>>> Stashed changes
+
   });
 });
 
