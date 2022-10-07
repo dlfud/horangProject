@@ -19,7 +19,7 @@ const AppRoute = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/create" element={<Create />} />
-        <Route exact path="/secretPostDetailPage" element={<SecretPostDetailPage />} />
+        <Route exact path="/secretPostDetailPage/:id" element={<SecretPostDetailPage />} />
         <Route exact path="/update/:id" element={<Update />} />
       </Routes>
     </BrowserRouter>
