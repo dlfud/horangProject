@@ -6,6 +6,7 @@ import SecretPostListInput from "./SecretPostListInput";
 
 
 const HomeR = () => {
+  const [activity, setActivity] = useState("false");
   const [secretPost, setSecretPost] = useState([]);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const HomeR = () => {
       setSecretPost(secretPost.data);
     };
     getData();
-  },[]);
+  },[activity]);
 
   return(
     <>
@@ -41,6 +42,7 @@ const HomeR = () => {
             key = {index}
             secretPost = {secretPost}
             setSecretPost={setSecretPost}
+            setActivity={setActivity}
             />
           ))}      
       </div>
