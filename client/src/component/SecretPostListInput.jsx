@@ -15,7 +15,7 @@ const SecretPostListInput = ({ secretPost, setSecretPost, setActivity }) => {
       <table>
         <tr>
           <td>{id}</td>
-          <td><Link to="/secretPostDetailPage">{title}</Link></td>
+          <td><Link to={`/secretPostDetailPage/${id}`}>{title}</Link></td>
           <td>{createDate}</td>
           <td>{view}</td>
           <td><Link to={`/update/${id}`}>수정</Link></td>

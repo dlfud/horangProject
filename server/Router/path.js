@@ -16,8 +16,8 @@ router.get("/", (request, response) => {
   });
 });
 
-router.get("/", (request, response) => {
-  const sql = "select * from secretPost";
+router.get("/secretPostDetailPage/:id", (request, response) => {
+  const sql = "select * from secretPost WHERE id = " + request.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send(result);
