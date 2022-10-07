@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-const SecretPostListInput = ({ secretPost }) => {
+const SecretPostListInput = ({ secretPost, setSecretPost, setActivity }) => {
 
 
 
@@ -25,7 +25,9 @@ const SecretPostListInput = ({ secretPost }) => {
             axios({
               url: `http://localhost:3000/delete/${id}`,
               method: "POST",
-            })}}><button>삭제</button></form></td>
+            })
+            setActivity("true" + id);
+            }}><button>삭제</button></form></td>
 </tr>
 </table>
 
