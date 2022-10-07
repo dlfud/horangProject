@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import HomeR from "./component/HomeR.jsx";
+import Home from "./component/Home.jsx";
 import horangLoGo from "./Picture/horangLOGO 1.png";
 import "./App.css";
 import Create from "./component/Create.jsx";
 import Update from "./component/Update.jsx";
-import Read from "./component/Read.jsx";
+import SecretPostDetailPage from "./component/SecretPostDetailPage.jsx";
 
 const AppRoute = () => {
  return(
@@ -17,9 +17,9 @@ const AppRoute = () => {
       </div>
 
       <Routes>
-        <Route exact path="/" element={<HomeR />} />
+        <Route exact path="/" element={<Home />} />
         <Route exact path="/create" element={<Create />} />
-        <Route exact path="/read" element={<Read />} />
+        <Route exact path="/secretPostDetailPage" element={<SecretPostDetailPage />} />
         <Route exact path="/update/:id" element={<Update />} />
       </Routes>
     </BrowserRouter>

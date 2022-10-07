@@ -1,6 +1,6 @@
 
 
-const Read = () => {
+const SecretPostDetailPage = () => {
 
   return(
   <>
@@ -10,4 +10,4 @@ const Read = () => {
   </>);
 }
 
-export default Read;
+export default SecretPostDetailPage;
