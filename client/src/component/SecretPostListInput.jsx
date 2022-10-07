@@ -15,13 +15,7 @@ const SecretPostListInput = ({ secretPost }) => {
       <table>
         <tr>
           <td>{id}</td>
-          <td>{title}</td>
-          {/* <td><Link 
-          to={{
-            pathname:`/update/${id}`, 
-            state:{
-              secretPost:
-          }}}>{title}</Link></td> */}
+          <td><Link to="/read">{title}</Link></td>
           <td>{content}</td>
           <td>{createDate}</td>
           <td>{view}</td>
