@@ -1,9 +1,6 @@
 import axios from "axios";
-
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import React, {useState, useEffect, useParams} from "react";
+import React, {useState, useEffect} from "react";
 
 
 const SecretPostDetailPage = () => {
@@ -17,9 +14,10 @@ const SecretPostDetailPage = () => {
         method: "GET",
       });
       setSecretPostDetail(...secretPost.data);
+
     };
     getData();
-  },[]);
+  },[id]);
 
 
   return(
