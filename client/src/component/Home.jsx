@@ -2,12 +2,15 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
+import Pagination from "./Pagination";
 
 
 
 const HomeR = () => {
   const [activity, setActivity] = useState("false");
   const [secretPost, setSecretPost] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(10);
 
   useEffect(() => {
     const getData = async () => {
@@ -20,32 +23,24 @@ const HomeR = () => {
     getData();
   },[activity]);
 
+const indexOfLastPost = currentPage * postPerPage;
+const indexOfFirstPost = indexOfLastPost - postPerPage;
+const currentPosts = secretPost.slice(indexOfFirstPost, indexOfLastPost);
+
+const paginate = pageNum => setCurrentPage(pageNum);
+
   return(
     <>
    <div className="absolute inset-x-0 top-0">
         <strong>익명 게시물</strong>
       </div>
-      <div className="PageHeight overflow-auto ">
-      <table>
-          <tr>
-            <th>No</th>
-            <th>제목</th>
-            <th>작성일</th>
-            <th>조회수</th>
-            <th>수정</th>
-            <th>삭제</th>
-          </tr>
-        </table>
-            {secretPost&&secretPost.map((secretPost, index) => (
-            <SecretPostListInput
-            key = {index}
-            secretPost = {secretPost}
-            setSecretPost={setSecretPost}
-            setActivity={setActivity}
-            />
-          ))}      
-      </div>
+     <SecretPostListInput secretPost={currentPosts} setActivity={setActivity}/>
       <Link to="/create" > 생성  </Link>
+      <Pagination 
+      postPerPage={postPerPage}
+      totalPosts={secretPost.length}
+      paginate={paginate}      
+      />
     </>
   );
 }
