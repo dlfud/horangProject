@@ -64,4 +64,14 @@ router.post("/delete/:id", (request, response) => {
   });
 });
 
+
+/*댓글 생성*/
+router.post("/commentCreate/:id", (request, response) => {
+  const {id, content} = req.body;
+  db.query(`INSERT INTO comment SET content = ? WHERE secretPost_id = ?`, [content, id], function(err, result){
+    if(err) throw err;
+    response.send("seccess");
+  })
+})
+
 module.exports = router;
