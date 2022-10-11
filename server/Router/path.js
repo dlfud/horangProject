@@ -49,18 +49,17 @@ router.post("/update/:id", (request, response) => {
     if (err) throw err;
     response.send("success");
     console.log("비밀게시물 업데이트 완료");
-
-    response.send("성공^^");
   });
 });
 
-/* 업데이트 */
+/* 삭제 */
 
 router.post("/delete/:id", (request, response) => {
   console.log("비밀게시물 삭제 준비");
   const sql = "DELETE FROM secretPost WHERE id = " + request.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
+    response.send("success");
     console.log("비밀게시물 삭제 완료");
   });
 });
