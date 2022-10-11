@@ -26,7 +26,7 @@ const Update = () => {
        });     
 
        if(data.data!==null){
-        nav("/");
+        nav(`/secretPostDetailPage/${id}`);
         console.log("성공");
        }else{
         console.log("오류");
