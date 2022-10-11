@@ -7,7 +7,6 @@ const SecretPostDetailPage = () => {
   const [secretPostDetail, setSecretPostDetail] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
-  const [content, setContent] = useState("");
 
   useEffect(() => {
     const getData = async () => {
