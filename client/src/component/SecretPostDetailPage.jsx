@@ -4,7 +4,9 @@ import React, { useState, useEffect } from "react";
 
 
 const SecretPostDetailPage = () => {
+  const [activity, setActivity] = useState("false");
   const [secretPostDetail, setSecretPostDetail] = useState({});
+  const [comment, setComment] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
   const [content, setContent] = useState("");
@@ -16,10 +18,15 @@ const SecretPostDetailPage = () => {
         method: "GET",
       });
       setSecretPostDetail(...secretPost.data);
-
+      
+      const commentData = await axios({
+        url:`http://localhost:5000/comment/${id}`,
+        method:"GET",
+      });
+      setComment(commentData.data);
     };
     getData();
-  }, [id]);
+  }, []);
 
 
   return (
@@ -42,7 +49,49 @@ const SecretPostDetailPage = () => {
         내용 : {secretPostDetail.content}
       </div>
 
-      <form></form>
+      {comment.map((comment, index) => 
+        <div key={index}>
+          {comment.content}
+        </div>
+      )}
+
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const data = await axios({
+            url: `http://localhost:3000/commentCreate/${id}`,
+            method: "POST",
+            data: {
+              id,
+              content
+            }
+          });
+
+          if (data.data !== null) {
+            setActivity("true" + id);
+            console.log("성공");
+          } else {
+            console.log("오류");
+          }
+        }}>
+        <div >
+          <label>
+            <strong >내용</strong>
+          </label>
+          <input
+            type="text"
+            placeholder="내용"
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          >
+          </input>
+        </div>
+        <div>
+          <button type="submit">확인</button>
+        </div>
+      </form>
     </>);
 }
 
