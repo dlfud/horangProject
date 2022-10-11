@@ -26,9 +26,24 @@ const HomeR = () => {
 
   return(
     <>
-   <div className="absolute inset-x-0 top-0">
+     <div className="absolute inset-x-0 top-0">
         <strong>익명 게시물</strong>
       </div>
+      <label>
+        페이지 당 표시할 게시물 수:&nbsp;
+        <select
+          type="number"
+          value={limit}
+          onChange={({ target: { value } }) => setLimit(Number(value))}
+        >
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </label>
+      
       <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost}/>
       <Link to="/create" > 생성  </Link>
       <Pagination 
