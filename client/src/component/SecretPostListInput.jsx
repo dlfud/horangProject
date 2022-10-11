@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-const SecretPostListInput = ({ secretPost, setActivity }) => {
+const SecretPostListInput = ({ offset, limit, secretPost, setActivity }) => {
 
   return (
     <>
@@ -18,7 +18,7 @@ const SecretPostListInput = ({ secretPost, setActivity }) => {
             <th>수정</th>
             <th>삭제</th>
             </tr>
-          {secretPost.map(secretPost=>
+          {secretPost.slice(offset, offset + limit).map((secretPost)=>
           <tr>
           <td>{secretPost.id}</td>
           <td><Link to={`/secretPostDetailPage/${secretPost.id}`}>{secretPost.title}</Link></td>
