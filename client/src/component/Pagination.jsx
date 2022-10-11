@@ -1,21 +1,30 @@
-import React from "react";
 
-const Pagination = ({postPerPage, totalPosts, paginate})=>{
-  const pageNumbers = [];
+function Pagination({ total, limit, page, setPage }) {
+  const numPages = Math.ceil(total / limit);
 
-  for(let i = 1; i<=Math.ceil(totalPosts/postPerPage);i++){
-    pageNumbers.push(i);
-  }
-  return(
-    <nav>
-      <ul>
-        {pageNumbers.map(num =>
-          <li key={num}>
-            <a onClick={()=> paginate(num)} href='!#'>{num}</a>
-          </li>)}
-      </ul>
-    </nav>
+  return (
+    <>
+      <div>
+        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+          &lt;
+        </button>
+        {Array(numPages)
+          .fill()
+          .map((_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => setPage(i + 1)}
+              aria-current={page === i + 1 ? "page" : null}
+            >
+              {i + 1}
+            </button>
+          ))}
+        <button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+          &gt;
+        </button>
+      </div>
+    </>
   );
-};
+}
 
 export default Pagination;
