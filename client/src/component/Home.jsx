@@ -28,13 +28,13 @@ const indexOfFirstPost = indexOfLastPost - postPerPage;
 const currentPosts = secretPost.slice(indexOfFirstPost, indexOfLastPost);
 
 const paginate = pageNum => setCurrentPage(pageNum);
-
+const {id} = secretPost;
   return(
     <>
    <div className="absolute inset-x-0 top-0">
         <strong>익명 게시물</strong>
       </div>
-     <SecretPostListInput secretPost={currentPosts} setActivity={setActivity}/>
+     <SecretPostListInput key={id} secretPost={currentPosts} setActivity={setActivity}/>
       <Link to="/create" > 생성  </Link>
       <Pagination 
       postPerPage={postPerPage}
