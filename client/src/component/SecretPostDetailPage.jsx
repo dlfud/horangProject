@@ -5,9 +5,8 @@ import React, { useState, useEffect } from "react";
 
 const SecretPostDetailPage = () => {
   const [activity, setActivity] = useState("false");
-  const [secretPostDetail, setSecretPostDetail] = useState({});
+  const [secretPostDetail, setSecretPostDetail] = useState([]);
   const [content, setContent] = useState("");
-  const [comment, setComment] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -17,10 +16,11 @@ const SecretPostDetailPage = () => {
         url: `http://localhost:5000/secretPostDetailPage/${id}`,
         method: "GET",
       });
-      setSecretPostDetail(...secretPost.data);
+      setSecretPostDetail(secretPost.data);
+      console.log(secretPostDetail);
     };
     getData();
-  }, []);
+  }, [activity]);
 
 
   return (
@@ -37,15 +37,15 @@ const SecretPostDetailPage = () => {
       }}><button>삭제</button></form>
       <Link to={`/`}>목록</Link>
       <div>
-        제목 : {secretPostDetail.title}
+        제목 : {secretPostDetail[0].title}
       </div>
       <div>
-        내용 : {secretPostDetail.content}
+        내용 : {secretPostDetail[0].content}
       </div>
 
-      {comment.map((comment, index) => 
+      {secretPostDetail.map((comment, index) => 
         <div key={index}>
-          {comment.content}
+          댓글 : {comment.commentContent}
         </div>
       )}
 
