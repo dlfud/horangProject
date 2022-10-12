@@ -19,7 +19,8 @@ router.get("/", (request, response) => {
 /* 상세페이지 */
 
 router.get("/secretPostDetailPage/:id", (request, response) => {
-  const sql = "SELECT * FROM secretPost a LEFT JOIN `comment` b ON a.id = b.secretPost_id WHERE a.id = " + request.params.id;
+  const sql = "SELECT * FROM secretPost WHERE id = " + request.params.id;
+  // const sql = "SELECT * FROM secretPost a LEFT JOIN `comment` b ON a.id = b.secretPost_id WHERE a.id = " + request.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -67,9 +68,9 @@ router.post("/delete/:id", (request, response) => {
 
 
 /*댓글 조회*/
-router.get("/comment/:id", (request, respomse) => {
-  const {id} = request.body;
-  db.query(`SELECT * FROM comment WHERE secretPost_id = ?`, [id], function (err, result) {
+router.get("/comment/:id", (request, response) => {
+  const sql = "SELECT * FROM comment WHERE secretPost_id = " + request.params.id;
+  db.query(sql, function (err, result) {
     if (err) throw err;
     response.send(result);
   })
