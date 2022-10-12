@@ -7,11 +7,9 @@ import SecretPostDetailPage from "./component/SecretPostDetailPage.jsx";
 
 const AppRoute = () => {
  return(
-<<<<<<< Updated upstream:client/src/AppRoute.js
-  <>
-=======
+
   <>  
->>>>>>> Stashed changes:client/src/AppRoute.jsx
+
    <BrowserRouter>
    <div className="LOGObackgroundColor">
 
