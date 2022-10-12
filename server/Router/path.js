@@ -19,9 +19,10 @@ router.get("/", (request, response) => {
 /* 상세페이지 */
 
 router.get("/secretPostDetailPage/:id", (request, response) => {
-  const sql = "SELECT * FROM secretPost a INNER JOIN `comment`b ON a.id = b.secretPost_id WHERE b.secretPost_id = " + request.params.id;
+  const sql = "SELECT * FROM secretPost a LEFT JOIN `comment` b ON a.id = b.secretPost_id WHERE a.id = " + request.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
+    console.log(result);
     response.send(result);
   });
 });

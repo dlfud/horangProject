@@ -15,7 +15,8 @@ CREATE TABLE `comment`(
     id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     commentContent TEXT NOT NULL,
     create_date DATETIME DEFAULT NOW(),
-    secretPost_id INT(11) NOT NULL
+    secretPost_id INT(11) UNSIGNED NOT NULL,
+    FOREIGN KEY(secretPost_id) REFERENCES secretPost(id) ON DELETE CASCADE
 );
 
 SELECT * FROM secretPost;
@@ -26,7 +27,7 @@ SET title="님 대가리 깨버릴거임",
 content="너무해ㅠㅠ";
 
 INSERT INTO `comment`
-SET commentContent="너무해ㅠㅠ", secretPost_id = 117;
+SET commentContent="너무해ㅠㅠ", secretPost_id = 115;
 
 
-SELECT * FROM (SELECT * FROM secretPost AS a, `comment` AS b WHERE a.id = b.secretPost_id) WHERE a.id = 116;
+SELECT * FROM secretPost a LEFT JOIN `comment`b ON a.id = b.secretPost_id WHERE a.id = 114;

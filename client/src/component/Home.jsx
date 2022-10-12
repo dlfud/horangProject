@@ -27,7 +27,7 @@ const HomeR = () => {
   return(
     <>
      <div className="absolute inset-x-0 top-0">
-        <strong>익명 게시물</strong>
+        <h2>익명 게시물</h2>
       </div>
       <label>
         페이지 당 표시할 게시물 수:&nbsp;
