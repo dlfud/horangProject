@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background-color: #F4EEFF;
+}
 .LOGObackgroundColor{
   background-color: #A6B1E1;
+  padding: 10px 5px;
+}
+.MainColor2{
+  background-color: #DCD6F7;
 }
 
+[aria-current] {
+  background: #DCD6F7;
+  font-weight: bold;
+  cursor: revert;
+  transform: revert;
+  padding: 5px;;
+}

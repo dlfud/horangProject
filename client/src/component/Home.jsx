@@ -25,7 +25,7 @@ const HomeR = () => {
 
 
   return(
-    <>
+    <div className="grid gap-4 place-content-center">
 
      <div >
         <h2>익명 게시물</h2>
@@ -46,14 +46,18 @@ const HomeR = () => {
       </label>
       
       <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost}/>
-      <Link to="/create" > 생성  </Link>
+      <div className="text-right ">
+        <Link to="/create" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
+        </div>
+      <div className=" text-center">
       <Pagination 
        total={secretPost.length}
        limit={limit}
        page={page}
        setPage={setPage}    
       />
-    </>
+      </div>
+    </div>
   );
 }
 
