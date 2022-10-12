@@ -5,21 +5,30 @@ import React, { useState, useEffect } from "react";
 
 const SecretPostDetailPage = () => {
   const [activity, setActivity] = useState("false");
-  const [secretPostDetail, setSecretPostDetail] = useState([]);
+  const [secretPostDetail, setSecretPostDetail] = useState({});
   const [content, setContent] = useState("");
+  const [comment, setComment] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getData = async () => {
+    const getData1 = async () => {
       const secretPost = await axios({
         url: `http://localhost:5000/secretPostDetailPage/${id}`,
         method: "GET",
       });
-      setSecretPostDetail(secretPost.data);
-      console.log(secretPostDetail);
+      setSecretPostDetail(...secretPost.data);
     };
-    getData();
+    const getData2 = async () => {
+      const secretPostComment = await axios({
+        url: `http://localhost:5000/comment/${id}`,
+        method: "GET",
+      });
+      setComment(secretPostComment.data);
+    };
+
+    getData1();
+    getData2();
   }, [activity]);
 
 
@@ -37,13 +46,13 @@ const SecretPostDetailPage = () => {
       }}><button>삭제</button></form>
       <Link to={`/`}>목록</Link>
       <div>
-        {/* 제목 : {secretPostDetail[0].title} */}
+        제목 : {secretPostDetail.title}
       </div>
       <div>
-        {/* 내용 : {secretPostDetail[0].content} */}
+        내용 : {secretPostDetail.content}
       </div>
 
-      {secretPostDetail.map((comment, index) => 
+       {comment.map((comment, index) => 
         <div key={index}>
           댓글 : {comment.commentContent}
         </div>
