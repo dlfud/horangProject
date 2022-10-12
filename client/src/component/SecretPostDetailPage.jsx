@@ -37,10 +37,10 @@ const SecretPostDetailPage = () => {
       }}><button>삭제</button></form>
       <Link to={`/`}>목록</Link>
       <div>
-        제목 : {secretPostDetail[0].title}
+        {/* 제목 : {secretPostDetail[0].title} */}
       </div>
       <div>
-        내용 : {secretPostDetail[0].content}
+        {/* 내용 : {secretPostDetail[0].content} */}
       </div>
 
       {secretPostDetail.map((comment, index) => 
