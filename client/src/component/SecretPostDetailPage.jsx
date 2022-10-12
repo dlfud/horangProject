@@ -29,7 +29,7 @@ const SecretPostDetailPage = () => {
 
     getData1();
     getData2();
-  }, [activity]);
+  }, [activity, id]);
 
 
   return (
