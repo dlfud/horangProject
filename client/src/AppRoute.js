@@ -1,19 +1,20 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./component/Home.jsx";
 import horangLoGo from "./Picture/horangLOGO 1.png";
-import "./App.css";
 import Create from "./component/Create.jsx";
 import Update from "./component/Update.jsx";
 import SecretPostDetailPage from "./component/SecretPostDetailPage.jsx";
 
 const AppRoute = () => {
  return(
+<<<<<<< Updated upstream:client/src/AppRoute.js
   <>
+=======
+  <>  
+>>>>>>> Stashed changes:client/src/AppRoute.jsx
    <BrowserRouter>
    <div className="LOGObackgroundColor">
-   <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+
       <Link to="/">
 
         <img src={horangLoGo} alt="horangLoGo"/>
