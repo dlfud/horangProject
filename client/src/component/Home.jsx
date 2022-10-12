@@ -27,7 +27,7 @@ const HomeR = () => {
   return(
     <>
 
-     <div className="absolute inset-x-0 top-0">
+     <div >
         <h2>익명 게시물</h2>
       </div>
       <label>
