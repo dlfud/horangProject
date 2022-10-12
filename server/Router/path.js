@@ -9,7 +9,7 @@ db.connect(function (err) {
 });
 
 router.get("/", (request, response) => {
-  const sql = "select * from secretPost";
+  const sql = "select * from secretPost ORDER BY id DESC";
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send(result);
