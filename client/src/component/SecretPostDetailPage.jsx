@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 const SecretPostDetailPage = () => {
   const [activity, setActivity] = useState("false");
   const [secretPostDetail, setSecretPostDetail] = useState({});
+  const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,12 +18,6 @@ const SecretPostDetailPage = () => {
         method: "GET",
       });
       setSecretPostDetail(...secretPost.data);
-      
-      const commentData = await axios({
-        url:`http://localhost:5000/comment/${id}`,
-        method:"GET",
-      });
-      setComment(commentData.data);
     };
     getData();
   }, []);
