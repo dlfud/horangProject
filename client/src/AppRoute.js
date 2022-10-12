@@ -7,14 +7,11 @@ import SecretPostDetailPage from "./component/SecretPostDetailPage.jsx";
 
 const AppRoute = () => {
  return(
-
-  <>  
-
-   <BrowserRouter>
+<>
+<BrowserRouter>
    <div className="LOGObackgroundColor">
 
       <Link to="/">
-
         <img src={horangLoGo} alt="horangLoGo"/>
       </Link>
       </div>
