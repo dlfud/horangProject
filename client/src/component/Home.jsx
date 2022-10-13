@@ -28,7 +28,7 @@ const HomeR = () => {
     <div className="grid gap-4 place-content-center">
 
      <div >
-        <h2>익명 게시물</h2>
+        <p className="font-bold text-2xl">익명 게시물</p>
       </div>
       <label>
         페이지 당 표시할 게시물 수:&nbsp;
@@ -48,7 +48,7 @@ const HomeR = () => {
       <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost}/>
       <div className="text-right ">
         <Link to="/create" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
-        </div>
+      </div>
       <div className=" text-center">
       <Pagination 
        total={secretPost.length}
