@@ -1,16 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'dalse';
+  src: url("../src/Font/AnyConv.com__SCDream4.woff") format('woff');;
+}
+
 
 body{
   background-color: #F4EEFF;
+  font-family:"dalse";
 }
 .LOGObackgroundColor{
   background-color: #A6B1E1;
   padding: 10px 5px;
+  min-height:60px;
+  max-height:60px;
 }
 .MainColor2{
   background-color: #DCD6F7;
+}
+.TitleWidth{
+  min-width : 500px;
+  max-width : 500px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  padding:10px; 
 }
 
 [aria-current] {
@@ -20,3 +36,5 @@ body{
   transform: revert;
   padding: 5px;;
 }
+
+
