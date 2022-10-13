@@ -78,8 +78,9 @@ router.get("/comment/:id", (request, response) => {
 
 /*댓글 생성*/
 router.post("/commentCreate/:id", (request, response) => {
-  const { id, content } = request.body;
-  db.query(`INSERT INTO comment SET content = ?, secretPost_id = ?`, [content, id], function (err, result) {
+  console.log(request.params.id);
+  const sql = "INSERT INTO comment (commentContent, secretPost_id) VALUES (?,?)";
+  db.query(sql, [request.body.content, request.params.id], function (err, result) {
     if (err) throw err;
     response.send("success");
   })

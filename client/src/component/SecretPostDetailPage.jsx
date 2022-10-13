@@ -52,7 +52,7 @@ const SecretPostDetailPage = () => {
         내용 : {secretPostDetail.content}
       </div>
 
-       {comment.map((comment, index) => 
+      {comment.map((comment, index) =>
         <div key={index}>
           댓글 : {comment.commentContent}
         </div>
@@ -65,7 +65,6 @@ const SecretPostDetailPage = () => {
             url: `http://localhost:3000/commentCreate/${id}`,
             method: "POST",
             data: {
-              id,
               content
             }
           });
