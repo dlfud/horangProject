@@ -69,8 +69,8 @@ router.post("/delete/:id", (request, response) => {
 
 /*댓글 조회*/
 router.get("/comment/:id", (request, response) => {
-  const sql = "SELECT * FROM comment WHERE secretPost_id = " + request.params.id;
-  db.query(sql, function (err, result) {
+  const sql = "SELECT * FROM comment WHERE secretPost_id = ? ORDER BY commentId DESC";
+  db.query(sql, [request.params.id], function (err, result) {
     if (err) throw err;
     response.send(result);
   })
@@ -78,7 +78,6 @@ router.get("/comment/:id", (request, response) => {
 
 /*댓글 생성*/
 router.post("/commentCreate/:id", (request, response) => {
-  console.log(request.params.id);
   const sql = "INSERT INTO comment (commentContent, secretPost_id) VALUES (?,?)";
   db.query(sql, [request.body.content, request.params.id], function (err, result) {
     if (err) throw err;
