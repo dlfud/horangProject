@@ -23,12 +23,12 @@ const SecretPostListInput = ({ offset, limit, secretPost }) => {
       </thead>
     
       {secretPost.slice(offset, offset + limit).map((secretPost, index) =>
-        < tbody key={index} class="bg-white divide-y divide-gray-300 border" >
-          <tr class="whitespace-nowrap">
-          <td class="px-6 py-4 text-sm text-gray-500 w-20 text-center">{secretPost.id}</td>
-          <td class="px-6 py-4 TitleWidth text-center" ><Link to={`/secretPostDetailPage/${secretPost.id}`}>{secretPost.title}</Link></td>
-          <td class="px-6 py-4 text-sm text-center w-32 ">{moment(secretPost.create_date).format('YY.MM.DD')}</td>
-          <td class="px-6 py-4  text-sm  text-center">{secretPost.view}</td>
+        < tbody key={index} className="bg-white divide-y divide-gray-300 border" >
+          <tr className="whitespace-nowrap">
+          <td className="px-6 py-4 text-sm text-gray-500 w-20 text-center">{secretPost.id}</td>
+          <td className="px-6 py-4 TitleWidth text-center" ><Link to={`/secretPostDetailPage/${secretPost.id}`}>{secretPost.title}</Link></td>
+          <td className="px-6 py-4 text-sm text-center w-32 ">{moment(secretPost.create_date).format('YY.MM.DD')}</td>
+          <td className="px-6 py-4  text-sm  text-center">{secretPost.view}</td>
           </tr>
           </tbody>
       )}
