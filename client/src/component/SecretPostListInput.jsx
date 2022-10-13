@@ -3,8 +3,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 
-const SecretPostListInput = ({ offset, limit, secretPost }) => {
-
+const SecretPostListInput = ({ offset, limit, secretPost, comment }) => {
 
   return (
     <>

@@ -85,4 +85,13 @@ router.post("/commentCreate/:id", (request, response) => {
   })
 })
 
+/*댓글 개수*/
+router.get("/commentCount", (request, response) => {
+  const sql = "SELECT secretPost_id, COUNT(commentId) FROM comment";
+  db.query(sql, function(err, result) {
+    if(err) throw err;
+    response.send(result);
+  })
+})
+
 module.exports = router;

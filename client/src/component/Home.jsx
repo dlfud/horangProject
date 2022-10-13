@@ -8,19 +8,20 @@ import Pagination from "./Pagination";
 
 const HomeR = () => {
   const [secretPost, setSecretPost] = useState([]);
+  const [comment, setComment] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    const getData = async () => {
+    const getData1 = async () => {
       const secretPost = await axios({
         url: `http://localhost:5000`,
         method: "GET",
       });
       setSecretPost(secretPost.data);
     };
-    getData();
+    getData1();
   },[]);
 
 
@@ -45,7 +46,7 @@ const HomeR = () => {
         </select>
       </label>
       
-      <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost}/>
+      <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost} comment={comment}/>
       <div className="text-right ">
         <Link to="/create" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
       </div>
