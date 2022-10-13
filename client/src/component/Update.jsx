@@ -61,9 +61,7 @@ const Update = () => {
             </input>
           </div>
           <div>
-         
-              <button type="submit">확인</button>
-         
+            <button type="submit">확인</button>
           </div>
       </form>
   </div>

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 
 const SecretPostDetailPage = () => {
-  const [activity, setActivity] = useState("false");
+  const [activity, setActivity] = useState(0);
   const [secretPostDetail, setSecretPostDetail] = useState({});
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
@@ -70,7 +70,8 @@ const SecretPostDetailPage = () => {
           });
 
           if (data.data !== null) {
-            setActivity("true" + id);
+            setActivity(activity + 1);
+            setContent("");
             console.log("성공");
           } else {
             console.log("오류");
