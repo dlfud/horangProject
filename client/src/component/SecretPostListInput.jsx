@@ -5,6 +5,15 @@ import { Link } from "react-router-dom";
 
 const SecretPostListInput = ({ offset, limit, secretPost, comment }) => {
 
+  let count = 0;
+
+  const countComment = (id) => comment.map((_comment, index) => {
+    if(_comment.secretPost_id === id){
+      count = _comment.count;
+      return count
+    }
+  })
+
   return (
     <>
     <div className="container flex justify-center mx-auto">
@@ -25,7 +34,12 @@ const SecretPostListInput = ({ offset, limit, secretPost, comment }) => {
         < tbody key={index} className="bg-white divide-y divide-gray-300 border" >
           <tr className="whitespace-nowrap">
           <td className="px-6 py-4 text-sm text-gray-500 w-20 text-center">{secretPost.id}</td>
-          <td className="px-6 py-4 TitleWidth text-center" ><Link to={`/secretPostDetailPage/${secretPost.id}`}>{secretPost.title}</Link></td>
+          <td className="px-6 py-4 TitleWidth" >
+            <Link to={`/secretPostDetailPage/${secretPost.id}`}>
+              {secretPost.title}
+            </Link>
+            <span className="text-violet-300 ml-3"> {countComment(secretPost.id)}</span>
+          </td>
           <td className="px-6 py-4 text-sm text-center w-32 ">{moment(secretPost.create_date).format('YY.MM.DD')}</td>
           <td className="px-6 py-4  text-sm  text-center">{secretPost.view}</td>
           </tr>
