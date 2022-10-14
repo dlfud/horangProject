@@ -36,11 +36,11 @@ const SecretPostDetailPage = () => {
     <>
       <h1>비밀 게시물 상세페이지</h1>
       <div>조회수 : {secretPostDetail.view}</div>
-      <Link to={`/update/${id}`}>수정</Link>
+      <Link to={`/secretPostUpdate/${id}`}>수정</Link>
       <form onSubmit={async (e) => {
         e.preventDefault();
         await axios({
-          url: `http://localhost:3000/delete/${id}`,
+          url: `http://localhost:3000/secretPostDelete/${id}`,
           method: "POST",
         })
         navigate("/");

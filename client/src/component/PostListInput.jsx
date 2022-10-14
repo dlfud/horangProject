@@ -3,7 +3,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 
-const SecretPostListInput = ({ offset, limit, post, comment }) => {
+const PostListInput = ({ offset, limit, post, comment }) => {
 
   let count = 0;
 
@@ -46,6 +46,9 @@ const SecretPostListInput = ({ offset, limit, post, comment }) => {
           </tbody>
       )}
       </table>
+      <div className="text-right ">
+          <Link to="/postCreate" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
+        </div>
       </div>
     </div>
   </div>
@@ -54,4 +57,4 @@ const SecretPostListInput = ({ offset, limit, post, comment }) => {
   )
 }
 
-export default SecretPostListInput;
+export default PostListInput;

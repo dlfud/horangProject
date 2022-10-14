@@ -46,6 +46,9 @@ const SecretPostListInput = ({ offset, limit, secretPost, post, comment }) => {
             </tbody>
           )}
         </table>
+        <div className="text-right ">
+          <Link to="/secretPostCreate" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
+        </div>
 
         <table >
           <thead className="bg-gray-50">
@@ -73,6 +76,9 @@ const SecretPostListInput = ({ offset, limit, secretPost, post, comment }) => {
             </tbody>
           )}
         </table>
+        <div className="text-right ">
+          <Link to="/postCreate" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
+        </div>
       </div>
     </div>
   </div>
