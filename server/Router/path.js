@@ -94,6 +94,15 @@ router.get("/secretPostCommentCount", (request, response) => {
   })
 })
 
+/* 비밀 게시글 댓글 삭제 */
+router.post("/secretPostCommentDelete/:id", (request, response) => {
+  const sql = "DELETE FROM secretPostComment WHERE secretPostCommentId = " + request.params.id;
+  db.query(sql, function(err, result){
+    if(err) throw err;
+    response.send("success");
+  })
+})
+
 
 
 /* 익명 게시물 조회 */
