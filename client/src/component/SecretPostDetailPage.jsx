@@ -56,6 +56,16 @@ const SecretPostDetailPage = () => {
       {comment.map((comment, index) =>
         <div key={index}>
           댓글 : {comment.secretPostCommentContent}
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            await axios({
+              url:`http://localhost:3000/secretPostCommentDelete/${comment.secretPostCommentId}`,
+              method:"POST",
+            })
+            setActivity(activity + 1);
+          }}>
+            <button>삭제</button>
+          </form>
         </div>
       )}
 
