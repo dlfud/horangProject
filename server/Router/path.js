@@ -85,7 +85,7 @@ router.post("/commentCreate/:id", (request, response) => {
   })
 })
 
-<<<<<<< Updated upstream
+
 
 /* 회원등록 */
 router.post("/join", (req, res) => {
@@ -102,10 +102,7 @@ router.post("/join", (req, res) => {
 });
 
 
-/*댓글 개수*/
-=======
 /* 비밀 게시글 댓글 개수*/
->>>>>>> Stashed changes
 router.get("/commentCount", (request, response) => {
   const sql = "SELECT secretPost_id, COUNT(commentId) count FROM comment GROUP BY secretPost_id";
   db.query(sql, function(err, result) {
