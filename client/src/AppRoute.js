@@ -3,6 +3,7 @@ import Home from "./component/Home.jsx";
 import horangLoGo from "./Picture/horangLOGO 1.png";
 import Create from "./component/Create.jsx";
 import Update from "./component/Update.jsx";
+import Join from "./component/Join.jsx";
 import SecretPostDetailPage from "./component/SecretPostDetailPage.jsx";
 
 const AppRoute = () => {
@@ -21,6 +22,7 @@ const AppRoute = () => {
           <Route exact path="/create" element={<Create />} />
           <Route exact path="/secretPostDetailPage/:id" element={<SecretPostDetailPage />} />
           <Route exact path="/update/:id" element={<Update />} />
+          <Route exact path="/join" element={<Join/>}/>
         </Routes>
 
         <footer className="LOGObackgroundColor w-full absolute bottom-0">

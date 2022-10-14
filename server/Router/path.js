@@ -85,4 +85,19 @@ router.post("/commentCreate/:id", (request, response) => {
   })
 })
 
+/* 회원등록 */
+router.post("/join", (req, res) => {
+  console.log(req.body);
+  let memberId = req.body.id;
+  let password = req.body.pw;
+  let email = req.body.email;
+
+  const sqlQuery = `insert into member set memberId = "${memberId}" , password = "${password}" , email ="${email}";`;
+  db.query(sqlQuery, (err, result) => {
+    if (err) throw err;
+    res.send("success");
+  });
+});
+
+
 module.exports = router;
