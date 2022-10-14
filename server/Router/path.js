@@ -32,7 +32,7 @@ router.get("/secretPostDetailPage/:id", async (request, response) => {
 });
 
 /* 비밀게시글 생성 */
-router.post("/create", (request, response) => {
+router.post("/secretPostCreate", (request, response) => {
   const sql = "INSERT INTO secretPost (title, content) VALUES (?,?)";
   db.query(
     sql,
@@ -46,7 +46,7 @@ router.post("/create", (request, response) => {
 });
 
 /* 비밀 게시글 업데이트 */
-router.post("/update/:id", (request, response) => {
+router.post("/secretPostUpdate/:id", (request, response) => {
   const sql = "UPDATE secretPost SET ? WHERE id = " + request.params.id;
   db.query(sql, request.body, function (err, result) {
     if (err) throw err;
@@ -56,7 +56,7 @@ router.post("/update/:id", (request, response) => {
 });
 
 /* 비밀 게시글 삭제 */
-router.post("/delete/:id", (request, response) => {
+router.post("/secretPostDelete/:id", (request, response) => {
   console.log("비밀게시물 삭제 준비");
   const sql = "DELETE FROM secretPost WHERE id = " + request.params.id;
   db.query(sql, function (err, result) {
@@ -103,9 +103,11 @@ router.post("/secretPostCommentDelete/:id", (request, response) => {
   })
 })
 
+/* 비밀 게시글 댓글 수정 */
 
 
-/* 익명 게시물 조회 */
+
+/* 익명 게시글 조회 */
 router.get("/post", (request, response) => {
   const sql = "select * from post ORDER BY id DESC";
   db.query(sql, function (err, result) {
@@ -113,6 +115,38 @@ router.get("/post", (request, response) => {
     response.send(result);
   });
 });
+
+/* 익명 게시글 상세 페이지 */
+
+/* 익명 게시글 생성 */
+router.post("/postCreate", (request, response) => {
+  const sql = "INSERT INTO Post (title, content) VALUES (?,?)";
+  db.query(
+    sql,
+    [request.body.title, request.body.content],
+    function (err, result) {
+      if (err) throw err;
+      console.log("비밀게시물 생성 완료");
+      response.redirect("/");
+    }
+  );
+});
+
+/* 익명 게시글 수정 */
+
+/* 익명 게시글 삭제 */
+
+/* 익명 게시글 댓글 개수*/
+
+/* 익명 게시글 댓글 조회 */
+
+/* 익명 게시글 댓글 생성 */
+
+/* 익명 게시글 댓글 삭제 */
+
+/* 익명 게시글 댓글 수정 */
+
+
 
 /* 회원등록 */
 router.post("/join", (req, res) => {

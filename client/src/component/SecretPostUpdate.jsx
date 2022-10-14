@@ -1,22 +1,23 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 
-const Create = () => {
+const Update = () => {
   const nav = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
- 
+  const {id} = useParams();
+  console.log(id);
   return(
   <>
-  <h1>비밀 게시물 업로드</h1>
+  <h1>비밀 게시물 수정</h1>
+ 
   <div>
     <form
     onSubmit={async(e) => {
        e.preventDefault();
        const data = await axios({
-        url: "http://localhost:3000/create",
-        // 위의 주소는 5000번대가 아닌 3000번대로 (전송주소!)
+        url: `http://localhost:3000/secretPostUpdate/${id}`,
         method: "POST",
         data: {
           title, 
@@ -25,9 +26,7 @@ const Create = () => {
        });     
 
        if(data.data!==null){
-        nav("/");
-        //navigate 기능을 활용하여 Access-Control-Allow-Origin 관련 오류를 막을 수 있음?
-        // 그냥 보내면 server에서 create를 못읽음
+        nav(`/secretPostDetailPage/${id}`);
         console.log("성공");
        }else{
         console.log("오류");
@@ -62,13 +61,11 @@ const Create = () => {
             </input>
           </div>
           <div>
-         
-              <button type="submit">확인</button>
-         
+            <button type="submit">확인</button>
           </div>
       </form>
   </div>
   </>);
 }
 
-export default Create;
+export default Update;

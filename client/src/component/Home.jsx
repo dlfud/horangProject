@@ -72,9 +72,9 @@ const HomeR = () => {
         <p className="font-bold text-2xl">비밀 + 익명 게시물</p>
       </div>
       <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost} post = {post} comment={comment}/>
-        <div className="text-right ">
-        <Link to="/create" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
-      </div>
+        {/* <div className="text-right ">
+        <Link to="/secretPostCreate" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
+      </div> */}
       <div className=" text-center">
       <Pagination 
        total={secretPost.length}
