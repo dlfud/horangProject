@@ -87,7 +87,7 @@ router.post("/commentCreate/:id", (request, response) => {
 
 /*댓글 개수*/
 router.get("/commentCount", (request, response) => {
-  const sql = "SELECT secretPost_id, COUNT(commentId) FROM comment";
+  const sql = "SELECT secretPost_id, COUNT(commentId) count FROM comment GROUP BY secretPost_id";
   db.query(sql, function(err, result) {
     if(err) throw err;
     response.send(result);

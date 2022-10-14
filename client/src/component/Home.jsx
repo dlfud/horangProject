@@ -21,7 +21,17 @@ const HomeR = () => {
       });
       setSecretPost(secretPost.data);
     };
+
+    const getData2 = async () => {
+      const comment = await axios({
+        url: `http://localhost:5000/commentCount`,
+        method: "GET",
+      });
+      console.log(comment.data);
+      setComment(comment.data);
+    };
     getData1();
+    getData2();
   },[]);
 
 
