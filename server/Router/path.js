@@ -2,11 +2,13 @@ const express = require("express");
 const db = require("../config/database.js");
 const router = express.Router();
 
+/* 연결확인 */
 db.connect(function (err) {
   if (err) throw err;
   console.log("Connected");
 });
 
+/* 비밀 게시글 조회 */
 router.get("/", (request, response) => {
   const sql = "select * from secretPost ORDER BY id DESC";
   db.query(sql, function (err, result) {
@@ -15,20 +17,21 @@ router.get("/", (request, response) => {
   });
 });
 
-/* 상세페이지 */
-
-router.get("/secretPostDetailPage/:id", (request, response) => {
-  const sql = "SELECT * FROM secretPost WHERE id = " + request.params.id;
-  // const sql = "SELECT * FROM secretPost a LEFT JOIN `comment` b ON a.id = b.secretPost_id WHERE a.id = " + request.params.id;
-  db.query(sql, function (err, result) {
+/* 비밀 게시글 상세페이지 */
+router.get("/secretPostDetailPage/:id", async (request, response) => {
+  const sql1 = "SELECT * FROM secretPost WHERE id = " + request.params.id;
+  const sql2 = "UPDATE secretPost SET view = view + 1 WHERE id = " + request.params.id;
+  await db.query(sql1, function (err, result) {
     if (err) throw err;
     console.log(result);
     response.send(result);
   });
+  await db.query(sql2, function(err, result){
+    if(err)throw err;
+  })
 });
 
-/* 보내기 */
-
+/* 비밀게시글 생성 */
 router.post("/create", (request, response) => {
   const sql = "INSERT INTO secretPost (title, content) VALUES (?,?)";
   db.query(
@@ -42,8 +45,7 @@ router.post("/create", (request, response) => {
   );
 });
 
-/* 업데이트 */
-
+/* 비밀 게시글 업데이트 */
 router.post("/update/:id", (request, response) => {
   const sql = "UPDATE secretPost SET ? WHERE id = " + request.params.id;
   db.query(sql, request.body, function (err, result) {
@@ -53,8 +55,7 @@ router.post("/update/:id", (request, response) => {
   });
 });
 
-/* 삭제 */
-
+/* 비밀 게시글 삭제 */
 router.post("/delete/:id", (request, response) => {
   console.log("비밀게시물 삭제 준비");
   const sql = "DELETE FROM secretPost WHERE id = " + request.params.id;
@@ -66,7 +67,7 @@ router.post("/delete/:id", (request, response) => {
 });
 
 
-/*댓글 조회*/
+/* 비밀 게시글 댓글 조회*/
 router.get("/comment/:id", (request, response) => {
   const sql = "SELECT * FROM comment WHERE secretPost_id = ? ORDER BY commentId DESC";
   db.query(sql, [request.params.id], function (err, result) {
@@ -75,7 +76,7 @@ router.get("/comment/:id", (request, response) => {
   })
 })
 
-/*댓글 생성*/
+/* 비밀 게시글 댓글 생성*/
 router.post("/commentCreate/:id", (request, response) => {
   const sql = "INSERT INTO comment (commentContent, secretPost_id) VALUES (?,?)";
   db.query(sql, [request.body.content, request.params.id], function (err, result) {
@@ -84,6 +85,7 @@ router.post("/commentCreate/:id", (request, response) => {
   })
 })
 
+<<<<<<< Updated upstream
 
 /* 회원등록 */
 router.post("/join", (req, res) => {
@@ -101,6 +103,9 @@ router.post("/join", (req, res) => {
 
 
 /*댓글 개수*/
+=======
+/* 비밀 게시글 댓글 개수*/
+>>>>>>> Stashed changes
 router.get("/commentCount", (request, response) => {
   const sql = "SELECT secretPost_id, COUNT(commentId) count FROM comment GROUP BY secretPost_id";
   db.query(sql, function(err, result) {
