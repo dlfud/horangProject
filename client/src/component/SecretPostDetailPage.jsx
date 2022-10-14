@@ -21,7 +21,7 @@ const SecretPostDetailPage = () => {
     };
     const getData2 = async () => {
       const secretPostComment = await axios({
-        url: `http://localhost:5000/comment/${id}`,
+        url: `http://localhost:5000/secretPostComment/${id}`,
         method: "GET",
       });
       setComment(secretPostComment.data);
@@ -55,7 +55,7 @@ const SecretPostDetailPage = () => {
 
       {comment.map((comment, index) =>
         <div key={index}>
-          댓글 : {comment.commentContent}
+          댓글 : {comment.secretPostCommentContent}
         </div>
       )}
 
@@ -63,7 +63,7 @@ const SecretPostDetailPage = () => {
         onSubmit={async (e) => {
           e.preventDefault();
           const data = await axios({
-            url: `http://localhost:3000/commentCreate/${id}`,
+            url: `http://localhost:3000/secretPostCommentCreate/${id}`,
             method: "POST",
             data: {
               content

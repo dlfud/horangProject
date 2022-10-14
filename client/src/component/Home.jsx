@@ -2,12 +2,14 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
+import PostListInput from "./PostListInput";
 import Pagination from "./Pagination";
 
 
 
 const HomeR = () => {
   const [secretPost, setSecretPost] = useState([]);
+  const [post, setPost] = useState([]);
   const [comment, setComment] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -16,7 +18,7 @@ const HomeR = () => {
   useEffect(() => {
     const getData1 = async () => {
       const secretPost = await axios({
-        url: `http://localhost:5000`,
+        url: `http://localhost:5000/secretPost`,
         method: "GET",
       });
       setSecretPost(secretPost.data);
@@ -24,21 +26,29 @@ const HomeR = () => {
 
     const getData2 = async () => {
       const comment = await axios({
-        url: `http://localhost:5000/commentCount`,
+        url: `http://localhost:5000/secretPostCommentCount`,
         method: "GET",
       });
-      console.log(comment.data);
       setComment(comment.data);
     };
+
+    const getData3 = async () => {
+      const post = await axios({
+        url: `http://localhost:5000/post`,
+        method:"GET",
+      });
+      setPost(post.data);
+    }
     getData1();
     getData2();
+    getData3();
   },[]);
 
 
   return(
     <div className="grid gap-4 place-content-center">
 
-     <div >
+     <div>
         <p className="font-bold text-2xl">익명 게시물</p>
       </div>
       <label>
@@ -57,7 +67,11 @@ const HomeR = () => {
       </label>
 
       <Link to ="/join">회원가입</Link>
-      <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost} comment={comment}/>
+      <PostListInput offset={offset} limit={limit} post={post} comment={comment}/>
+      <div>
+        <p className="font-bold text-2xl">비밀 + 익명 게시물</p>
+      </div>
+      <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost} post = {post} comment={comment}/>
         <div className="text-right ">
         <Link to="/create" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
       </div>
