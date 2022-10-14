@@ -19,18 +19,35 @@ CREATE TABLE secretPost(
     `view` INT(10) DEFAULT 0
 );
 
-DROP TABLE  `comment`;
-CREATE TABLE `comment`(
-    commentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    commentContent TEXT NOT NULL,
-    commentCreateDate DATETIME DEFAULT NOW(),
+CREATE TABLE `member`(
+    id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    memberId TEXT NOT NULL,
+    `password` TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
+
+CREATE TABLE postComment(
+    postCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    postCommentContent TEXT NOT NULL,
+    postCommentCreateDate DATETIME DEFAULT NOW(),
+    post_id INT(11) UNSIGNED NOT NULL,
+    FOREIGN KEY(post_id) REFERENCES Post(id) ON DELETE CASCADE
+);
+
+DROP TABLE  secretPostComment;
+CREATE TABLE secretPostComment(
+    secretPostCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    secretPostCommentContent TEXT NOT NULL,
+    secretPostCommentCreateDate DATETIME DEFAULT NOW(),
     secretPost_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPost_id) REFERENCES secretPost(id) ON DELETE CASCADE
 );
 
 SELECT * FROM post;
 SELECT * FROM secretPost;
-SELECT * FROM `comment`;
+SELECT * FROM secretPostComment;
+SELECT * FROM postComment;
 
 INSERT INTO Post
 SET title="익명 게시판",
@@ -40,8 +57,8 @@ INSERT INTO secretPost
 SET title="님 대가리 깨버릴거임",
 content="너무해ㅠㅠ";
 
-INSERT INTO `comment`
-SET commentContent="너무해ㅠㅠ", secretPost_id = 1;
+INSERT INTO secretPostComment
+SET secretPostCommentContent="너무해ㅠㅠ", secretPost_id = 1;
 
 
 SELECT * FROM secretPost a LEFT JOIN `comment`b ON a.id = b.secretPost_id WHERE a.id = 160;

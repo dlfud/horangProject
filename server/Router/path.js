@@ -9,7 +9,7 @@ db.connect(function (err) {
 });
 
 /* 비밀 게시글 조회 */
-router.get("/", (request, response) => {
+router.get("/secretPost", (request, response) => {
   const sql = "select * from secretPost ORDER BY id DESC";
   db.query(sql, function (err, result) {
     if (err) throw err;
@@ -68,8 +68,8 @@ router.post("/delete/:id", (request, response) => {
 
 
 /* 비밀 게시글 댓글 조회*/
-router.get("/comment/:id", (request, response) => {
-  const sql = "SELECT * FROM comment WHERE secretPost_id = ? ORDER BY commentId DESC";
+router.get("/secretPostComment/:id", (request, response) => {
+  const sql = "SELECT * FROM secretPostComment WHERE secretPost_id = ? ORDER BY secretPostCommentId DESC";
   db.query(sql, [request.params.id], function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -77,15 +77,33 @@ router.get("/comment/:id", (request, response) => {
 })
 
 /* 비밀 게시글 댓글 생성*/
-router.post("/commentCreate/:id", (request, response) => {
-  const sql = "INSERT INTO comment (commentContent, secretPost_id) VALUES (?,?)";
+router.post("/secretPostCommentCreate/:id", (request, response) => {
+  const sql = "INSERT INTO secretPostComment (secretPostCommentContent, secretPost_id) VALUES (?,?)";
   db.query(sql, [request.body.content, request.params.id], function (err, result) {
     if (err) throw err;
     response.send("success");
   })
 })
 
+/* 비밀 게시글 댓글 개수*/
+router.get("/secretPostCommentCount", (request, response) => {
+  const sql = "SELECT secretPost_id, COUNT(secretPostCommentId) count FROM secretPostComment GROUP BY secretPost_id";
+  db.query(sql, function(err, result) {
+    if(err) throw err;
+    response.send(result);
+  })
+})
 
+
+
+/* 익명 게시물 조회 */
+router.get("/post", (request, response) => {
+  const sql = "select * from post ORDER BY id DESC";
+  db.query(sql, function (err, result) {
+    if (err) throw err;
+    response.send(result);
+  });
+});
 
 /* 회원등록 */
 router.post("/join", (req, res) => {
@@ -101,15 +119,6 @@ router.post("/join", (req, res) => {
   });
 });
 
-
-/* 비밀 게시글 댓글 개수*/
-router.get("/commentCount", (request, response) => {
-  const sql = "SELECT secretPost_id, COUNT(commentId) count FROM comment GROUP BY secretPost_id";
-  db.query(sql, function(err, result) {
-    if(err) throw err;
-    response.send(result);
-  })
-})
 
 
 module.exports = router;
