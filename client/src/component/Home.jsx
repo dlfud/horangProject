@@ -55,9 +55,10 @@ const HomeR = () => {
           <option value="100">100</option>
         </select>
       </label>
-      
+
+      <Link to ="/join">회원가입</Link>
       <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost} comment={comment}/>
-      <div className="text-right ">
+        <div className="text-right ">
         <Link to="/create" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
       </div>
       <div className=" text-center">

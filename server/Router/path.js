@@ -1,4 +1,3 @@
-const { application } = require("express");
 const express = require("express");
 const db = require("../config/database.js");
 const router = express.Router();
@@ -85,6 +84,22 @@ router.post("/commentCreate/:id", (request, response) => {
   })
 })
 
+
+/* 회원등록 */
+router.post("/join", (req, res) => {
+  console.log(req.body);
+  let memberId = req.body.id;
+  let password = req.body.pw;
+  let email = req.body.email;
+
+  const sqlQuery = `insert into member set memberId = "${memberId}" , password = "${password}" , email ="${email}";`;
+  db.query(sqlQuery, (err, result) => {
+    if (err) throw err;
+    res.send("success");
+  });
+});
+
+
 /*댓글 개수*/
 router.get("/commentCount", (request, response) => {
   const sql = "SELECT secretPost_id, COUNT(commentId) count FROM comment GROUP BY secretPost_id";
@@ -93,5 +108,6 @@ router.get("/commentCount", (request, response) => {
     response.send(result);
   })
 })
+
 
 module.exports = router;
