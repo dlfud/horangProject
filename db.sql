@@ -19,6 +19,20 @@ CREATE TABLE secretPost(
     `view` INT(10) DEFAULT 0
 );
 
+CREATE TABLE `member`(
+    id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    memberId TEXT NOT NULL,
+    `password` TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
+CREATE TABLE `member`(
+    id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    memberId TEXT NOT NULL,
+    `password` TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
 DROP TABLE  `comment`;
 CREATE TABLE `comment`(
     commentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
