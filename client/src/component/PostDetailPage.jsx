@@ -99,7 +99,7 @@ const SecretPostDetailPage = () => {
         }}>
         <div >
           <label>
-            <strong >내용</strong>
+            <strong >댓글</strong>
           </label>
           <input
             type="text"

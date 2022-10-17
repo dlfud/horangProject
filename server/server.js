@@ -4,10 +4,17 @@ const path = require("./Router/path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-app.all("/*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  next();
-});
+// app.all("/*", function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   next();
+// });
+
+const corsOptions = {
+  origin: `http://localhost:3000`,
+  credential: true, // 쿠키 세션에 접근
+ };
+ 
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 // 이게 있어야지 Create.jsx에서 path로 값을 보낼 수가 있음

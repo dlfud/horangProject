@@ -104,6 +104,13 @@ router.post("/secretPostCommentDelete/:id", (request, response) => {
 })
 
 /* 비밀 게시글 댓글 수정 */
+router.patch("/secretPostCommentUpdate/:id", (request, response) => {
+  const sql = "UPDATE secretPostComment SET secretPostCommentContent = ? WHERE secretPostCommentId = " + request.params.id;
+  db.query(sql, [request.body.content], function(err, result){
+    if(err) throw err;
+    response.send("success");
+  })
+})
 
 
 
