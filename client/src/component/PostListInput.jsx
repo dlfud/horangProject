@@ -46,7 +46,7 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
           </tbody>
       )}
       </table>
-      <div className="text-right ">
+      <div className="text-right mt-4">
           <Link to="/postCreate" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
         </div>
       </div>
