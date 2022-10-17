@@ -11,6 +11,13 @@ body{
   background-color: #F4EEFF;
   font-family:"dalse";
 }
+
+.PostHeight{
+  min-height:600px;
+  max-height:600px;
+  width:auto;
+  overflow:scroll;
+}
 .LOGObackgroundColor{
   background-color: #A6B1E1;
   padding: 10px 5px;

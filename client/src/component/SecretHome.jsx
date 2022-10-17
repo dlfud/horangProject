@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
 import Pagination from "./Pagination";
-
+import "../index.css";
 
 
 const SecretHomeR = () => {
@@ -64,6 +64,7 @@ const SecretHomeR = () => {
 
 
     return (
+
         <div className="grid gap-4 place-content-center">
 
             <div>
