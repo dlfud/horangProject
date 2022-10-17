@@ -9,6 +9,7 @@ const SecretPostDetailPage = () => {
   const [secretPostDetail, setSecretPostDetail] = useState({});
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
+  const [newContent, setNewContent] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -64,7 +65,7 @@ const SecretPostDetailPage = () => {
 
       {comment.map((comment, index) =>
         <div key={index}>
-          댓글 : { check === "true" ?
+          댓글 : { check === "true"+comment.secretPostCommentId ?
            <form onSubmit={async (e) => {
             e.preventDefault();
             const data = await axios({
@@ -74,7 +75,7 @@ const SecretPostDetailPage = () => {
             });
             if (data.data !== null) {
               setActivity(activity + 1);
-              setCheck("false");
+              setCheck("false"+comment.secretPostCommentId);
               setContent("");
               console.log("성공");
             } else {
@@ -96,7 +97,7 @@ const SecretPostDetailPage = () => {
            </form> 
            : 
            <div>{comment.secretPostCommentContent}</div>}
-          {check === "false" ? <span className="cursor-pointer" onClick={(e) => {setCheck("true")}}>수정</span> : null}
+          {check === "true"+comment.secretPostCommentId ? null : <span className="cursor-pointer" onClick={(e) => {setCheck("true"+comment.secretPostCommentId)}}>수정</span>}
 
 
           <form onSubmit={async (e) => {
@@ -119,13 +120,13 @@ const SecretPostDetailPage = () => {
             url: `http://localhost:3000/secretPostCommentCreate/${id}`,
             method: "POST",
             data: {
-              content
+              newContent
             }
           });
 
           if (data.data !== null) {
             setActivity(activity + 1);
-            setContent("");
+            setNewContent("");
             console.log("성공");
           } else {
             console.log("오류");
@@ -138,9 +139,9 @@ const SecretPostDetailPage = () => {
           <input
             type="text"
             placeholder="내용"
-            value={content}
+            value={newContent}
             onChange={(e) => {
-              setContent(e.target.value);
+              setNewContent(e.target.value);
             }}
           >
           </input>
