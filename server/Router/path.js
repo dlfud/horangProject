@@ -145,8 +145,24 @@ router.post("/postCreate", (request, response) => {
 
 
 /* 익명 게시글 수정 */
+router.post("/postUpdate/:id", (request, response) => {
+  const sql = "UPDATE post SET ? WHERE id = " + request.params.id;
+  db.query(sql, request.body, function (err, result) {
+    if (err) throw err;
+    response.send("success");
+    console.log("익명게시물 업데이트 완료");
+  });
+});
 
 /* 익명 게시글 삭제 */
+router.post("/postDelete/:id", (request, response) => {
+  const sql = "DELETE FROM post WHERE id = " + request.params.id;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
+    response.send("success");
+    console.log("익명게시물 삭제 완료");
+  });
+});
 
 /* 익명 게시글 댓글 개수*/
 
