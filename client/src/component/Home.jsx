@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
 import PostListInput from "./PostListInput";
 import Pagination from "./Pagination";
@@ -66,7 +65,6 @@ const HomeR = () => {
         </select>
       </label>
 
-      <Link to ="/join">회원가입</Link>
       <PostListInput offset={offset} limit={limit} post={post} comment={comment}/>
       <div>
         <p className="font-bold text-2xl">비밀 + 익명 게시물</p>

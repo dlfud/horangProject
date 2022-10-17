@@ -7,6 +7,7 @@ import Join from "./component/Join.jsx";
 import PostCreate from "./component/PostCreate";
 import SecretPostDetailPage from "./component/SecretPostDetailPage.jsx";
 import PostDetailPage from "./component/PostDetailPage.jsx"
+import Login from "./component/Login.jsx";
 
 const AppRoute = () => {
   return (
@@ -20,7 +21,7 @@ const AppRoute = () => {
         </header>
 
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/home" element={<Home />} />
           <Route exact path="/secretPostCreate" element={<SecretPostCreate />} />
           <Route exact path="/secretPostDetailPage/:id" element={<SecretPostDetailPage />} />
           <Route exact path="/secretPostUpdate/:id" element={<SecretPostUpdate />} />
@@ -28,6 +29,7 @@ const AppRoute = () => {
           <Route exact path="/postCreate" element={<PostCreate />} />
           <Route exact path="/postDetailPage/:id" element={<PostDetailPage />} />
           <Route exact path="/join" element={<Join/>}/>
+          <Route exact path="/" element={<Login/>}/>
         </Routes>
 
         <footer className="LOGObackgroundColor w-full absolute bottom-0">
