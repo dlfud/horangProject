@@ -117,6 +117,17 @@ router.get("/post", (request, response) => {
 });
 
 /* 익명 게시글 상세 페이지 */
+router.get("/postDetailPage/:id", async (request, response) => {
+  const sql = "SELECT * FROM post WHERE id = " + request.params.id;
+  const sql2 = "UPDATE post SET view = view + 1 WHERE id = " + request.params.id;
+  db.query(sql, function(err, result){
+    if(err) throw err;
+    response.send(result);
+  })
+  await db.query(sql2, function(err, result){
+    if(err)throw err;
+  })
+})
 
 /* 익명 게시글 생성 */
 router.post("/postCreate", (request, response) => {
@@ -139,6 +150,13 @@ router.post("/postCreate", (request, response) => {
 /* 익명 게시글 댓글 개수*/
 
 /* 익명 게시글 댓글 조회 */
+router.get("/postComment/:id", (request, response) => {
+  const sql = "SELECT * FROM postComment WHERE post_id = ? ORDER BY postCommentId DESC";
+  db.query(sql, [request.params.id], function(err, result){
+    if(err) throw err;
+    response.send(result);
+  })
+})
 
 /* 익명 게시글 댓글 생성 */
 
