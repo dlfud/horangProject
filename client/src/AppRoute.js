@@ -16,7 +16,7 @@ const AppRoute = () => {
 
       <BrowserRouter>
         <header className="LOGObackgroundColor mb-10">
-          <Link to="/">
+          <Link to="/home">
             <img src={horangLoGo} alt="horangLoGo" />
           </Link>
         </header>

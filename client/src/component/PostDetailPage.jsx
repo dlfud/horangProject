@@ -45,7 +45,7 @@ const SecretPostDetailPage = () => {
         })
         navigate("/");
       }}><button>삭제</button></form>
-      <Link to={`/`}>목록</Link>
+      <Link to={`/home`}>목록</Link>
       <div>
         제목 : {postDetail.title}
       </div>

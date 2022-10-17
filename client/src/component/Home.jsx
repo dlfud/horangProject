@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
 import PostListInput from "./PostListInput";
 import Pagination from "./Pagination";
@@ -13,6 +14,7 @@ const HomeR = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData1 = async () => {
@@ -43,6 +45,14 @@ const HomeR = () => {
     getData3();
   },[]);
 
+    const handleLogout = () => {
+      console.log("로그아웃");
+      window.sessionStorage.clear();
+      console.log(
+        "로그아웃 완료", window.sessionStorage.getItem("id")
+      );
+      navigate("/");
+    }
 
   return(
     <div className="grid gap-4 place-content-center">
@@ -64,6 +74,11 @@ const HomeR = () => {
           <option value="100">100</option>
         </select>
       </label>
+      <input 
+       onClick={handleLogout}
+       value="로그아웃"
+      type="button"
+       ></input>
 
       <PostListInput offset={offset} limit={limit} post={post} comment={comment}/>
       <div>
