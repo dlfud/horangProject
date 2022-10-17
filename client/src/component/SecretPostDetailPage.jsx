@@ -31,6 +31,13 @@ const SecretPostDetailPage = () => {
     getData2();
   }, [activity, id]);
 
+  const loginout = () => {
+    if (window.sessionStorage.getItem("id") === null) {
+      navigate("/home");
+    } else {
+      navigate("/secrethome");
+    }
+  }
 
   return (
     <>
@@ -45,7 +52,7 @@ const SecretPostDetailPage = () => {
         })
         navigate("/home");
       }}><button>삭제</button></form>
-      <Link to={`/home`}>목록</Link>
+      <input onClick={loginout} value="목록" type="button"></input>
       <div>
         제목 : {secretPostDetail.title}
       </div>
@@ -59,8 +66,8 @@ const SecretPostDetailPage = () => {
           <form onSubmit={async (e) => {
             e.preventDefault();
             await axios({
-              url:`http://localhost:3000/secretPostCommentDelete/${comment.secretPostCommentId}`,
-              method:"POST",
+              url: `http://localhost:3000/secretPostCommentDelete/${comment.secretPostCommentId}`,
+              method: "POST",
             })
             setActivity(activity + 1);
           }}>

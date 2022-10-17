@@ -36,7 +36,7 @@ const Login = () => {
                     window.sessionStorage.setItem("id", idRef.current.value);
                     // 세션스토리지에 key : id , value : idRef.current.value로 저장
                     // sessionsStorage는 창 닫으면 사라짐, localStorage는 안사라짐
-                    navigate("/home");
+                    navigate("/secrethome");
                 } else {
                     alert("아이디, 패스워드가 정확하지 않습니다.");
                     idRef.current.value = "";
