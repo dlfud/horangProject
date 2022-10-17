@@ -35,7 +35,7 @@ const PostListInput = ({ offset, limit, post, comment }) => {
           <tr className="whitespace-nowrap">
           <td className="px-6 py-4 text-sm text-gray-500 w-20 text-center">{post.id}</td>
           <td className="px-6 py-4 TitleWidth" >
-            <Link to={`/secretPostDetailPage/${post.id}`}>
+            <Link to={`/postDetailPage/${post.id}`}>
               {post.title}
             </Link>
             {/* <span className="text-violet-300 ml-3"> {countComment(post.id)}</span> */}
