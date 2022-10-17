@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 const SecretPostDetailPage = () => {
   const [activity, setActivity] = useState(0);
   const [postDetail, setPostDetail] = useState({});
+  const [secretPostComment, setSecretPostComment] = useState([]);
+  const [postComment, setPostComment] = useState([]);
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
   const { id } = useParams();
@@ -31,6 +33,13 @@ const SecretPostDetailPage = () => {
     getData2();
   }, [activity, id]);
 
+  const loginout = () => {
+    if(window.sessionStorage.getItem("id")===null){
+      navigate("/home");
+    }else{
+      navigate("/secrethome");
+    }
+  }
 
   return (
     <>
@@ -45,7 +54,7 @@ const SecretPostDetailPage = () => {
         })
         navigate("/home");
       }}><button>삭제</button></form>
-      <Link to={`/home`}>목록</Link>
+      <input onClick={loginout} value="목록" type="button"></input>
       <div>
         제목 : {postDetail.title}
       </div>
