@@ -43,7 +43,7 @@ const SecretPostDetailPage = () => {
           url: `http://localhost:3000/postDelete/${id}`,
           method: "POST",
         })
-        navigate("/");
+        navigate("/home");
       }}><button>삭제</button></form>
       <Link to={`/home`}>목록</Link>
       <div>
@@ -59,7 +59,7 @@ const SecretPostDetailPage = () => {
           <form onSubmit={async (e) => {
             e.preventDefault();
             await axios({
-              url:`http://localhost:3000/secretPostCommentDelete/${comment.postCommentId}`,
+              url:`http://localhost:3000/postCommentDelete/${comment.postCommentId}`,
               method:"POST",
             })
             setActivity(activity + 1);

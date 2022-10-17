@@ -10,7 +10,8 @@ import Pagination from "./Pagination";
 const HomeR = () => {
   const [secretPost, setSecretPost] = useState([]);
   const [post, setPost] = useState([]);
-  const [comment, setComment] = useState([]);
+  const [secretPostComment, setSecretPostComment] = useState([]);
+  const [postComment, setPostComment] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
@@ -26,11 +27,11 @@ const HomeR = () => {
     };
 
     const getData2 = async () => {
-      const comment = await axios({
+      const secretPostComment = await axios({
         url: `http://localhost:5000/secretPostCommentCount`,
         method: "GET",
       });
-      setComment(comment.data);
+      setSecretPostComment(secretPostComment.data);
     };
 
     const getData3 = async () => {
@@ -40,9 +41,18 @@ const HomeR = () => {
       });
       setPost(post.data);
     }
+
+    const getData4 = async () => {
+      const postComment = await axios({
+        url:`http://localhost:5000/postCommentCount`,
+        method:"GET",
+      });
+      setPostComment(postComment.data);
+    }
     getData1();
     getData2();
     getData3();
+    getData4();
   },[]);
 
     const handleLogout = () => {
@@ -80,11 +90,12 @@ const HomeR = () => {
       type="button"
        ></input>
 
-      <PostListInput offset={offset} limit={limit} post={post} comment={comment}/>
+      <PostListInput offset={offset} limit={limit} post={post} postComment={postComment}/>
       <div>
         <p className="font-bold text-2xl">비밀 + 익명 게시물</p>
       </div>
-      <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost} post = {post} comment={comment}/>
+      <SecretPostListInput offset={offset} limit={limit} 
+        secretPost={secretPost} post={post} secretPostComment={secretPostComment} postComment={postComment}/>
       <div className=" text-center">
       <Pagination 
        total={secretPost.length}

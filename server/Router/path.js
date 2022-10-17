@@ -165,6 +165,13 @@ router.post("/postDelete/:id", (request, response) => {
 });
 
 /* 익명 게시글 댓글 개수*/
+router.get("/postCommentCount", (request, response) => {
+  const sql = "SELECT post_id, COUNT(postCommentId) count FROM postComment GROUP BY post_id";
+  db.query(sql, function(err, result) {
+    if(err) throw err;
+    response.send(result);
+  })
+})
 
 /* 익명 게시글 댓글 조회 */
 router.get("/postComment/:id", (request, response) => {
@@ -176,8 +183,22 @@ router.get("/postComment/:id", (request, response) => {
 })
 
 /* 익명 게시글 댓글 생성 */
+router.post("/postCommentCreate/:id", (request, response) => {
+  const sql = "INSERT INTO postComment (postCommentContent, post_id) VALUES (?,?)";
+  db.query(sql, [request.body.content, request.params.id], function (err, result) {
+    if (err) throw err;
+    response.send("success");
+  })
+})
 
 /* 익명 게시글 댓글 삭제 */
+router.post("/postCommentDelete/:id", (request, response) => {
+  const sql = "DELETE FROM postComment WHERE postCommentId = " + request.params.id;
+  db.query(sql, function(err, result){
+    if(err) throw err;
+    response.send("success");
+  })
+})
 
 /* 익명 게시글 댓글 수정 */
 
