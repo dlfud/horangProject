@@ -143,6 +143,7 @@ router.post("/postCreate", (request, response) => {
   );
 });
 
+
 /* 익명 게시글 수정 */
 
 /* 익명 게시글 삭제 */
@@ -180,6 +181,18 @@ router.post("/join", (req, res) => {
   });
 });
 
+/* 로그인 */
+router.post("/login", (req, res) => {
+  console.log(req.body);
+  let memberId = req.body.id;
+  let password = req.body.pw;
 
+  const sqlQuery = `select count(*) as 'cnt' from member where memberId = "${memberId}" and password = "${password}";`;
+  // select count(*) as cnt : 특정테이블에서 특정 조건에 맞는 컬럼의 갯수 등을 출력하려할 때 사용
+  db.query(sqlQuery, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 module.exports = router;
