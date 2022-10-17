@@ -6,7 +6,8 @@ import SecretPostUpdate from "./component/SecretPostUpdate.jsx";
 import Join from "./component/Join.jsx";
 import PostCreate from "./component/PostCreate";
 import SecretPostDetailPage from "./component/SecretPostDetailPage.jsx";
-import PostDetailPage from "./component/PostDetailPage.jsx"
+import PostDetailPage from "./component/PostDetailPage.jsx";
+import PostUpdate from "./component/PostUpdate.jsx";
 import Login from "./component/Login.jsx";
 
 const AppRoute = () => {
@@ -28,6 +29,7 @@ const AppRoute = () => {
 
           <Route exact path="/postCreate" element={<PostCreate />} />
           <Route exact path="/postDetailPage/:id" element={<PostDetailPage />} />
+          <Route exact path="/postUpdate/:id" element={<PostUpdate />} />
           <Route exact path="/join" element={<Join/>}/>
           <Route exact path="/" element={<Login/>}/>
         </Routes>
