@@ -6,9 +6,9 @@ import React, { useState, useEffect } from "react";
 const SecretPostDetailPage = () => {
   const [activity, setActivity] = useState(0);
   const [postDetail, setPostDetail] = useState({});
-  const [secretPostComment, setSecretPostComment] = useState([]);
-  const [postComment, setPostComment] = useState([]);
+  const [check, setCheck] = useState("false");
   const [content, setContent] = useState("");
+  const [newContent, setNewContent] = useState("");
   const [comment, setComment] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -64,7 +64,42 @@ const SecretPostDetailPage = () => {
 
       {comment.map((comment, index) =>
         <div key={index}>
-          댓글 : {comment.postCommentContent}
+          댓글 : { check === "true"+comment.postCommentId ?
+           <form onSubmit={async (e) => {
+            e.preventDefault();
+            const data = await axios({
+              url:`http://localhost:5000/postCommentUpdate/${comment.postCommentId}`,
+              method:"PATCH",
+              data:{content}
+            });
+            if (data.data !== null) {
+              setActivity(activity + 1);
+              setCheck("false"+comment.postCommentId);
+              setContent("");
+              console.log("성공");
+            } else {
+              console.log("오류");
+            }
+           }}>
+            <input
+            type="text"
+            placeholder="내용"
+            value={content}
+            onChange={(e) => {
+                setContent(e.target.value);
+            }}
+            >
+            </input>
+            <div>
+              <button type="submit">확인</button>
+            </div>
+           </form> 
+           : 
+           <div>{comment.postCommentContent}</div>}
+          {check === "false"+comment.postCommentId ? null : 
+            <span className="cursor-pointer" onClick={(e) => {setCheck("true"+comment.postCommentId)}}>수정</span> 
+          }
+
           <form onSubmit={async (e) => {
             e.preventDefault();
             await axios({
@@ -85,13 +120,13 @@ const SecretPostDetailPage = () => {
             url: `http://localhost:3000/postCommentCreate/${id}`,
             method: "POST",
             data: {
-              content
+              newContent
             }
           });
 
           if (data.data !== null) {
             setActivity(activity + 1);
-            setContent("");
+            setNewContent("");
             console.log("성공");
           } else {
             console.log("오류");
@@ -104,9 +139,9 @@ const SecretPostDetailPage = () => {
           <input
             type="text"
             placeholder="내용"
-            value={content}
+            value={newContent}
             onChange={(e) => {
-              setContent(e.target.value);
+              setNewContent(e.target.value);
             }}
           >
           </input>
