@@ -43,7 +43,7 @@ const SecretPostDetailPage = () => {
           url: `http://localhost:3000/secretPostDelete/${id}`,
           method: "POST",
         })
-        navigate("/");
+        navigate("/home");
       }}><button>삭제</button></form>
       <Link to={`/home`}>목록</Link>
       <div>

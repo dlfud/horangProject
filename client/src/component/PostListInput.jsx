@@ -3,16 +3,16 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 
-const PostListInput = ({ offset, limit, post, comment }) => {
+const PostListInput = ({ offset, limit, post, postComment }) => {
 
   let count = 0;
 
-//   const countComment = (id) => comment.map((_comment, index) => {
-//     if(_comment.secretPost_id === id){
-//       count = _comment.count;
-//       return count
-//     }
-//   })
+  const countPostComment = (id) => postComment.map((_comment, index) => {
+    if(_comment.post_id === id){
+      count = _comment.count;
+      return count
+    }
+  })
 
   return (
     <>
@@ -38,7 +38,7 @@ const PostListInput = ({ offset, limit, post, comment }) => {
             <Link to={`/postDetailPage/${post.id}`}>
               {post.title}
             </Link>
-            {/* <span className="text-violet-300 ml-3"> {countComment(post.id)}</span> */}
+            <span className="text-violet-300 ml-3"> {countPostComment(post.id)}</span>
           </td>
           <td className="px-6 py-4 text-sm text-center w-32 ">{moment(post.create_date).format('YY.MM.DD')}</td>
           <td className="px-6 py-4  text-sm  text-center">{post.view}</td>
