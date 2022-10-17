@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 
 const SecretPostDetailPage = () => {
   const [activity, setActivity] = useState(0);
+  const [check, setCheck] = useState("false");
   const [secretPostDetail, setSecretPostDetail] = useState({});
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
@@ -30,6 +31,7 @@ const SecretPostDetailPage = () => {
     getData1();
     getData2();
   }, [activity, id]);
+
 
   const loginout = () => {
     if (window.sessionStorage.getItem("id") === null) {
@@ -62,11 +64,45 @@ const SecretPostDetailPage = () => {
 
       {comment.map((comment, index) =>
         <div key={index}>
-          댓글 : {comment.secretPostCommentContent}
+          댓글 : { check === "true" ?
+           <form onSubmit={async (e) => {
+            e.preventDefault();
+            const data = await axios({
+              url:`http://localhost:5000/secretPostCommentUpdate/${comment.secretPostCommentId}`,
+              method:"PATCH",
+              data:{content}
+            });
+            if (data.data !== null) {
+              setActivity(activity + 1);
+              setCheck("false");
+              setContent("");
+              console.log("성공");
+            } else {
+              console.log("오류");
+            }
+           }}>
+            <input
+            type="text"
+            placeholder="내용"
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+            >
+            </input>
+            <div>
+              <button type="submit">확인</button>
+            </div>
+           </form> 
+           : 
+           <div>{comment.secretPostCommentContent}</div>}
+          {check === "false" ? <span className="cursor-pointer" onClick={(e) => {setCheck("true")}}>수정</span> : null}
+
+
           <form onSubmit={async (e) => {
             e.preventDefault();
             await axios({
-              url: `http://localhost:3000/secretPostCommentDelete/${comment.secretPostCommentId}`,
+              url: `http://localhost:5000/secretPostCommentDelete/${comment.secretPostCommentId}`,
               method: "POST",
             })
             setActivity(activity + 1);
@@ -97,7 +133,7 @@ const SecretPostDetailPage = () => {
         }}>
         <div >
           <label>
-            <strong >내용</strong>
+            <strong >댓글</strong>
           </label>
           <input
             type="text"
