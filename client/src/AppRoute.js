@@ -28,7 +28,7 @@ const AppRoute = () => {
     <>
 
       <BrowserRouter>
-        <header className="LOGObackgroundColor mb-10">
+        <header className="LOGObackgroundColor">
           {
             onoff ?
               <Link to="/secrethome">
@@ -55,7 +55,7 @@ const AppRoute = () => {
           <Route exact path="/secrethome" element={<SecretHome />} />
         </Routes>
 
-        <footer className="LOGObackgroundColor w-full absolute bottom-0">
+        <footer className="LOGObackgroundColor w-full relative bottom-0 m-0 p-0">
           <span>팀명 : 호랑이 </span>
           <span>팀프로젝트명 : 호랑이 </span>
           <span>팀원명 : 박선호, 윤이령 </span>
