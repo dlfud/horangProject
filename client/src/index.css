@@ -8,15 +8,18 @@
 
 
 body{
-  background-color: #F4EEFF;
+ 
+  background-color: #A6B1E1;
   font-family:"dalse";
+  height:100vh;
 }
-
-.PostHeight{
-  min-height:600px;
-  max-height:600px;
-  width:auto;
-  overflow:scroll;
+.Main{
+ background-color: #F4EEFF;
+}
+.Side{
+  background-color: #A6B1E1;
+  height:100vh;
+   position:relative;
 }
 .LOGObackgroundColor{
   background-color: #A6B1E1;
@@ -28,8 +31,17 @@ body{
   background-color: #DCD6F7;
 }
 .TitleWidth{
-  min-width : 500px;
-  max-width : 500px;
+  min-width : 1000px;
+  max-width : 1000px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  padding:10px; 
+}
+
+.tdWidth{
+  min-width : 150px;
+  max-width : 150px;
   overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
