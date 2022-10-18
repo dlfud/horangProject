@@ -7,9 +7,11 @@ const SecretPostDetailPage = () => {
   const [activity, setActivity] = useState(0);
   const [postDetail, setPostDetail] = useState({});
   const [check, setCheck] = useState("false");
+  const [checkComment, setCheckComment] = useState("false");
   const [content, setContent] = useState("");
   const [newContent, setNewContent] = useState("");
   const [comment, setComment] = useState([]);
+  const [commentComment, setCommentComment] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -29,8 +31,17 @@ const SecretPostDetailPage = () => {
       setComment(postComment.data);
     };
 
+    const getData3 = async ()=>{
+      const postCommentComment = await axios({
+        url:`http://localhost:5000/postCommentComment/${id}`,
+        method:"GET",
+      });
+      setCommentComment(postCommentComment.data);
+    }
+
     getData1();
     getData2();
+    getData3();
   }, [activity, id]);
 
   const loginout = () => {
@@ -110,6 +121,20 @@ const SecretPostDetailPage = () => {
           }}>
             <button>삭제</button>
           </form>
+
+          {commentComment.map((commentComment, index) => 
+            <div key={index}>
+              대댓글 : {commentComment.postCommentCommentContent}
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                await axios({
+                  url:`http://localhost:3000/postCommentCommentDelete/${commentComment.postCommentCommentId}`,
+                  method:"POST",
+                })
+                setActivity(activity + 1);
+              }}><button>삭제</button></form>
+            </div>
+          )}
         </div>
       )}
 

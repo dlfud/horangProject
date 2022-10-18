@@ -246,4 +246,37 @@ router.post("/login", (req, res) => {
   });
 });
 
+
+
+//익명게시판 대댓글 조회
+router.get("/postCommentComment/:id", (request, response) => {
+  const sql = "SELECT * FROM postCommentComment WHERE post_id = " + request.params.id;
+  db.query(sql, function(err, result){
+    if(err) throw err;
+    response.send(result);
+  })
+})
+//익명게시판 대댓글 생성
+//익명게시판 대댓글 수정
+
+
+//익명게시판 대댓글 삭제
+router.post("/postCommentCommentDelete/:id", (req, res) => {
+  const sql = "DELETE FROM postCommentComment WHERE postCommentCommentId = " + req.params.id;
+  db.query(sql, function(err, result){
+    if(err) throw err;
+    res.send("success");
+  })
+})
+
+//비밀게시판 대댓글 조회
+//익명게시판 대댓글 생성
+//익명게시판 대댓글 수정
+//익명게시판 대댓글 삭제
+
+
+
+
+
+
 module.exports = router;

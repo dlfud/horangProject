@@ -2,15 +2,12 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
-import Pagination from "./Pagination";
 import "../index.css";
 
 
 const SecretHomeR = () => {
     const [secretPost, setSecretPost] = useState([]);
-    const [post, setPost] = useState([]);
     const [secretPostComment, setSecretPostComment] = useState([]);
-    const [postComment, setPostComment] = useState([]);
     const [limit, setLimit] = useState(10);
     const navigate = useNavigate();
 
@@ -30,26 +27,8 @@ const SecretHomeR = () => {
             });
             setSecretPostComment(secretPostComment.data);
           };
-      
-          const getData3 = async () => {
-            const post = await axios({
-              url: `http://localhost:5000/post`,
-              method:"GET",
-            });
-            setPost(post.data);
-          }
-      
-          const getData4 = async () => {
-            const postComment = await axios({
-              url:`http://localhost:5000/postCommentCount`,
-              method:"GET",
-            });
-            setPostComment(postComment.data);
-          }
           getData1();
           getData2();
-          getData3();
-          getData4();
     }, []);
 
     const handleLogout = () => {
@@ -88,7 +67,7 @@ const SecretHomeR = () => {
                 ></input>
             </label>
 
-            <SecretPostListInput limit={limit} secretPost={secretPost} post={post} secretPostComment={secretPostComment} postComment={postComment} />
+            <SecretPostListInput limit={limit} secretPost={secretPost} secretPostComment={secretPostComment}/>
 
         </div>
     );
