@@ -13,6 +13,7 @@ body{
   font-family:"dalse";
   height:100vh;
 }
+
 .Main{
  background-color: #F4EEFF;
 }
@@ -21,6 +22,7 @@ body{
   height:100vh;
    position:relative;
 }
+
 .LOGObackgroundColor{
   background-color: #A6B1E1;
   padding: 10px 5px;
