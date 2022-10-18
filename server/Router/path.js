@@ -250,15 +250,28 @@ router.post("/login", (req, res) => {
 
 //익명게시판 대댓글 조회
 router.get("/postCommentComment/:id", (request, response) => {
-  const sql = "SELECT * FROM postCommentComment WHERE post_id = " + request.params.id;
-  db.query(sql, function(err, result){
+  const sql = "SELECT * FROM postCommentComment WHERE post_id = ? ORDER BY postCommentCommentId DESC";
+  db.query(sql,[request.params.id], function(err, result){
     if(err) throw err;
     response.send(result);
   })
 })
 //익명게시판 대댓글 생성
+router.post("/postCommentCommentCreate", (request, response) => {
+  const sql = "INSERT INTO postCommentComment (postComment_id, post_id, postCommentCommentContent) VALUES (?,?,?)";
+  db.query(sql, [request.body.postCommnetId, request.body.postId, request.body.newContent], function (err, result) {
+    if (err) throw err;
+    response.send("success");
+  })
+})
 //익명게시판 대댓글 수정
-
+router.patch("/postCommentCommentUpdate/:id", (request, response) => {
+  const sql = "UPDATE postCommentComment SET postCommentCommentContent = ? WHERE postCommentCommentId = " + request.params.id;
+  db.query(sql, [request.body.commentContent], function(err, result){
+    if(err) throw err;
+    response.send("success");
+  })
+})
 
 //익명게시판 대댓글 삭제
 router.post("/postCommentCommentDelete/:id", (req, res) => {
@@ -270,9 +283,9 @@ router.post("/postCommentCommentDelete/:id", (req, res) => {
 })
 
 //비밀게시판 대댓글 조회
-//익명게시판 대댓글 생성
-//익명게시판 대댓글 수정
-//익명게시판 대댓글 삭제
+//비밀게시판 대댓글 생성
+//비밀게시판 대댓글 수정
+//비밀게시판 대댓글 삭제
 
 
 
