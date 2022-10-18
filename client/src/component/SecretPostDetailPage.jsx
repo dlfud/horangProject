@@ -75,7 +75,7 @@ const SecretPostDetailPage = () => {
             });
             if (data.data !== null) {
               setActivity(activity + 1);
-              setCheck("false"+comment.secretPostCommentId);
+              setCheck("false");
               setContent("");
               console.log("성공");
             } else {
