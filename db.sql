@@ -88,8 +88,8 @@ INSERT INTO secretPost
 SET title="님 대가리 깨버릴거임",
 content="너무해ㅠㅠ";
 
-INSERT INTO postComment
-SET postCommentContent="너무해ㅠㅠ", post_id = 19;
+INSERT INTO postCommentComment
+SET postCommentCommentContent="너무해ㅠㅠ", post_id = 19, postComment_id=1;
 
 
 SELECT * FROM secretPost a LEFT JOIN `comment`b ON a.id = b.secretPost_id WHERE a.id = 160;
