@@ -283,10 +283,40 @@ router.post("/postCommentCommentDelete/:id", (req, res) => {
 })
 
 //비밀게시판 대댓글 조회
-//비밀게시판 대댓글 생성
-//비밀게시판 대댓글 수정
-//비밀게시판 대댓글 삭제
+router.get("/secretPostCommentComment/:id", (request, response) => {
+  const sql = "SELECT * FROM secretPostCommentComment WHERE secretPost_id = ? ORDER BY secretPostCommentCommentId DESC";
+  db.query(sql,[request.params.id], function(err, result){
+    if(err) throw err;
+    response.send(result);
+  })
+})
 
+//비밀게시판 대댓글 생성
+router.post("/secretPostCommentCommentCreate", (request, response) => {
+  const sql = "INSERT INTO secretPostCommentComment (secretPostComment_id, secretPost_id, secretPostCommentCommentContent) VALUES (?,?,?)";
+  db.query(sql, [request.body.secretPostCommnetId, request.body.secretPostId, request.body.newContent], function (err, result) {
+    if (err) throw err;
+    response.send("success");
+  })
+})
+
+//비밀게시판 대댓글 수정
+router.patch("/secretPostCommentCommentUpdate/:id", (request, response) => {
+  const sql = "UPDATE secretPostCommentComment SET secretPostCommentCommentContent = ? WHERE secretPostCommentCommentId = " + request.params.id;
+  db.query(sql, [request.body.commentContent], function(err, result){
+    if(err) throw err;
+    response.send("success");
+  })
+})
+
+//비밀게시판 대댓글 삭제
+router.post("/secretPostCommentCommentDelete/:id", (req, res) => {
+  const sql = "DELETE FROM secretPostCommentComment WHERE secretPostCommentCommentId = " + req.params.id;
+  db.query(sql, function(err, result){
+    if(err) throw err;
+    res.send("success");
+  })
+})
 
 
 
