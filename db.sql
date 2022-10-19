@@ -31,10 +31,11 @@ CREATE TABLE `member`(
 );
 
 #익명게시판 댓글
+DROP TABLE postComment;
 CREATE TABLE postComment(
-    postCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    postCommentContent TEXT NOT NULL,
-    postCommentCreateDate DATETIME DEFAULT NOW(),
+    commentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    commentContent TEXT NOT NULL,
+    commentCreateDate DATETIME DEFAULT NOW(),
     post_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(post_id) REFERENCES Post(id) ON DELETE CASCADE
 );
@@ -42,11 +43,11 @@ CREATE TABLE postComment(
 #익명게시판 대댓글
 DROP TABLE postCommentComment;
 CREATE TABLE postCommentComment(
-    postCommentCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    postCommentCommentContent TEXT NOT NULL,
-    postCommentCommentCreateDate DATETIME DEFAULT NOW(),
+    commentCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    commentCommentContent TEXT NOT NULL,
+    commentCommentCreateDate DATETIME DEFAULT NOW(),
     postComment_id INT(11) UNSIGNED NOT NULL,
-    FOREIGN KEY(postComment_id) REFERENCES PostComment(postCommentId) ON DELETE CASCADE,
+    FOREIGN KEY(postComment_id) REFERENCES PostComment(commentId) ON DELETE CASCADE,
     post_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(post_id) REFERENCES Post(id) ON DELETE CASCADE
 );
@@ -54,9 +55,9 @@ CREATE TABLE postCommentComment(
 #비밀 게시판 댓글
 DROP TABLE  secretPostComment;
 CREATE TABLE secretPostComment(
-    secretPostCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    secretPostCommentContent TEXT NOT NULL,
-    secretPostCommentCreateDate DATETIME DEFAULT NOW(),
+    commentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    commentContent TEXT NOT NULL,
+    commentCreateDate DATETIME DEFAULT NOW(),
     secretPost_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPost_id) REFERENCES secretPost(id) ON DELETE CASCADE
 );
@@ -64,11 +65,11 @@ CREATE TABLE secretPostComment(
 #비밀게시판 대댓글
 DROP TABLE secretPostCommentComment;
 CREATE TABLE secretPostCommentComment(
-    secretPostCommentCommenttId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    secretPostCommentCommentContent TEXT NOT NULL,
-    secretPostCommentCommentCreateDate DATETIME DEFAULT NOW(),
+    commentCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    commentCommentContent TEXT NOT NULL,
+    commentCommentCreateDate DATETIME DEFAULT NOW(),
     secretPostComment_id INT(11) UNSIGNED NOT NULL,
-    FOREIGN KEY(secretPostComment_id) REFERENCES secretPostComment(secretPostCommentId) ON DELETE CASCADE,
+    FOREIGN KEY(secretPostComment_id) REFERENCES secretPostComment(commentId) ON DELETE CASCADE,
     secretPost_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPost_id) REFERENCES secretPost(id) ON DELETE CASCADE
 );

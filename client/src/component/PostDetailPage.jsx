@@ -1,16 +1,15 @@
-import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
 import DetailPage from "./DetailPage.jsx";
 
-
 const postDetailPage = () => {
+  const { id } = useParams();
   return (
     <>
-    <h1>익명 게시물 상세페이지</h1>
-    <DetailPage method="0"/>
+      <h1>익명 게시물 상세페이지</h1>
+      <DetailPage method="0" id={id} />
     </>
-  )
-}
+  );
+};
 
 export default postDetailPage;
