@@ -55,8 +55,8 @@ const AppRoute = () => {
           <Route exact path="/secrethome" element={<SecretHome />} />
         </Routes>
 
-    
-      </BrowserRouter>
+        
+        </BrowserRouter>
     </>
   )
 };
