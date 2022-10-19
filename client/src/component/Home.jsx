@@ -43,7 +43,7 @@ const HomeR = () => {
       }
     }
 
-   
+
     loginout();
 
   }, []);
@@ -53,11 +53,10 @@ const HomeR = () => {
     console.log("로그아웃");
     window.sessionStorage.clear();
     console.log(
-        "로그아웃 완료", window.sessionStorage.getItem("id")
+      "로그아웃 완료", window.sessionStorage.getItem("id")
     );
     navigate("/");
-}
-
+  }
   return (
     <div className="flex Main">
       <div className=" px-3 Side w-70">
@@ -139,7 +138,7 @@ const HomeR = () => {
                     </li>
                     <li className="rounded-sm">
                       <a
-                         onClick={handleLogout}
+                        onClick={handleLogout}
                         className="flex items-center p-2 space-x-3 rounded-md"
                       >
                         <svg
@@ -232,10 +231,12 @@ const HomeR = () => {
                     </li>
                   </>
               }
-
-
-
             </ul>
+            <div className=" absolute bottom-0 text-stone-500">
+              <p>【 팀명 】<br /> 호랑이 </p>
+              <p>【 프로젝트명 】<br /> 호랑이 </p>
+              <p>【 팀원명 】<br /> 박선호, 윤이령 </p>
+            </div>
           </div>
         </div>
       </div>
