@@ -20,15 +20,16 @@ router.get("/secretPost", (request, response) => {
 /* 비밀 게시글 상세페이지 */
 router.get("/secretPostDetailPage/:id", async (request, response) => {
   const sql1 = "SELECT * FROM secretPost WHERE id = " + request.params.id;
-  const sql2 = "UPDATE secretPost SET view = view + 1 WHERE id = " + request.params.id;
+  const sql2 =
+    "UPDATE secretPost SET view = view + 1 WHERE id = " + request.params.id;
   await db.query(sql1, function (err, result) {
     if (err) throw err;
     console.log(result);
     response.send(result);
   });
-  await db.query(sql2, function(err, result){
-    if(err)throw err;
-  })
+  await db.query(sql2, function (err, result) {
+    if (err) throw err;
+  });
 });
 
 /* 비밀게시글 생성 */
@@ -66,53 +67,60 @@ router.post("/secretPostDelete/:id", (request, response) => {
   });
 });
 
-
 /* 비밀 게시글 댓글 조회*/
 router.get("/secretPostComment/:id", (request, response) => {
-  const sql = "SELECT * FROM secretPostComment WHERE secretPost_id = ? ORDER BY secretPostCommentId DESC";
+  const sql =
+    "SELECT * FROM secretPostComment WHERE secretPost_id = ? ORDER BY commentId DESC";
   db.query(sql, [request.params.id], function (err, result) {
     if (err) throw err;
     response.send(result);
-  })
-})
+  });
+});
 
 /* 비밀 게시글 댓글 생성*/
 router.post("/secretPostCommentCreate/:id", (request, response) => {
-  const sql = "INSERT INTO secretPostComment (secretPostCommentContent, secretPost_id) VALUES (?,?)";
-  db.query(sql, [request.body.newContent, request.params.id], function (err, result) {
-    if (err) throw err;
-    response.send("success");
-  })
-})
+  const sql =
+    "INSERT INTO secretPostComment (commentContent, secretPost_id) VALUES (?,?)";
+  db.query(
+    sql,
+    [request.body.newContent, request.params.id],
+    function (err, result) {
+      if (err) throw err;
+      response.send("success");
+    }
+  );
+});
 
 /* 비밀 게시글 댓글 개수*/
 router.get("/secretPostCommentCount", (request, response) => {
-  const sql = "SELECT secretPost_id, COUNT(secretPostCommentId) count FROM secretPostComment GROUP BY secretPost_id";
-  db.query(sql, function(err, result) {
-    if(err) throw err;
+  const sql =
+    "SELECT secretPost_id, COUNT(commentId) count FROM secretPostComment GROUP BY secretPost_id";
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     response.send(result);
-  })
-})
+  });
+});
 
 /* 비밀 게시글 댓글 삭제 */
 router.post("/secretPostCommentDelete/:id", (request, response) => {
-  const sql = "DELETE FROM secretPostComment WHERE secretPostCommentId = " + request.params.id;
-  db.query(sql, function(err, result){
-    if(err) throw err;
+  const sql =
+    "DELETE FROM secretPostComment WHERE commentId = " + request.params.id;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     response.send("success");
-  })
-})
+  });
+});
 
 /* 비밀 게시글 댓글 수정 */
 router.patch("/secretPostCommentUpdate/:id", (request, response) => {
-  const sql = "UPDATE secretPostComment SET secretPostCommentContent = ? WHERE secretPostCommentId = " + request.params.id;
-  db.query(sql, [request.body.content], function(err, result){
-    if(err) throw err;
+  const sql =
+    "UPDATE secretPostComment SET commentContent = ? WHERE commentId = " +
+    request.params.id;
+  db.query(sql, [request.body.content], function (err, result) {
+    if (err) throw err;
     response.send("success");
-  })
-})
-
-
+  });
+});
 
 /* 익명 게시글 조회 */
 router.get("/post", (request, response) => {
@@ -126,15 +134,16 @@ router.get("/post", (request, response) => {
 /* 익명 게시글 상세 페이지 */
 router.get("/postDetailPage/:id", async (request, response) => {
   const sql = "SELECT * FROM post WHERE id = " + request.params.id;
-  const sql2 = "UPDATE post SET view = view + 1 WHERE id = " + request.params.id;
-  db.query(sql, function(err, result){
-    if(err) throw err;
+  const sql2 =
+    "UPDATE post SET view = view + 1 WHERE id = " + request.params.id;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     response.send(result);
-  })
-  await db.query(sql2, function(err, result){
-    if(err)throw err;
-  })
-})
+  });
+  await db.query(sql2, function (err, result) {
+    if (err) throw err;
+  });
+});
 
 /* 익명 게시글 생성 */
 router.post("/postCreate", (request, response) => {
@@ -149,7 +158,6 @@ router.post("/postCreate", (request, response) => {
     }
   );
 });
-
 
 /* 익명 게시글 수정 */
 router.post("/postUpdate/:id", (request, response) => {
@@ -173,50 +181,56 @@ router.post("/postDelete/:id", (request, response) => {
 
 /* 익명 게시글 댓글 개수*/
 router.get("/postCommentCount", (request, response) => {
-  const sql = "SELECT post_id, COUNT(postCommentId) count FROM postComment GROUP BY post_id";
-  db.query(sql, function(err, result) {
-    if(err) throw err;
+  const sql =
+    "SELECT post_id, COUNT(commentId) count FROM postComment GROUP BY post_id";
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     response.send(result);
-  })
-})
+  });
+});
 
 /* 익명 게시글 댓글 조회 */
 router.get("/postComment/:id", (request, response) => {
-  const sql = "SELECT * FROM postComment WHERE post_id = ? ORDER BY postCommentId DESC";
-  db.query(sql, [request.params.id], function(err, result){
-    if(err) throw err;
+  const sql =
+    "SELECT * FROM postComment WHERE post_id = ? ORDER BY commentId DESC";
+  db.query(sql, [request.params.id], function (err, result) {
+    if (err) throw err;
     response.send(result);
-  })
-})
+  });
+});
 
 /* 익명 게시글 댓글 생성 */
 router.post("/postCommentCreate/:id", (request, response) => {
-  const sql = "INSERT INTO postComment (postCommentContent, post_id) VALUES (?,?)";
-  db.query(sql, [request.body.newContent, request.params.id], function (err, result) {
-    if (err) throw err;
-    response.send("success");
-  })
-})
+  const sql = "INSERT INTO postComment (commentContent, post_id) VALUES (?,?)";
+  db.query(
+    sql,
+    [request.body.newContent, request.params.id],
+    function (err, result) {
+      if (err) throw err;
+      response.send("success");
+    }
+  );
+});
 
 /* 익명 게시글 댓글 삭제 */
 router.post("/postCommentDelete/:id", (request, response) => {
-  const sql = "DELETE FROM postComment WHERE postCommentId = " + request.params.id;
-  db.query(sql, function(err, result){
-    if(err) throw err;
+  const sql = "DELETE FROM postComment WHERE commentId = " + request.params.id;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     response.send("success");
-  })
-})
+  });
+});
 
 /* 익명 게시글 댓글 수정 */
 router.patch("/postCommentUpdate/:id", (request, response) => {
-  const sql = "UPDATE postComment SET postCommentContent = ? WHERE postCommentId = " + request.params.id;
-  db.query(sql, [request.body.content], function(err, result){
-    if(err) throw err;
+  const sql =
+    "UPDATE postComment SET commentContent = ? WHERE commentId = " +
+    request.params.id;
+  db.query(sql, [request.body.content], function (err, result) {
+    if (err) throw err;
     response.send("success");
-  })
-})
-
-
+  });
+});
 
 /* 회원등록 */
 router.post("/join", (req, res) => {
@@ -246,80 +260,93 @@ router.post("/login", (req, res) => {
   });
 });
 
-
-
 //익명게시판 대댓글 조회
 router.get("/postCommentComment/:id", (request, response) => {
-  const sql = "SELECT * FROM postCommentComment WHERE post_id = ? ORDER BY postCommentCommentId DESC";
-  db.query(sql,[request.params.id], function(err, result){
-    if(err) throw err;
+  const sql =
+    "SELECT * FROM postCommentComment WHERE post_id = ? ORDER BY commentCommentId DESC";
+  db.query(sql, [request.params.id], function (err, result) {
+    if (err) throw err;
     response.send(result);
-  })
-})
+  });
+});
 //익명게시판 대댓글 생성
 router.post("/postCommentCommentCreate", (request, response) => {
-  const sql = "INSERT INTO postCommentComment (postComment_id, post_id, postCommentCommentContent) VALUES (?,?,?)";
-  db.query(sql, [request.body.postCommnetId, request.body.postId, request.body.newContent], function (err, result) {
-    if (err) throw err;
-    response.send("success");
-  })
-})
+  const sql =
+    "INSERT INTO postCommentComment (postComment_id, post_id, commentCommentContent) VALUES (?,?,?)";
+  db.query(
+    sql,
+    [request.body.commentId, request.body.id, request.body.content],
+    function (err, result) {
+      if (err) throw err;
+      response.send("success");
+    }
+  );
+});
 //익명게시판 대댓글 수정
 router.patch("/postCommentCommentUpdate/:id", (request, response) => {
-  const sql = "UPDATE postCommentComment SET postCommentCommentContent = ? WHERE postCommentCommentId = " + request.params.id;
-  db.query(sql, [request.body.commentContent], function(err, result){
-    if(err) throw err;
+  const sql =
+    "UPDATE postCommentComment SET commentCommentContent = ? WHERE commentCommentId = " +
+    request.params.id;
+  db.query(sql, [request.body.commentContent], function (err, result) {
+    if (err) throw err;
     response.send("success");
-  })
-})
+  });
+});
 
 //익명게시판 대댓글 삭제
 router.post("/postCommentCommentDelete/:id", (req, res) => {
-  const sql = "DELETE FROM postCommentComment WHERE postCommentCommentId = " + req.params.id;
-  db.query(sql, function(err, result){
-    if(err) throw err;
+  const sql =
+    "DELETE FROM postCommentComment WHERE commentCommentId = " + req.params.id;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     res.send("success");
-  })
-})
+  });
+});
 
 //비밀게시판 대댓글 조회
 router.get("/secretPostCommentComment/:id", (request, response) => {
-  const sql = "SELECT * FROM secretPostCommentComment WHERE secretPost_id = ? ORDER BY secretPostCommentCommentId DESC";
-  db.query(sql,[request.params.id], function(err, result){
-    if(err) throw err;
+  const sql =
+    "SELECT * FROM secretPostCommentComment WHERE secretPost_id = ? ORDER BY commentCommentId DESC";
+  db.query(sql, [request.params.id], function (err, result) {
+    if (err) throw err;
     response.send(result);
-  })
-})
+  });
+});
 
 //비밀게시판 대댓글 생성
 router.post("/secretPostCommentCommentCreate", (request, response) => {
-  const sql = "INSERT INTO secretPostCommentComment (secretPostComment_id, secretPost_id, secretPostCommentCommentContent) VALUES (?,?,?)";
-  db.query(sql, [request.body.secretPostCommnetId, request.body.secretPostId, request.body.newContent], function (err, result) {
-    if (err) throw err;
-    response.send("success");
-  })
-})
+  const sql =
+    "INSERT INTO secretPostCommentComment (secretPostComment_id, secretPost_id, commentCommentContent) VALUES (?,?,?)";
+  db.query(
+    sql,
+    [request.body.commentId, request.body.id, request.body.content],
+    function (err, result) {
+      if (err) throw err;
+      response.send("success");
+    }
+  );
+});
 
 //비밀게시판 대댓글 수정
 router.patch("/secretPostCommentCommentUpdate/:id", (request, response) => {
-  const sql = "UPDATE secretPostCommentComment SET secretPostCommentCommentContent = ? WHERE secretPostCommentCommentId = " + request.params.id;
-  db.query(sql, [request.body.commentContent], function(err, result){
-    if(err) throw err;
+  const sql =
+    "UPDATE secretPostCommentComment SET commentCommentContent = ? WHERE commentCommentId = " +
+    request.params.id;
+  db.query(sql, [request.body.commentContent], function (err, result) {
+    if (err) throw err;
     response.send("success");
-  })
-})
+  });
+});
 
 //비밀게시판 대댓글 삭제
 router.post("/secretPostCommentCommentDelete/:id", (req, res) => {
-  const sql = "DELETE FROM secretPostCommentComment WHERE secretPostCommentCommentId = " + req.params.id;
-  db.query(sql, function(err, result){
-    if(err) throw err;
+  const sql =
+    "DELETE FROM secretPostCommentComment WHERE commentCommentId = " +
+    req.params.id;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     res.send("success");
-  })
-})
-
-
-
-
+  });
+});
 
 module.exports = router;
