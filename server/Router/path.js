@@ -80,10 +80,15 @@ router.get("/secretPostComment/:id", (request, response) => {
 /* 비밀 게시글 댓글 생성*/
 router.post("/secretPostCommentCreate/:id", (request, response) => {
   const sql =
-    "INSERT INTO secretPostComment (commentContent, secretPost_id) VALUES (?,?)";
+    "INSERT INTO secretPostComment (commentNick, commentPassword,commentContent, secretPost_id) VALUES (?,?,?,?)";
   db.query(
     sql,
-    [request.body.newContent, request.params.id],
+    [
+      request.body.nick,
+      request.body.password,
+      request.body.newContent,
+      request.params.id,
+    ],
     function (err, result) {
       if (err) throw err;
       response.send("success");
@@ -201,10 +206,16 @@ router.get("/postComment/:id", (request, response) => {
 
 /* 익명 게시글 댓글 생성 */
 router.post("/postCommentCreate/:id", (request, response) => {
-  const sql = "INSERT INTO postComment (commentContent, post_id) VALUES (?,?)";
+  const sql =
+    "INSERT INTO postComment (commentNick, commentPassword, commentContent, post_id) VALUES (?,?,?,?)";
   db.query(
     sql,
-    [request.body.newContent, request.params.id],
+    [
+      request.body.nick,
+      request.body.password,
+      request.body.newContent,
+      request.params.id,
+    ],
     function (err, result) {
       if (err) throw err;
       response.send("success");
@@ -272,10 +283,16 @@ router.get("/postCommentComment/:id", (request, response) => {
 //익명게시판 대댓글 생성
 router.post("/postCommentCommentCreate", (request, response) => {
   const sql =
-    "INSERT INTO postCommentComment (postComment_id, post_id, commentCommentContent) VALUES (?,?,?)";
+    "INSERT INTO postCommentComment (commentCommentNick, commentCommentPassword, postComment_id, post_id, commentCommentContent) VALUES (?,?,?,?,?)";
   db.query(
     sql,
-    [request.body.commentId, request.body.id, request.body.content],
+    [
+      request.body.nick,
+      request.body.password,
+      request.body.commentId,
+      request.body.id,
+      request.body.content,
+    ],
     function (err, result) {
       if (err) throw err;
       response.send("success");
@@ -316,10 +333,16 @@ router.get("/secretPostCommentComment/:id", (request, response) => {
 //비밀게시판 대댓글 생성
 router.post("/secretPostCommentCommentCreate", (request, response) => {
   const sql =
-    "INSERT INTO secretPostCommentComment (secretPostComment_id, secretPost_id, commentCommentContent) VALUES (?,?,?)";
+    "INSERT INTO secretPostCommentComment (commentCommentNick, commentCommentPassword, secretPostComment_id, secretPost_id, commentCommentContent) VALUES (?,?,?,?,?)";
   db.query(
     sql,
-    [request.body.commentId, request.body.id, request.body.content],
+    [
+      request.body.nick,
+      request.body.password,
+      request.body.commentId,
+      request.body.id,
+      request.body.content,
+    ],
     function (err, result) {
       if (err) throw err;
       response.send("success");
@@ -357,7 +380,5 @@ router.post("/search", (req, res) => {
     res.send(result);
   });
 });
-
-
 
 module.exports = router;
