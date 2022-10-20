@@ -5,14 +5,17 @@ import Pagination from "./Pagination";
 import { Link, useNavigate } from "react-router-dom";
 
 
+/* 익명 게시판 */
 const HomeR = () => {
   const [post, setPost] = useState([]);
   const [postComment, setPostComment] = useState([]);
+  const [search, setSearch] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const [onoff, setOnoff] = useState(false);
   const navigate = useNavigate();
+  const [searchTitle, setSearchTitle] = useState("");
 
 
   useEffect(() => {
@@ -31,6 +34,7 @@ const HomeR = () => {
       });
       setPostComment(postComment.data);
     }
+    
     getData1();
     getData2();
 
@@ -48,6 +52,7 @@ const HomeR = () => {
 
   }, []);
 
+  
 
   const handleLogout = () => {
     console.log("로그아웃");
@@ -66,6 +71,35 @@ const HomeR = () => {
               {
                 onoff ?
                   <>
+                    <li className="rounded-sm">
+
+                      <form
+                        onSubmit={async (e) => {
+                          e.preventDefault();
+                         const search =  await axios({
+                            url: `http://localhost:3000/search`,
+                            method: "POST",
+                            data: {
+                              searchTitle
+                            }
+                          });
+                          console.log(search.data);
+                          setSearch(search.data);
+                          navigate("/home");
+                        }}
+                      >
+                       
+                        <input 
+                        className="text-base w-10/12" 
+                        placeholder="Search"
+                        onChange={(e)=>{
+                          setSearchTitle(e.target.value);
+                        }}
+                        ></input>
+                        <button type="submit">확인</button>
+                      </form>
+                    </li>
+
                     <li className="rounded-sm">
                       <Link to="/home"
                         className="flex items-center p-2 space-x-3 rounded-md"
@@ -258,7 +292,7 @@ const HomeR = () => {
           </div>
           <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
             <div >
-              <PostListInput offset={offset} limit={limit} post={post} postComment={postComment} />
+              <PostListInput offset={offset} limit={limit} post={post} postComment={postComment}/>
             </div>
           </div>
           <div className=" text-center">
