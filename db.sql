@@ -36,6 +36,8 @@ CREATE TABLE postComment(
     commentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     commentContent TEXT NOT NULL,
     commentCreateDate DATETIME DEFAULT NOW(),
+    commentNick TEXT NOT NULL,
+    commentPassword TEXT NOT NULL,
     post_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(post_id) REFERENCES Post(id) ON DELETE CASCADE
 );
@@ -46,6 +48,8 @@ CREATE TABLE postCommentComment(
     commentCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     commentCommentContent TEXT NOT NULL,
     commentCommentCreateDate DATETIME DEFAULT NOW(),
+    commentCommentNick TEXT NOT NULL,
+    commentCommentPassword TEXT NOT NULL,
     postComment_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(postComment_id) REFERENCES PostComment(commentId) ON DELETE CASCADE,
     post_id INT(11) UNSIGNED NOT NULL,
@@ -58,6 +62,7 @@ CREATE TABLE secretPostComment(
     commentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     commentContent TEXT NOT NULL,
     commentCreateDate DATETIME DEFAULT NOW(),
+    commentNick TEXT NOT NULL,
     secretPost_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPost_id) REFERENCES secretPost(id) ON DELETE CASCADE
 );
@@ -68,6 +73,7 @@ CREATE TABLE secretPostCommentComment(
     commentCommentId INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     commentCommentContent TEXT NOT NULL,
     commentCommentCreateDate DATETIME DEFAULT NOW(),
+    commentCommentNick TEXT NOT NULL,
     secretPostComment_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPostComment_id) REFERENCES secretPostComment(commentId) ON DELETE CASCADE,
     secretPost_id INT(11) UNSIGNED NOT NULL,

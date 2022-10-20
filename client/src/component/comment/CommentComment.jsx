@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CommentCommentCreate from "./CommentCommentCreate";
 
 const CommentComment = ({ sort, id, comment, activity, setActivity }) => {
   const [check, setCheck] = useState("false");
-  const [content, setContent] = useState("");
   const [commentContent, setCommentContent] = useState("");
   const [commentComment, setCommentComment] = useState([]);
+  const [onoff, setOnoff] = useState(false);
 
   useEffect(() => {
     const getData3 = async () => {
@@ -17,51 +18,31 @@ const CommentComment = ({ sort, id, comment, activity, setActivity }) => {
       setCommentComment(commentComment.data);
     };
     getData3();
+
+    const loginout = () => {
+      console.log(window.sessionStorage.getItem("id"));
+      if (window.sessionStorage.getItem("id") === null) {
+        setOnoff(false);
+      } else {
+        setOnoff(true);
+      }
+    };
+
+    loginout();
   }, [activity]);
 
   return (
     <>
       {check === "true" + comment.commentId ? (
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            const data = await axios({
-              url: `http://localhost:3000/${sort}CommentCommentCreate`,
-              method: "POST",
-              data: {
-                commentId: comment.commentId,
-                id,
-                content,
-              },
-            });
-
-            if (data.data !== null) {
-              setActivity(activity + 1);
-              setCheck("false");
-              setContent("");
-              console.log("성공");
-            } else {
-              console.log("오류");
-            }
-          }}
-        >
-          <div>
-            <label>
-              <strong>대댓글</strong>
-            </label>
-            <input
-              type="text"
-              placeholder="내용"
-              value={content}
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            ></input>
-          </div>
-          <div>
-            <button type="submit">확인</button>
-          </div>
-        </form>
+        <CommentCommentCreate
+          sort={sort}
+          activity={activity}
+          setActivity={setActivity}
+          id={id}
+          onoff={onoff}
+          setCheck={setCheck}
+          comment={comment}
+        />
       ) : null}
       {check === "true" + comment.commentId ? null : (
         <span
