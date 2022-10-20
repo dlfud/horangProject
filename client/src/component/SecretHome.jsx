@@ -5,7 +5,7 @@ import SecretPostListInput from "./SecretPostListInput";
 import "../index.css";
 import SecretPagination from "./SecretPagination"
 
-
+/* 게시판 */
 
 const SecretHomeR = () => {
     const [secretPost, setSecretPost] = useState([]);

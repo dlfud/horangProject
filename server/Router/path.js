@@ -349,4 +349,15 @@ router.post("/secretPostCommentCommentDelete/:id", (req, res) => {
   });
 });
 
+// 검색
+router.post("/search", (req, res) => {
+  const sql = `SELECT * FROM Post WHERE title LIKE "%${req.body.searchTitle}%"`;
+  db.query(sql, [req.body], function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+
+
 module.exports = router;
