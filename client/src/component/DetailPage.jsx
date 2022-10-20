@@ -6,7 +6,6 @@ import Comment from "./comment/Comment.jsx";
 const DetailPage = ({ method, id }) => {
   const [activity, setActivity] = useState(0);
   const [detail, setDetail] = useState({});
-  const [comment, setComment] = useState([]);
   const navigate = useNavigate();
   let sort = "";
 
@@ -58,7 +57,6 @@ const DetailPage = ({ method, id }) => {
       <div>내용 : {detail.content}</div>
 
       <Comment
-        commentContent={comment}
         sort={sort}
         activity={activity}
         setActivity={setActivity}
