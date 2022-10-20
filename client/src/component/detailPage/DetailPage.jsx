@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Comment from "./comment/Comment.jsx";
+import Comment from "../comment/Comment.jsx";
 
 const DetailPage = ({ method, id }) => {
   const [activity, setActivity] = useState(0);
@@ -39,7 +39,7 @@ const DetailPage = ({ method, id }) => {
   return (
     <>
       <div>조회수 : {detail.view}</div>
-      <Link to={`/postUpdate/${id}`}>수정</Link>
+      <Link to={`/${sort}Update/${id}`}>수정</Link>
       <form
         onSubmit={async (e) => {
           e.preventDefault();

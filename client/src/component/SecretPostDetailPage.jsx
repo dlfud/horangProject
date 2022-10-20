@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import React from "react";
-import DetailPage from "./DetailPage";
+import DetailPage from "./detailPage/DetailPage";
 
 const SecretPostDetailPage = () => {
   const { id } = useParams();
