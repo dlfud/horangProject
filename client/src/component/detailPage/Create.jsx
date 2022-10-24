@@ -32,7 +32,11 @@ const Create = ({method}) => {
                         });
 
                         if (data.data !== null) {
-                            nav("/");
+                            if(sort === "post"){
+                                nav("/home");
+                            }else{
+                                nav("/secrethome");
+                            }
                             //navigate 기능을 활용하여 Access-Control-Allow-Origin 관련 오류를 막을 수 있음?
                             // 그냥 보내면 server에서 create를 못읽음
                             console.log("성공");
