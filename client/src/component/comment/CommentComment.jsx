@@ -2,11 +2,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CommentCommentCreate from "./CommentCommentCreate";
 
-const CommentComment = ({ sort, id, comment, activity, setActivity }) => {
+const CommentComment = ({
+  sort,
+  id,
+  comment,
+  activity,
+  setActivity,
+  onoff,
+}) => {
   const [check, setCheck] = useState("false");
   const [commentContent, setCommentContent] = useState("");
   const [commentComment, setCommentComment] = useState([]);
-  const [onoff, setOnoff] = useState(false);
 
   useEffect(() => {
     const getData3 = async () => {
@@ -18,17 +24,6 @@ const CommentComment = ({ sort, id, comment, activity, setActivity }) => {
       setCommentComment(commentComment.data);
     };
     getData3();
-
-    const loginout = () => {
-      console.log(window.sessionStorage.getItem("id"));
-      if (window.sessionStorage.getItem("id") === null) {
-        setOnoff(false);
-      } else {
-        setOnoff(true);
-      }
-    };
-
-    loginout();
   }, [activity]);
 
   return (

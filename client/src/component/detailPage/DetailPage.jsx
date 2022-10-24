@@ -6,6 +6,7 @@ import Comment from "../comment/Comment.jsx";
 const DetailPage = ({ method, id }) => {
   const [activity, setActivity] = useState(0);
   const [detail, setDetail] = useState({});
+  const [onoff, setOnoff] = useState(false);
   const navigate = useNavigate();
   let sort = "";
 
@@ -26,6 +27,17 @@ const DetailPage = ({ method, id }) => {
     };
 
     getData1();
+
+    const loginout = () => {
+      console.log(window.sessionStorage.getItem("id"));
+      if (window.sessionStorage.getItem("id") === null) {
+        setOnoff(false);
+      } else {
+        setOnoff(true);
+      }
+    };
+
+    loginout();
   }, [activity, id]);
 
   const loginout = () => {
@@ -39,7 +51,7 @@ const DetailPage = ({ method, id }) => {
   return (
     <>
       <div className="flex">
-          <div className="justify-items-end">조회수 : {detail.view}</div>
+        <div className="justify-items-end">조회수 : {detail.view}</div>
         <div className="mt-6 justify-end">
           <Link to={`/${sort}Update/${id}`}>수정</Link>
           <form
@@ -63,8 +75,9 @@ const DetailPage = ({ method, id }) => {
             activity={activity}
             setActivity={setActivity}
             id={id}
+            onoff={onoff}
           />
-      </div>
+        </div>
       </div>
     </>
   );
