@@ -381,4 +381,13 @@ router.post("/search", (req, res) => {
   });
 });
 
+
+router.post("/secretSearch", (req, res) => {
+  const sql = `SELECT * FROM secretPost WHERE title LIKE "%${req.body.searchTitle}%"`;
+  db.query(sql, [req.body], function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 module.exports = router;
