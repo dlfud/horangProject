@@ -4,11 +4,10 @@ import { useState } from "react";
 import CommentComment from "./CommentComment";
 import CommentCreate from "./CommentCreate";
 
-const Comment = ({ sort, activity, setActivity, id }) => {
+const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   const [check, setCheck] = useState("false");
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
-  const [onoff, setOnoff] = useState(false);
 
   useEffect(() => {
     const getData2 = async () => {
@@ -20,17 +19,6 @@ const Comment = ({ sort, activity, setActivity, id }) => {
     };
 
     getData2();
-
-    const loginout = () => {
-      console.log(window.sessionStorage.getItem("id"));
-      if (window.sessionStorage.getItem("id") === null) {
-        setOnoff(false);
-      } else {
-        setOnoff(true);
-      }
-    };
-
-    loginout();
   }, [activity, id]);
 
   return (
@@ -101,6 +89,7 @@ const Comment = ({ sort, activity, setActivity, id }) => {
             comment={comment}
             activity={activity}
             setActivity={setActivity}
+            onoff={onoff}
           />
         </div>
       ))}
