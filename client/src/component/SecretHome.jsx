@@ -14,6 +14,8 @@ const SecretHomeR = () => {
     const [limit, setLimit] = useState(10);
     const offset = (secretPage - 1) * limit;
     const navigate = useNavigate();
+    const [searchTitle, setSearchTitle] = useState("");
+    const [search, setSearch] = useState([]);
 
     useEffect(() => {
         const getData1 = async () => {
@@ -53,6 +55,32 @@ const SecretHomeR = () => {
                 <div className="space-y-3">
                     <div className="flex-1">
                         <ul className="pt-2 pb-4 space-y-1 text-sm">
+                            <li className="rounded-sm">
+                                <form
+                                    onSubmit={async (e) => {
+                                        e.preventDefault();
+                                        const search = await axios({
+                                            url: `http://localhost:3000/secretSearch`,
+                                            method: "POST",
+                                            data: {
+                                                searchTitle
+                                            }
+                                        });
+                                        console.log(search.data);
+                                        setSearch(search.data);
+                                        navigate("/secrethome");
+                                    }}
+                                >
+                                    <input
+                                        className="text-base w-10/12"
+                                        placeholder="Search"
+                                        onChange={(e) => {
+                                            setSearchTitle(e.target.value);
+                                        }}
+                                    ></input>
+                                    <button type="submit">확인</button>
+                                </form>
+                            </li>
                             <li className="rounded-sm">
                                 <Link to="/home"
                                     className="flex items-center p-2 space-x-3 rounded-md"
