@@ -6,9 +6,7 @@ const Create = ({ method, onoff }) => {
   const nav = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  //   const [member, setMember] = useState({});
-  //   let memberId = window.sessionStorage.getItem("id");
-  //   console.log(memberId);
+  let memberId = "익명";
   let sort = "";
 
   if (method === "0") {
@@ -17,22 +15,9 @@ const Create = ({ method, onoff }) => {
     sort = "secretPost";
   }
 
-  //   if (onoff) {
-  //     //로그인되어 있으면 회원정보 가져옴
-  //     const getData1 = async () => {
-  //       const member = await axios({
-  //         url: `http://localhost:5000/member`,
-  //         method: "GET",
-  //         data: {
-  //           memberId,
-  //         },
-  //       });
-  //       console.log(member.data);
-  //       setMember(...member.data);
-  //     };
-
-  //     getData1();
-  //   }
+  if (onoff) {
+    memberId = window.sessionStorage.getItem("id");
+  }
 
   return (
     <>
@@ -47,6 +32,7 @@ const Create = ({ method, onoff }) => {
               data: {
                 title,
                 content,
+                member_id: memberId,
               },
             });
 
