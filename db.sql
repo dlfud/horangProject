@@ -2,15 +2,24 @@ DROP DATABASE IF EXISTS horang;
 CREATE DATABASE horang;
 USE horang;
 
+#회원
+CREATE TABLE `member`(
+    memberId VARCHAR(10) NOT NULL PRIMARY KEY,
+    `password` TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
+
 #익명게시판
+DROP TABLE post;
 CREATE TABLE post(
     id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(30) NOT NULL,
     content TEXT NOT NULL,
     create_date DATETIME DEFAULT NOW(),
     `view` INT(10) DEFAULT 0,
-    member_id INT(11) UNSIGNED,
-    FOREIGN KEY(member_id) REFERENCES `member`(id) ON DELETE CASCADE
+    member_id  VARCHAR(10),
+    FOREIGN KEY(member_id) REFERENCES `member`(memberId) ON DELETE CASCADE
 );
 
 
@@ -22,17 +31,12 @@ CREATE TABLE secretPost(
     content TEXT NOT NULL,
     create_date DATETIME DEFAULT NOW(),
     `view` INT(10) DEFAULT 0,
-    member_id INT(11) UNSIGNED NOT NULL,
-    FOREIGN KEY(member_id) REFERENCES `member`(id) ON DELETE CASCADE
+    member_id  VARCHAR(10) NOT NULL,
+    FOREIGN KEY(member_id) REFERENCES `member`(memberId) ON DELETE CASCADE
 );
 
-#회원
-CREATE TABLE `member`(
-    id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    memberId TEXT NOT NULL,
-    `password` TEXT NOT NULL,
-    email TEXT NOT NULL
-);
+
+
 
 #익명게시판 댓글
 DROP TABLE postComment;
@@ -83,3 +87,13 @@ CREATE TABLE secretPostCommentComment(
     secretPost_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPost_id) REFERENCES secretPost(id) ON DELETE CASCADE
 );
+
+SELECT * FROM `member`;
+
+INSERT INTO post
+SET title="익명 게시판",
+content="내용1";
+
+INSERT INTO secretPost
+SET title="님 대가리 깨버릴거임",
+content="너무해ㅠㅠ", member_id = 1;
