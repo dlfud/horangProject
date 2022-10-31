@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
 const PostListInput = ({ offset, limit, post, postComment }) => {
   let count = 0;
+  const [onoff, setOnoff] = useState(false);
 
   const countPostComment = (id) =>
     postComment.map((_comment, index) => {
@@ -12,6 +13,15 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
         return count;
       }
     });
+
+    const loginout = () => {
+      console.log(window.sessionStorage.getItem("id"));
+      if(window.sessionStorage.getItem("id")===null){
+        setOnoff(false);
+      }else{
+        setOnoff(true);
+      }
+    }
 
   return (
     <>
@@ -59,13 +69,21 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
               ))}
             </table>
             <div className="text-right mt-4">
+              {onoff?
               <Link
-                to="/postCreate"
-                className=" p-2 MainColor2 text-sm font-bold"
+              to="/postCreate"
+              className=" p-2 MainColor2 text-sm font-bold"
+            >
+                <button
+                onClick={loginout}
               >
-                {" "}
-                글쓰기{" "}
-              </Link>
+                글쓰기
+              </button>  </Link>
+              : <button
+              onClick={loginout}>글쓰기</button>
+              }
+                
+            
             </div>
           </div>
         </div>
