@@ -369,7 +369,8 @@ router.post("/secretPostCommentCommentDelete/:id", (req, res) => {
 
 // 검색
 router.post("/search", (req, res) => {
-  const sql = `SELECT * FROM Post WHERE title LIKE "%${req.body.searchTitle}%"`;
+  console.log(req.body.searchTitle);
+  const sql = `SELECT * FROM Post WHERE title LIKE "%${req.body.searchTitle}% " ORDER BY id DESC`;
   db.query(sql, [req.body], function (err, result) {
     if (err) throw err;
     res.send(result);
@@ -377,7 +378,8 @@ router.post("/search", (req, res) => {
 });
 
 router.post("/secretSearch", (req, res) => {
-  const sql = `SELECT * FROM secretPost WHERE title LIKE "%${req.body.searchTitle}%"`;
+  console.log(req.body.searchTitle);
+  const sql = `SELECT * FROM secretPost WHERE title LIKE "%${req.body.searchTitle}%" ORDER BY id DESC`;
   db.query(sql, [req.body], function (err, result) {
     if (err) throw err;
     res.send(result);
