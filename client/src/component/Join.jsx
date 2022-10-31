@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import e from "cors";
 
 const Join = () => {
  const [iderrMsg, setIderrMsg] = useState('');
@@ -83,6 +84,12 @@ const Join = () => {
       .catch((e) => {
         console.error(e);
       });
+
+      // checkID(e){
+      //   e.preventDefault();
+      //   console.log(this.idMemberErr.id)
+      // }
+
   }
   
   return (

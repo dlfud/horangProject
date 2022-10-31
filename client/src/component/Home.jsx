@@ -34,7 +34,7 @@ const HomeR = () => {
       });
       setPostComment(postComment.data);
     }
-    
+
     getData1();
     getData2();
 
@@ -52,7 +52,7 @@ const HomeR = () => {
 
   }, []);
 
-  
+
 
   const handleLogout = () => {
     console.log("로그아웃");
@@ -76,7 +76,7 @@ const HomeR = () => {
                       <form
                         onSubmit={async (e) => {
                           e.preventDefault();
-                         const search =  await axios({
+                          const search = await axios({
                             url: `http://localhost:3000/search`,
                             method: "POST",
                             data: {
@@ -88,13 +88,13 @@ const HomeR = () => {
                           navigate("/home");
                         }}
                       >
-                       
-                        <input 
-                        className="text-base w-10/12" 
-                        placeholder="Search"
-                        onChange={(e)=>{
-                          setSearchTitle(e.target.value);
-                        }}
+
+                        <input
+                          className="text-base w-10/12"
+                          placeholder="Search"
+                          onChange={(e) => {
+                            setSearchTitle(e.target.value);
+                          }}
                         ></input>
                         <button type="submit">확인</button>
                       </form>
@@ -292,9 +292,38 @@ const HomeR = () => {
           </div>
           <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
             <div >
-              <PostListInput offset={offset} limit={limit} post={post} postComment={postComment}/>
+              <PostListInput offset={offset} limit={limit} post={post} postComment={postComment} />
             </div>
           </div>
+
+          <div className="w-full px-4 py-5 mt-2 bg-white rounded-lg shadow overflow-auto h-96">
+            <table className="">
+              <thead className="bg-gray-50 border">
+                <tr className="whitespace-nowrap">
+                  <th className="px-6 py-2 text-xs text-gray-500 ">No</th>
+                  <th className="px-6 py-2 text-xs text-gray-500 SearchTitleWidth">제목</th>
+                </tr>
+              </thead>
+              {search.map((search, index) => (
+                <tbody
+                  key={index}
+                  className="bg-white divide-y divide-gray-300 border "
+                >
+                  <tr className="whitespace-nowrap">
+                    <td className="px-6 py-4 text-sm text-gray-500 text-center tdWidth">
+                      {search.id}
+                    </td>
+                    <td className="px-6 py-4 SearchTitleWidth ">
+                      <Link to={`/postDetailPage/${post.id}`}>
+                        {search.title}
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          </div>
+
           <div className=" text-center">
             <Pagination
               total={post.length}
