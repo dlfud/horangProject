@@ -296,7 +296,7 @@ const HomeR = () => {
             </div>
           </div>
 
-          <div className="w-full px-4 py-5 mt-2 bg-white rounded-lg shadow overflow-auto h-96">
+          <div className="w-full px-4 py-5 mt-2 bg-white rounded-lg shadow overflow-auto max-h-96">
             <table className="">
               <thead className="bg-gray-50 border">
                 <tr className="whitespace-nowrap">

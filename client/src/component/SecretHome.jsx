@@ -197,6 +197,34 @@ const SecretHomeR = () => {
                             <SecretPostListInput offset={offset} limit={limit} secretPost={secretPost} secretPostComment={secretPostComment} />
                         </div>
                     </div>
+                    <div className="w-full px-4 py-5 mt-2 bg-white rounded-lg shadow overflow-auto max-h-96">
+                        <table className="">
+                            <thead className="bg-gray-50 border">
+                                <tr className="whitespace-nowrap">
+                                    <th className="px-6 py-2 text-xs text-gray-500 ">No</th>
+                                    <th className="px-6 py-2 text-xs text-gray-500 SearchTitleWidth">제목</th>
+                                </tr>
+                            </thead>
+                            {search.map((search, index) => (
+                                <tbody
+                                    key={index}
+                                    className="bg-white divide-y divide-gray-300 border "
+                                >
+                                    <tr className="whitespace-nowrap">
+                                        <td className="px-6 py-4 text-sm text-gray-500 text-center tdWidth">
+                                            {search.id}
+                                        </td>
+                                        <td className="px-6 py-4 SearchTitleWidth ">
+                                            <Link to={`/secretPostDetailPage/${secretPost.id}`}>
+                                                {search.title}
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            ))}
+                        </table>
+                    </div>
+
                     <div className=" text-center">
                         <SecretPagination
                             total={secretPost.length}
