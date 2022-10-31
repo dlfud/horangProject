@@ -41,6 +41,16 @@ body{
   padding:10px; 
 }
 
+
+.SearchTitleWidth{
+  min-width : 1330px;
+  max-width : 1330px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  padding:10px; 
+}
+
 .tdWidth{
   min-width : 150px;
   max-width : 150px;
