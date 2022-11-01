@@ -17,6 +17,7 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
     const loginout = () => {
       console.log(window.sessionStorage.getItem("id"));
       if(window.sessionStorage.getItem("id")===null){
+        alert("로그인 필요");
         setOnoff(false);
       }else{
         setOnoff(true);
@@ -70,20 +71,16 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
             </table>
             <div className="text-right mt-4">
               {onoff?
-              <Link
-              to="/postCreate"
-              className=" p-2 MainColor2 text-sm font-bold"
-            >
-                <button
-                onClick={loginout}
-              >
-                글쓰기
-              </button>  </Link>
-              : <button
-              onClick={loginout}>글쓰기</button>
+                <Link to="/postCreate" className=" p-2 MainColor2 text-sm font-bold">
+                  <button onClick={loginout}>
+                    글쓰기
+                  </button>  
+                </Link>
+                : 
+                <button className=" p-2 MainColor2 text-sm font-bold" onClick={loginout}>
+                  글쓰기
+                </button>
               }
-                
-            
             </div>
           </div>
         </div>
