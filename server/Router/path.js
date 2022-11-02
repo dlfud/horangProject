@@ -386,4 +386,14 @@ router.post("/secretSearch", (req, res) => {
   });
 });
 
+/* 수정 시 비밀번호 확인 */
+router.post("/updatePassword", (req, res) => {
+  console.log(req.body.password);
+  const sql = `select count(*) as 'cnt' from postComment where commentPassword = "${req.body.password}"`;
+  db.query(sql, function (err, result){
+    if(err) throw err;
+    res.send(result);
+  })
+})
+
 module.exports = router;
