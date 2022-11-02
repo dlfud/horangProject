@@ -86,6 +86,7 @@ const CommentComment = ({
                 ></input>
                 <div>
                   <button type="submit">확인</button>
+                  <button onClick={(e) => {setCommentContent(commentComment.commentCommentContent)}}>취소</button>
                 </div>
               </form>
             ) : (
