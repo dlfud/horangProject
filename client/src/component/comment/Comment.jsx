@@ -64,7 +64,20 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
           ) : (
             <div>{comment.commentContent}</div>
           )}
-          {check === "true" + comment.commentId ? null : (
+          {check === "true" + comment.commentId ? null : 
+            <>
+              {onoff ? 
+                <button onClick={() => {setCheck("true" + comment.commentId);}}>
+                  수정
+                </button> 
+                : 
+                <button onClick={() => {setCheck("password" + comment.commentId);}}>
+                  수정
+                </button>
+              }
+            </>
+          }
+          {check === "password" + comment.commentId ? 
             <form onSubmit={async (e) => {
               e.preventDefault();
               const data = await axios({
@@ -88,10 +101,11 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
                 onChange={(e) => {setPassword(e.target.value)}}>
               </input>
               <button>
-                수정
+                확인
               </button>
             </form>
-          )}
+            :
+            null}
           <form
             onSubmit={async (e) => {
               e.preventDefault();
