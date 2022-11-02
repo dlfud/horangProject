@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
 import "../index.css";
 import SecretPagination from "./SecretPagination"
+import {url} from "../configIp";
 
 /* 게시판 */
 
@@ -20,7 +21,7 @@ const SecretHomeR = () => {
     useEffect(() => {
         const getData1 = async () => {
             const secretPost = await axios({
-                url: `http://localhost:5000/secretPost`,
+                url: `${url}/secretPost`,
                 method: "GET",
             });
             setSecretPost(secretPost.data);
@@ -28,7 +29,7 @@ const SecretHomeR = () => {
 
         const getData2 = async () => {
             const secretPostComment = await axios({
-                url: `http://localhost:5000/secretPostCommentCount`,
+                url: `${url}/secretPostCommentCount`,
                 method: "GET",
             });
             setSecretPostComment(secretPostComment.data);
@@ -60,7 +61,7 @@ const SecretHomeR = () => {
                                     onSubmit={async (e) => {
                                         e.preventDefault();
                                         const search = await axios({
-                                            url: `http://localhost:3000/secretSearch`,
+                                            url: `${url}/secretSearch`,
                                             method: "POST",
                                             data: {
                                                 searchTitle

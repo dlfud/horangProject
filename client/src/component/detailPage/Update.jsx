@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {url} from "../../configIp";
 
 const Update = ({ method, id }) => {
   const nav = useNavigate();
@@ -18,7 +19,7 @@ const Update = ({ method, id }) => {
   useEffect(() => {
     const getData = async () => {
       const detail = await axios({
-        url: `http://localhost:5000/${sort}DetailPage/${id}`,
+        url: `${url}/${sort}DetailPage/${id}`,
         method: "GET",
       });
       setDetail(...detail.data);
@@ -33,7 +34,7 @@ const Update = ({ method, id }) => {
           onSubmit={async (e) => {
             e.preventDefault();
             const data = await axios({
-              url: `http://localhost:3000/${sort}Update/${id}`,
+              url: `${url}/${sort}Update/${id}`,
               method: "POST",
               data: {
                 title,

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Comment from "../comment/Comment.jsx";
+import {url} from "../../configIp";
 
 const DetailPage = ({ method, id }) => {
   const [activity, setActivity] = useState(0);
@@ -19,7 +20,7 @@ const DetailPage = ({ method, id }) => {
   useEffect(() => {
     const getData1 = async () => {
       const detail = await axios({
-        url: `http://localhost:5000/${sort}DetailPage/${id}`,
+        url: `${url}/${sort}DetailPage/${id}`,
         method: "GET",
       });
       console.log(sort);
@@ -58,7 +59,7 @@ const DetailPage = ({ method, id }) => {
             onSubmit={async (e) => {
               e.preventDefault();
               await axios({
-                url: `http://localhost:3000/${sort}Delete/${id}`,
+                url: `${url}/${sort}Delete/${id}`,
                 method: "POST",
               });
               navigate("/home");
