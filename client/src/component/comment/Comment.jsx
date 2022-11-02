@@ -9,6 +9,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   const [check, setCheck] = useState("false");
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const getData2 = async () => {
@@ -64,14 +65,32 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
             <div>{comment.commentContent}</div>
           )}
           {check === "true" + comment.commentId ? null : (
-            <span
-              className="cursor-pointer"
-              onClick={(e) => {
+            <form onSubmit={async (e) => {
+              e.preventDefault();
+              const data = await axios({
+                url: `${url}/updatePassword`,
+                method: "POST",
+                data: { password },
+              });
+              if (data.data !== null) {
+                console.log("들어옴");
+                setPassword("");
                 setCheck("true" + comment.commentId);
-              }}
-            >
-              수정
-            </span>
+                console.log("성공");
+              } else {
+                console.log("오류");
+              }
+            }}>
+              <input 
+                type="password"
+                placeholder="비밀번호확인"
+                value={password}
+                onChange={(e) => {setPassword(e.target.value)}}>
+              </input>
+              <button>
+                수정
+              </button>
+            </form>
           )}
           <form
             onSubmit={async (e) => {
