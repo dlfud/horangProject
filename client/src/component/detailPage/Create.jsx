@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {url} from "../../configIp";
 
 const Create = ({ method, onoff }) => {
   const nav = useNavigate();
@@ -26,7 +27,7 @@ const Create = ({ method, onoff }) => {
           onSubmit={async (e) => {
             e.preventDefault();
             const data = await axios({
-              url: `http://localhost:3000/${sort}Create`,
+              url: `${url}/${sort}Create`,
               // 위의 주소는 5000번대가 아닌 3000번대로 (전송주소!)
               method: "POST",
               data: {

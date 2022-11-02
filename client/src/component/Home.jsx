@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import PostListInput from "./PostListInput";
 import Pagination from "./Pagination";
 import { Link, useNavigate } from "react-router-dom";
+import {url} from "../configIp";
 
 
 /* 익명 게시판 */
@@ -21,7 +22,7 @@ const HomeR = () => {
   useEffect(() => {
     const getData1 = async () => {
       const post = await axios({
-        url: `http://localhost:5000/post`,
+        url: `${url}/post`,
         method: "GET",
       });
       setPost(post.data);
@@ -29,7 +30,7 @@ const HomeR = () => {
 
     const getData2 = async () => {
       const postComment = await axios({
-        url: `http://localhost:5000/postCommentCount`,
+        url: `${url}/postCommentCount`,
         method: "GET",
       });
       setPostComment(postComment.data);
@@ -73,7 +74,7 @@ const HomeR = () => {
                                     onSubmit={async (e) => {
                                         e.preventDefault();
                                         const search = await axios({
-                                            url: `http://localhost:3000/search`,
+                                            url: `${url}/search`,
                                             method: "POST",
                                             data: {
                                               searchTitle

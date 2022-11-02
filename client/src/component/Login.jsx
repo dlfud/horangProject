@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {url} from "../configIp";
 
 const Login = () => {
     const idRef = useRef();
@@ -26,7 +27,7 @@ const Login = () => {
         );
 
         axios
-            .post("http://localhost:3000/login", {
+            .post(`${url}/login`, {
                 id: idRef.current.value,
                 pw: pwRef.current.value,
             })

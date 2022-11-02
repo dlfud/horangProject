@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import {url} from "../../configIp";
 
 const CommentCommentCreate = ({
   sort,
@@ -19,7 +20,7 @@ const CommentCommentCreate = ({
         onSubmit={async (e) => {
           e.preventDefault();
           const data = await axios({
-            url: `http://localhost:3000/${sort}CommentCommentCreate`,
+            url: `${url}/${sort}CommentCommentCreate`,
             method: "POST",
             data: {
               nick,

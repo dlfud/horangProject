@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import {url} from "../../configIp";
 
 const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
   const [newContent, setNewContent] = useState("");
@@ -11,7 +12,7 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
       onSubmit={async (e) => {
         e.preventDefault();
         const data = await axios({
-          url: `http://localhost:3000/${sort}CommentCreate/${id}`,
+          url: `${url}/${sort}CommentCreate/${id}`,
           method: "POST",
           data: {
             nick,
@@ -22,6 +23,8 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
 
         if (data.data !== null) {
           setActivity(activity + 1);
+          setNick("");
+          setPassword("");
           setNewContent("");
           console.log("성공");
         } else {

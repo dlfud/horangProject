@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CommentCommentCreate from "./CommentCommentCreate";
+import {url} from "../../configIp";
 
 const CommentComment = ({
   sort,
@@ -17,7 +18,7 @@ const CommentComment = ({
   useEffect(() => {
     const getData3 = async () => {
       const commentComment = await axios({
-        url: `http://localhost:5000/${sort}CommentComment/${id}`,
+        url: `${url}/${sort}CommentComment/${id}`,
         method: "GET",
       });
       console.log(comment);
@@ -60,7 +61,7 @@ const CommentComment = ({
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const data = await axios({
-                    url: `http://localhost:5000/${sort}CommentCommentUpdate/${commentComment.commentCommentId}`,
+                    url: `${url}/${sort}CommentCommentUpdate/${commentComment.commentCommentId}`,
                     method: "PATCH",
                     data: { commentContent },
                   });
@@ -104,7 +105,7 @@ const CommentComment = ({
               onSubmit={async (e) => {
                 e.preventDefault();
                 await axios({
-                  url: `http://localhost:3000/${sort}CommentCommentDelete/${commentComment.commentCommentId}`,
+                  url: `${url}/${sort}CommentCommentDelete/${commentComment.commentCommentId}`,
                   method: "POST",
                 });
                 setActivity(activity + 1);

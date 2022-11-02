@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import CommentComment from "./CommentComment";
 import CommentCreate from "./CommentCreate";
+import {url} from "../../configIp";
 
 const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   const [check, setCheck] = useState("false");
@@ -12,7 +13,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   useEffect(() => {
     const getData2 = async () => {
       const comment = await axios({
-        url: `http://localhost:5000/${sort}Comment/${id}`,
+        url: `${url}/${sort}Comment/${id}`,
         method: "GET",
       });
       setComment(comment.data);
@@ -32,7 +33,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
               onSubmit={async (e) => {
                 e.preventDefault();
                 const data = await axios({
-                  url: `http://localhost:5000/${sort}CommentUpdate/${comment.commentId}`,
+                  url: `${url}/${sort}CommentUpdate/${comment.commentId}`,
                   method: "PATCH",
                   data: { content },
                 });
@@ -75,7 +76,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
             onSubmit={async (e) => {
               e.preventDefault();
               await axios({
-                url: `http://localhost:3000/${sort}CommentDelete/${comment.commentId}`,
+                url: `${url}/${sort}CommentDelete/${comment.commentId}`,
                 method: "POST",
               });
               setActivity(activity + 1);

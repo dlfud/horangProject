@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import e from "cors";
+import {url} from "../configIp";
 
 const Join = () => {
  const [iderrMsg, setIderrMsg] = useState('');
@@ -69,7 +70,7 @@ const Join = () => {
 
     
     axios
-      .post("http://localhost:3000/join", {
+      .post(`${url}/join`, {
         id: idRef.current.value,
         pw: pwRef.current.value,
         email: emailRef.current.value,
