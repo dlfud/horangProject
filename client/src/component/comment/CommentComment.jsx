@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CommentCommentCreate from "./CommentCommentCreate";
 import {url} from "../../configIp";
+import CommentCommentUpdate from "./CommentCommentUpdate";
 
 const CommentComment = ({
   sort,
@@ -56,7 +57,8 @@ const CommentComment = ({
         commentComment.postComment_id === comment.commentId ? (
           <div key={index}>
             대댓글 :
-            {check === "trueUpdate" + commentComment.commentCommentId ? (
+            <CommentCommentUpdate sort={sort} comment={commentComment} activity={activity} setActivity={setActivity} onoff={onoff}/>
+            {/* {check === "trueUpdate" + commentComment.commentCommentId ? (
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();
@@ -101,7 +103,7 @@ const CommentComment = ({
               >
                 수정
               </span>
-            )}
+            )} */}
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
