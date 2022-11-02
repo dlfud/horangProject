@@ -3,20 +3,20 @@ import React, { useState, useEffect } from "react";
 import PostListInput from "./PostListInput";
 import Pagination from "./Pagination";
 import { Link, useNavigate } from "react-router-dom";
-import {url} from "../configIp";
+import { url } from "../configIp";
 
 
 /* 익명 게시판 */
 const HomeR = () => {
   const [post, setPost] = useState([]);
   const [postComment, setPostComment] = useState([]);
-  const [search, setSearch] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const [onoff, setOnoff] = useState(false);
   const navigate = useNavigate();
   const [searchTitle, setSearchTitle] = useState("");
+  const [search, setSearch] = useState([]);
 
 
   useEffect(() => {
@@ -69,32 +69,32 @@ const HomeR = () => {
         <div className="space-y-3">
           <div className="flex-1">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
-            <li className="rounded-sm">
-                                <form
-                                    onSubmit={async (e) => {
-                                        e.preventDefault();
-                                        const search = await axios({
-                                            url: `${url}/search`,
-                                            method: "POST",
-                                            data: {
-                                              searchTitle
-                                            }
-                                        });
-                                        console.log(search.data);
-                                        setSearch(search.data);
-                                        navigate("/home");
-                                    }}
-                                >
-                                    <input
-                                        className="text-base w-10/12"
-                                        placeholder="Search"
-                                        onChange={(e) => {
-                                            setSearchTitle(e.target.value);
-                                        }}
-                                    ></input>
-                                    <button type="submit">확인</button>
-                                </form>
-                            </li>
+              <li className="rounded-sm">
+                <form
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const search = await axios({
+                      url: `${url}/search`,
+                      method: "POST",
+                      data: {
+                        searchTitle
+                      }
+                    });
+                    console.log(search.data);
+                    setSearch(search.data);
+                    navigate("/home");
+                  }}
+                >
+                  <input
+                    className="text-base w-10/12"
+                    placeholder="Search"
+                    onChange={(e) => {
+                      setSearchTitle(e.target.value);
+                    }}
+                  ></input>
+                  <button type="submit">확인</button>
+                </form>
+              </li>
               {
                 onoff ?
                   <>
