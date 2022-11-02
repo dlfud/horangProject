@@ -54,19 +54,24 @@ const DetailPage = ({ method, id }) => {
       <div className="flex">
         <div className="justify-items-end">조회수 : {detail.view}</div>
         <div className="mt-6 justify-end">
-          <Link to={`/${sort}Update/${id}`}>수정</Link>
-          <form
-            onSubmit={async (e) => {
-              e.preventDefault();
-              await axios({
-                url: `${url}/${sort}Delete/${id}`,
-                method: "POST",
-              });
-              navigate("/home");
-            }}
-          >
-            <button>삭제</button>
-          </form>
+          {onoff?
+          <>
+            <Link to={`/${sort}Update/${id}`}>수정</Link>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                await axios({
+                  url: `${url}/${sort}Delete/${id}`,
+                  method: "POST",
+                });
+                navigate("/home");
+              }}
+            >
+              <button>삭제</button>
+            </form>
+          </>
+          : null
+          }
           <input onClick={loginout} value="목록" type="button"></input>
           <div>제목 : {detail.title}</div>
           <div>내용 : {detail.content}</div>

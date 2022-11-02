@@ -57,6 +57,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
               ></input>
               <div>
                 <button type="submit">확인</button>
+                <button onClick={(e) => {setContent(comment.commentContent)}}>취소</button>
               </div>
             </form>
           ) : (

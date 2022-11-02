@@ -59,7 +59,7 @@ const CommentCommentCreate = ({
                 <strong>비밀번호</strong>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="비밀번호"
                 value={password}
                 onChange={(e) => {
