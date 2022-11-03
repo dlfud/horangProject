@@ -41,7 +41,7 @@ const CommentCommentCreate = ({
           }
         }}
       >
-        <div>
+        <div className="inline-block mt-12">
           {onoff ? null : (
             <div>
               <label>
@@ -80,7 +80,7 @@ const CommentCommentCreate = ({
             }}
           ></input>
         </div>
-        <div>
+        <div className="inline-block border-2">
           <button type="submit">확인</button>
         </div>
       </form>

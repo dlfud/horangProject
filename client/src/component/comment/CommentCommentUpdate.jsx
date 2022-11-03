@@ -49,11 +49,11 @@ const CommentCommentUpdate = ({sort, comment, activity, setActivity, onoff}) => 
             check === "trueUpdate" + comment.commentCommentId ? null :
             <>
                 {onoff ?
-                    <button onClick={() => { setCheck("trueUpdate" + comment.commentCommentId); }}>
+                    <button onClick={() => { setCheck("trueUpdate" + comment.commentCommentId); }} className="float-right border-2">
                         수정
                     </button>
                     :
-                    <button onClick={() => { setCheck("password" + comment.commentCommentId); }}>
+                    <button onClick={() => { setCheck("password" + comment.commentCommentId); }} className="float-right border-2">
                         수정
                     </button>
                 }

@@ -23,10 +23,17 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
 
   return (
     <>
+      <CommentCreate
+        sort={sort}
+        activity={activity}
+        setActivity={setActivity}
+        id={id}
+        onoff={onoff}
+      />
+
+      <hr/>
       {comment.map((comment, index) => (
         <div key={index}>
-          <hr />
-          댓글 :{" "}
           <CommentUpdate sort={sort} comment={comment} activity={activity} setActivity={setActivity} onoff={onoff}/>
 
           <form
@@ -38,9 +45,15 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
               });
               setActivity(activity + 1);
             }}
+            className="inline-block float-right"
           >
-            <button>삭제</button>
+            <button className="border-2 mr-2">삭제</button>
           </form>
+
+          <hr/>
+          <div className="mt-3">대댓글</div>
+          <hr/>
+          <div  className="flex flex-col">
           <CommentComment
             sort={sort}
             id={id}
@@ -49,16 +62,9 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
             setActivity={setActivity}
             onoff={onoff}
           />
+          </div>
         </div>
       ))}
-
-      <CommentCreate
-        sort={sort}
-        activity={activity}
-        setActivity={setActivity}
-        id={id}
-        onoff={onoff}
-      />
     </>
   );
 };

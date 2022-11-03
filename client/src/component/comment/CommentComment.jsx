@@ -13,7 +13,6 @@ const CommentComment = ({
   onoff,
 }) => {
   const [check, setCheck] = useState("false");
-  const [commentContent, setCommentContent] = useState("");
   const [commentComment, setCommentComment] = useState([]);
 
   useEffect(() => {
@@ -22,7 +21,6 @@ const CommentComment = ({
         url: `${url}/${sort}CommentComment/${id}`,
         method: "GET",
       });
-      console.log(comment);
       setCommentComment(commentComment.data);
     };
     getData3();
@@ -30,6 +28,28 @@ const CommentComment = ({
 
   return (
     <>
+    <div>
+      {commentComment.map((commentComment, index) =>
+        commentComment.secretPostComment_id === comment.commentId ||
+        commentComment.postComment_id === comment.commentId ? (
+          <div key={index}>
+            <CommentCommentUpdate sort={sort} comment={commentComment} activity={activity} setActivity={setActivity} onoff={onoff}/>
+            
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                await axios({
+                  url: `${url}/${sort}CommentCommentDelete/${commentComment.commentCommentId}`,
+                  method: "POST",
+                });
+                setActivity(activity + 1);
+              }}
+            >
+              <button className="float-right border-2 mr-2">삭제</button>
+            </form>
+          </div>
+        ) : null
+      )}
       {check === "true" + comment.commentId ? (
         <CommentCommentCreate
           sort={sort}
@@ -43,7 +63,7 @@ const CommentComment = ({
       ) : null}
       {check === "true" + comment.commentId ? null : (
         <span
-          className="cursor-pointer"
+          className="cursor-pointer float-right border-2 mr-2"
           onClick={(e) => {
             setCheck("true" + comment.commentId);
           }}
@@ -51,74 +71,7 @@ const CommentComment = ({
           생성
         </span>
       )}
-
-      {commentComment.map((commentComment, index) =>
-        commentComment.secretPostComment_id === comment.commentId ||
-        commentComment.postComment_id === comment.commentId ? (
-          <div key={index}>
-            대댓글 :
-            <CommentCommentUpdate sort={sort} comment={commentComment} activity={activity} setActivity={setActivity} onoff={onoff}/>
-            {/* {check === "trueUpdate" + commentComment.commentCommentId ? (
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const data = await axios({
-                    url: `${url}/${sort}CommentCommentUpdate/${commentComment.commentCommentId}`,
-                    method: "PATCH",
-                    data: { commentContent },
-                  });
-                  if (data.data !== null) {
-                    setActivity(activity + 1);
-                    console.log(check);
-                    setCheck("false");
-                    setCommentContent("");
-                    console.log("성공");
-                  } else {
-                    console.log("오류");
-                  }
-                }}
-              >
-                <input
-                  type="text"
-                  placeholder={commentComment.commentCommentContent}
-                  value={commentContent}
-                  onChange={(e) => {
-                    setCommentContent(e.target.value);
-                  }}
-                ></input>
-                <div>
-                  <button type="submit">확인</button>
-                  <button onClick={(e) => {setCommentContent(commentComment.commentCommentContent)}}>취소</button>
-                </div>
-              </form>
-            ) : (
-              <div>{commentComment.commentCommentContent}</div>
-            )}
-            {check === "trueUpdate" + commentComment.commentCommentId ? null : (
-              <span
-                className="cursor-pointer"
-                onClick={(e) => {
-                  setCheck("trueUpdate" + commentComment.commentCommentId);
-                }}
-              >
-                수정
-              </span>
-            )} */}
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await axios({
-                  url: `${url}/${sort}CommentCommentDelete/${commentComment.commentCommentId}`,
-                  method: "POST",
-                });
-                setActivity(activity + 1);
-              }}
-            >
-              <button>삭제</button>
-            </form>
-          </div>
-        ) : null
-      )}
+      </div>
     </>
   );
 };
