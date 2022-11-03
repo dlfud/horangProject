@@ -404,4 +404,18 @@ router.post("/commentUpdatePassword", (req, res) => {
   })
 })
 
+
+/* ID 중복 체크 */
+
+router.post("/idCheck", (req, res) => {
+  console.log(req.body)
+  const sql = `SELECT COUNT(memberId) AS 'cnt' FROM member WHERE memberId = "${req.body.id}";`;
+  db.query(sql, function (err, result){
+    if(err) throw err;
+    console.log(result);
+    res.send(result);
+  })
+})
+
+
 module.exports = router;

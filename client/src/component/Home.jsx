@@ -282,9 +282,9 @@ const HomeR = () => {
                 value={limit}
                 onChange={({ target: { value } }) => setLimit(Number(value))}
               >
+                <option value="6">6</option>
+                <option value="8">8</option>
                 <option value="10">10</option>
-                <option value="14">14</option>
-                <option value="18">18</option>
               </select>
             </label>
           </div>
