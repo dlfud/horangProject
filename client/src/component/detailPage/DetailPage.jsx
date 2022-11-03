@@ -23,7 +23,6 @@ const DetailPage = ({ method, id }) => {
         url: `${url}/${sort}DetailPage/${id}`,
         method: "GET",
       });
-      console.log(sort);
       setDetail(...detail.data);
     };
 
@@ -51,38 +50,48 @@ const DetailPage = ({ method, id }) => {
 
   return (
     <>
-      <div className="flex">
-        <div className="justify-items-end">조회수 : {detail.view}</div>
-        <div className="mt-6 justify-end">
-          {onoff?
-          <>
-            <Link to={`/${sort}Update/${id}`}>수정</Link>
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await axios({
-                  url: `${url}/${sort}Delete/${id}`,
-                  method: "POST",
-                });
-                navigate("/home");
-              }}
-            >
-              <button>삭제</button>
-            </form>
-          </>
-          : null
-          }
-          <input onClick={loginout} value="목록" type="button"></input>
-          <div>제목 : {detail.title}</div>
-          <div>내용 : {detail.content}</div>
+      <div>
+        <strong className="text-2xl inline-block"><div>{detail.title}</div></strong>
+        <div className="inline-block float-right">조회수 : {detail.view}</div>
+        <hr/>
+        <div>
+          <div className="p-9">{detail.content}</div>
+          <hr/>
+          <div className="inline-block p-3 float-right">
+            <button onClick={loginout} className="float-left border-2 mr-2">목록</button>
 
-          <Comment
-            sort={sort}
-            activity={activity}
-            setActivity={setActivity}
-            id={id}
-            onoff={onoff}
-          />
+            {onoff?
+            <>
+              <Link to={`/${sort}Update/${id}`} className="float-left border-2 mr-2">수정</Link>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  await axios({
+                    url: `${url}/${sort}Delete/${id}`,
+                    method: "POST",
+                  });
+                  navigate("/home");
+                }}
+                className="float-left border-2"
+              >
+                <button>삭제</button>
+              </form>
+            </>
+            : null
+            }
+          </div>
+          
+          <div className="mt-12">
+            <div>댓글</div>
+            <hr/>
+            <Comment
+              sort={sort}
+              activity={activity}
+              setActivity={setActivity}
+              id={id}
+              onoff={onoff}
+            />
+          </div>
         </div>
       </div>
     </>

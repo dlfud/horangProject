@@ -300,7 +300,7 @@ router.patch("/postCommentCommentUpdate/:id", (request, response) => {
   const sql =
     "UPDATE postCommentComment SET commentCommentContent = ? WHERE commentCommentId = " +
     request.params.id;
-  db.query(sql, [request.body.commentContent], function (err, result) {
+  db.query(sql, [request.body.content], function (err, result) {
     if (err) throw err;
     response.send("success");
   });

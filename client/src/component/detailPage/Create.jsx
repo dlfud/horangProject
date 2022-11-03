@@ -28,7 +28,6 @@ const Create = ({ method, onoff }) => {
             e.preventDefault();
             const data = await axios({
               url: `${url}/${sort}Create`,
-              // 위의 주소는 5000번대가 아닌 3000번대로 (전송주소!)
               method: "POST",
               data: {
                 title,

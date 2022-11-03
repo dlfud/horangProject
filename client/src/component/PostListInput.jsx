@@ -55,7 +55,6 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
                         {post.title}
                       </Link>
                       <span className="text-violet-300 ml-3 tdWidth">
-                        {" "}
                         {countPostComment(post.id)}
                       </span>
                     </td>

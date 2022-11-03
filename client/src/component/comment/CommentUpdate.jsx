@@ -42,18 +42,18 @@ const CommentUpdate = ({sort, comment, activity, setActivity, onoff}) => {
                     </div>
                 </form>
             ) : (
-            <div>{comment.commentContent}</div>
+            <div className="inline-block">{comment.commentContent}</div>
         )
         }
         {
             check === "true" + comment.commentId ? null :
             <>
                 {onoff ?
-                    <button onClick={() => { setCheck("true" + comment.commentId); }}>
+                    <button onClick={() => { setCheck("true" + comment.commentId); }} className="float-right border-2">
                         수정
                     </button>
                     :
-                    <button onClick={() => { setCheck("password" + comment.commentId); }}>
+                    <button onClick={() => { setCheck("password" + comment.commentId); }} className="float-right border-2">
                         수정
                     </button>
                 }

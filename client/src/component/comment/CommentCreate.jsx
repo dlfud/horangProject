@@ -32,7 +32,7 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
         }
       }}
     >
-      <div>
+      <div className="inline-block">
         {onoff ? null : (
           <div>
             <label>
@@ -71,8 +71,8 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
           }}
         ></input>
       </div>
-      <div>
-        <button type="submit">확인</button>
+      <div className="float-right">
+        <button type="submit" className="inline-block border-2">확인</button>
       </div>
     </form>
   );
