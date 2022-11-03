@@ -40,7 +40,7 @@ const Join = () => {
   const onchangePwMember = () => {
 
     if ((pwRef.current.value.length < 10 || pwRef.current.value.length > 20)) {
-      setPwerrMsg("비밀번호는 공백없는 10자리~20자리 이내로 입력해주세요")
+      setPwerrMsg("비밀번호는 공백없는" + "\n" + " 10자리~20자리 이내로 입력해주세요")
     } else if ((pwRef.current.value.search(/\s/) > -1)) {
       setPwerrMsg("비밀번호는 공백없는 10자리~20자리 이내로 입력해주세요")
     } else {
@@ -50,9 +50,9 @@ const Join = () => {
   }
 
   const onchangePasswordMember = () => {
-    if(pwRef.current.value !== passwordRef.current.value){
+    if (pwRef.current.value !== passwordRef.current.value) {
       setPassworderrMsg("비밀번호가 일치하지 않습니다.");
-    }else{
+    } else {
       setPassworderrMsg("");
       setPasswordMemberErr(true);
     }
@@ -132,114 +132,127 @@ const Join = () => {
   }
 
   return (
-    <div>
-      <p></p>
-      <form>
-        <table border="1" width="300px" align="center">
-          <tr>
-            <td width="100px">아이디</td>
+    <div class='flex items-center justify-center mt-20'>
+      <div class='w-full max-w-lg px-10 py-8 mx-auto MainColor2 rounded-lg shadow-xl'>
+        <div class='max-w-md mx-auto space-y-6'>
+          <div className="border-b-4 border-white mb-4">
+            <div className="flex justify-center text-white font-bold text-4xl mb-4">
+              <p> JOIN</p>
+            </div>
+          </div>
+          <form>
+            <table border="1" width="360px" align="center" className="content-around h-40">
+              <tr>
+                <td width="100px" className="text-center text-white">ID</td>
+                <td align="left" width="200px">
+                  <input
+                    type="text"
+                    name="id"
+                    size="20"
+                    defaultValue=""
+                    ref={idRef}
+                    onChange={onchangeIdMember}
+                    placeholder="아이디를 입력하세요"
+                    className="rounded-lg text-xs px-6 py-1 text-center"
+                  ></input>
+                </td>
+                <td width="60px">
+                  <button
+                    onClick={checkID}
+                    className="float-right mr-6 rounded-lg text-xs text-white"
+                  >
+                    확인
+                  </button>
+                </td>
 
-            <td align="left" width="200px">
-              <input
-                type="text"
-                name="id"
-                size="20"
-                defaultValue=""
-                ref={idRef}
-                onChange={onchangeIdMember}
-                placeholder="아이디를 입력하세요"
-              ></input>
+              </tr>
+              <tr>
+                <td></td>
+                <td align="left" width="20px" className="text-xs text-red-500">
+                  {iderrMsg}
+                </td>
+              </tr>
+
+              <tr>
+                <td width="100px" className="text-center text-white">PW</td>
+                <td align="left" width="200px">
+                  <input
+                    type="password"
+                    name="pw"
+                    size="20"
+                    defaultValue=""
+                    ref={pwRef}
+                    onChange={onchangePwMember}
+                    placeholder="비밀번호를 입력하세요"
+                    className="rounded-lg text-xs px-6 py-1 text-center"
+                  ></input>
+                </td>
+              </tr>
+              <tr>
+                <td width="100px"></td>
+                <td align="left" width="200px" className="text-xs text-red-500">
+                  {pwerrMsg}
+                </td>
+              </tr>
+              <tr>
+                <td width="100px" className="text-center text-white" >PW 확인</td>
+                <td align="left" width="200px">
+                  <input
+                    type="password"
+                    name="password"
+                    size="20"
+                    defaultValue=""
+                    ref={passwordRef}
+                    onChange={onchangePasswordMember}
+                    placeholder="비밀번호를 확인하세요"
+                    className="rounded-lg text-xs px-6 py-1 text-center"
+                  ></input>
+                </td>
+              </tr>
+              <tr>
+                <td width="100px"></td>
+                <td align="left" width="200px" className="text-xs text-red-500">
+                  {passworderrMsg}
+                </td>
+              </tr>
+              <tr>
+                <td width="100px" className="text-center text-white">Email</td>
+                <td align="left" width="200px">
+                  <input
+                    type="email"
+                    name="email"
+                    size="20"
+                    defaultValue=""
+                    ref={emailRef}
+                    onChange={onchangeEmailMember}
+                    placeholder="이메일을 입력하세요"
+                    className="rounded-lg text-xs px-6 py-1 text-center"
+                    required autofocus
+                  ></input>
+                </td>
+              </tr>
+              <tr>
+                <td width="100px"></td>
+                <td align="left" width="200px" className="text-xs text-red-500">
+                  {emailerrMsg}
+                </td>
+              </tr>
+            </table>
+            <div className="flex justify-center mt-3">
               <button
-                onClick={checkID}
-              >
-                중복확인
-              </button>
-            </td>
-
-          </tr>
-          <tr>
-            <td width="100px"></td>
-            <td align="left" width="200px">
-              {iderrMsg}
-            </td>
-          </tr>
-
-          <tr>
-            <td width="100px">패스워드</td>
-            <td align="left" width="200px">
-              <input
-                type="password"
-                name="pw"
-                size="20"
-                defaultValue=""
-                ref={pwRef}
-                onChange={onchangePwMember}
-                placeholder="비밀번호를 입력하세요"
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td width="100px"></td>
-            <td align="left" width="200px">
-              {pwerrMsg}
-            </td>
-          </tr>
-          <tr>
-            <td width="100px">패스워드 확인</td>
-            <td align="left" width="200px">
-              <input
-                type="password"
-                name="password"
-                size="20"
-                defaultValue=""
-                ref={passwordRef}
-                onChange={onchangePasswordMember}
-                placeholder="비밀번호를 확인하세요"
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td width="100px"></td>
-            <td align="left" width="200px">
-              {passworderrMsg}
-            </td>
-          </tr>
-          <tr>
-            <td width="100px">이메일</td>
-            <td align="left" width="200px">
-              <input
-                type="email"
-                name="email"
-                size="20"
-                defaultValue=""
-                ref={emailRef}
-                onChange={onchangeEmailMember}
-                placeholder="이메일을 입력하세요"
-                required autofocus
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td width="100px"></td>
-            <td align="left" width="200px">
-              {emailerrMsg}
-            </td>
-          </tr>
-
-          <tr>
-            <td colSpan="2" align="center">
-              <button
+                className="text-gray-400 Main text-sm rounded-lg py-1 px-32"
                 type="button"
                 onClick={handleMember}
                 disabled={!(passwordMemberErr && pwMemberErr && idMemberErr && emailMemberErr)}
               >
                 회원가입
               </button>
-            </td>
-          </tr>
-        </table>
-      </form>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+
   );
 
 };
