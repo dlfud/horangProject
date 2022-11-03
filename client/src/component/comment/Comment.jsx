@@ -75,6 +75,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
                     method: "POST",
                   });
                   setActivity(activity + 1);
+                  setCheck("false");
                 }}
               >
                 <button>삭제</button>
