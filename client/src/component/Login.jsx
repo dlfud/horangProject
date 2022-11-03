@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {url} from "../configIp";
+import { url } from "../configIp";
 
 const Login = () => {
     const idRef = useRef();
@@ -60,58 +60,74 @@ const Login = () => {
 
     return (
         <div>
-            <p></p>
-            <form>
-                <table border="1" width="300px" align="center">
-                    <tr>
-                        <td width="100px">아이디</td>
-                        <td align="left" width="200px">
-                            <input
-                                type="text"
-                                name="id"
-                                size="20"
-                                ref={idRef}
-                                placeholder="아이디를 입력하세요"
-                            ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100px">패스워드</td>
-                        <td align="left" width="200px">
-                            <input
-                                type="password"
-                                name="pw"
-                                size="20"
-                                ref={pwRef}
-                                placeholder="비밀번호를 입력하세요"
-                            ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2" align="center">
-                            <input type="button" value="로그인" onClick={handleLogin}></input>
-                            &nbsp;
-                            <input
-                                type="button"
-                                value="회원가입"
-                                onClick={handleMemberForm}
-                            ></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center">
-                            <input
-                                onClick={handleNoLogin}
-                                value="로그인 없이 이용"
-                                className="bg-violet-300 text-center"
-                                type="button"
-                            ></input>
-                        </td>
-                    </tr>
+            <div class='flex items-center justify-center mt-20'>
+                <div class='w-full max-w-lg px-10 py-8 mx-auto MainColor2 rounded-lg shadow-xl'>
+                    <div class='max-w-md mx-auto space-y-6'>
+                        <div className="border-b-4 border-white mb-4">
+                            <div className="flex justify-center text-white font-bold text-4xl mb-4">
+                                <p> LOGIN</p>
+                            </div>
+                        </div>
+                        <form>
+                            <table border="1" width="300px" align="center">
+                                <tr>
+                                    <td width="100px" className="text-white">아이디</td>
+                                    <td align="left" width="200px">
+                                        <input
+                                            type="text"
+                                            name="id"
+                                            size="20"
+                                            ref={idRef}
+                                            placeholder="아이디를 입력하세요"
+                                            className="rounded-lg text-xs px-6 py-1 text-center"
+                                        ></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100px" className="text-white">패스워드</td>
+                                    <td align="left" width="200px">
+                                        <input
+                                            type="password"
+                                            name="pw"
+                                            size="20"
+                                            ref={pwRef}
+                                            placeholder="비밀번호를 입력하세요"
+                                            className="rounded-lg text-xs px-6 py-1 text-center"
+                                        ></input>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div className="flex justify-center mt-3">
 
-                </table>
-            </form>
+                                <div>
+                                    <input
+                                        type="button"
+                                        value="로그인"
+                                        onClick={handleLogin}
+                                        className="text-gray-400 Main text-sm rounded-lg py-1 px-32"
+                                    ></input>
+                                </div>
+                                <div>
+                                    <input
+                                        type="button"
+                                        value="회원가입"
+                                        onClick={handleMemberForm}
+                                    ></input>
+                                </div>
+                                <div>
+                                    <input
+                                        onClick={handleNoLogin}
+                                        value="로그인 없이 이용"
+                                        className="text-gray-400 Main text-sm rounded-lg py-1 px-32"
+                                        type="button"
+                                    ></input>
+                                </div>
+                            </div>
 
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
