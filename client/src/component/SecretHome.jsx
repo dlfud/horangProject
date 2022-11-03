@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import SecretPostListInput from "./SecretPostListInput";
 import "../index.css";
 import SecretPagination from "./SecretPagination"
-import {url} from "../configIp";
+import { url } from "../configIp";
 
 /* 게시판 */
 
@@ -187,9 +187,9 @@ const SecretHomeR = () => {
                                 value={limit}
                                 onChange={({ target: { value } }) => setLimit(Number(value))}
                             >
+                                <option value="6">6</option>
+                                <option value="8">8</option>
                                 <option value="10">10</option>
-                                <option value="14">14</option>
-                                <option value="18">18</option>
                             </select>
                         </label>
                     </div>
