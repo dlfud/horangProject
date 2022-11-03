@@ -29,7 +29,6 @@ const DetailPage = ({ method, id }) => {
     getData1();
 
     const loginout = () => {
-      console.log(window.sessionStorage.getItem("id"));
       if (window.sessionStorage.getItem("id") === null) {
         setOnoff(false);
       } else {
