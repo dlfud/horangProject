@@ -388,7 +388,7 @@ router.post("/secretSearch", (req, res) => {
 
 /* 댓글 수정 시 비밀번호 확인 */
 router.post("/checkPassword", (req, res) => {
-  const sql = `select count(*) as 'cnt' from postComment where commentPassword = "${req.body.password}"`;
+  const sql = `select count(*) as 'cnt' from postComment where commentPassword = "${req.body.password}" and commentId = ${req.body.commentId}`;
   db.query(sql, function (err, result){
     if(err) throw err;
     res.send(result);
@@ -397,7 +397,7 @@ router.post("/checkPassword", (req, res) => {
 
 /* 대댓글 수정 시 비밀번호 확인 */
 router.post("/commentCheckPassword", (req, res) => {
-  const sql = `select count(*) as 'cnt' from postCommentComment where commentCommentPassword = "${req.body.password}"`;
+  const sql = `select count(*) as 'cnt' from postCommentComment where commentCommentPassword = "${req.body.password}" and commentCommentId = ${req.body.commentId}`;
   db.query(sql, function (err, result){
     if(err) throw err;
     res.send(result);

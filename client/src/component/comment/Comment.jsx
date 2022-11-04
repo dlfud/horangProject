@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import CommentComment from "./CommentComment";
 import CommentCreate from "./CommentCreate";
-import {url} from "../../configIp";
+import { url } from "../../configIp";
 
 const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   const [check, setCheck] = useState("false");
@@ -23,12 +23,31 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
     getData2();
   }, [activity, id]);
 
+  const checkDelete = (id) => {
+    if (window.confirm("삭제할건가요? 정말요? 다시는 돌이킬 수 없어요! 다시 생각해 보세요! 삭제하실 건가요?")) {
+        const comDelete = async (e) => {
+          await axios({
+            url: `${url}/${sort}CommentDelete/${id}`,
+            method: "POST",
+          });
+          console.log("됐지롱")
+          setActivity(activity+1);
+          setCheck("false");
+          return;
+        }
+        comDelete();
+        return;
+      }
+    else{
+      alert("취소");
+    }
+  }
+
   return (
     <>
       {comment.map((comment, index) => (
         <div key={index}>
           <hr />
-          댓글 :{" "}
           {check === "update" + comment.commentId ? (
             <form
               onSubmit={async (e) => {
@@ -58,77 +77,66 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
               ></input>
               <div>
                 <button type="submit">확인</button>
-                <button onClick={(e) => {setContent(comment.commentContent)}}>취소</button>
+                <button onClick={(e) => { setContent(comment.commentContent) }}>취소</button>
               </div>
             </form>
           ) : (
             <div>{comment.commentContent}</div>
           )}
 
-          {check === "delete" + comment.commentId ? 
+          {check === "delete" + comment.commentId ?
             <>
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  await axios({
-                    url: `${url}/${sort}CommentDelete/${comment.commentId}`,
-                    method: "POST",
-                  });
-                  setActivity(activity + 1);
-                  setCheck("false");
-                }}
-              >
-                <button>삭제</button>
-              </form>
+              {checkDelete(comment.commentId)}
             </>
-          :
-          null}
+            :
+            null}
 
-          {check === "update" + comment.commentId ? null : 
+          {check === "update" + comment.commentId ? null :
             <>
               {onoff ?
-                <> 
-                  <button onClick={() => {setCheck("update" + comment.commentId);}}>
+                <>
+                  <button onClick={() => { setCheck("update" + comment.commentId); }}>
                     수정
                   </button>
-                  <button onClick={() => {setCheck("delete" + comment.commentId);}}>
+                  <button onClick={() => { setCheck("delete" + comment.commentId); }}>
                     삭제
                   </button>
                 </>
-                : 
-                <> 
-                  <button onClick={() => {setCheck("passwordUpdate" + comment.commentId);}}>
+                :
+                <>
+                  <button onClick={() => { setCheck("passwordUpdate" + comment.commentId); }}>
                     수정
                   </button>
-                  <button onClick={() => {setCheck("passwordDelete" + comment.commentId);}}>
+                  <button onClick={() => { setCheck("passwordDelete" + comment.commentId); }}>
                     삭제
                   </button>
                 </>
               }
             </>
           }
-          {check === "passwordUpdate" + comment.commentId ? 
+          {check === "passwordUpdate" + comment.commentId ?
             <form onSubmit={async (e) => {
               e.preventDefault();
               const data = await axios({
                 url: `${url}/checkPassword`,
                 method: "POST",
-                data: { password },
+                data: { password, commentId : comment.commentId },
               });
-              if (data.data !== null) {
+              if (data.data.cnt === 1) {
                 console.log("들어옴");
                 setPassword("");
                 setCheck("update" + comment.commentId);
                 console.log("성공");
               } else {
+                alert("비밀번호를 입력해주세요");
                 console.log("오류");
               }
             }}>
-              <input 
+              <input
                 type="password"
                 placeholder="비밀번호확인"
                 value={password}
-                onChange={(e) => {setPassword(e.target.value)}}>
+                onChange={(e) => { setPassword(e.target.value) }}>
               </input>
               <button>
                 확인
@@ -137,28 +145,29 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
             :
             null}
 
-            {check === "passwordDelete" + comment.commentId ? 
+          {check === "passwordDelete" + comment.commentId ?
             <form onSubmit={async (e) => {
               e.preventDefault();
               const data = await axios({
                 url: `${url}/checkPassword`,
                 method: "POST",
-                data: { password },
+                data: { password, commentId : comment.commentId },
               });
-              if (data.data !== null) {
-                console.log("들어옴");
+              console.log("싫어!",data.data)
+              if (data.data[0].cnt === 1) {
                 setPassword("");
                 setCheck("delete" + comment.commentId);
                 console.log("성공");
               } else {
+                alert("비번 입력해");
                 console.log("오류");
               }
             }}>
-              <input 
+              <input
                 type="password"
                 placeholder="비밀번호확인"
                 value={password}
-                onChange={(e) => {setPassword(e.target.value)}}>
+                onChange={(e) => { setPassword(e.target.value) }}>
               </input>
               <button>
                 확인
@@ -167,8 +176,8 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
             :
             null}
 
-          
-          
+
+
           <CommentComment
             sort={sort}
             id={id}
