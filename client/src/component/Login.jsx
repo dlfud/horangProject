@@ -59,7 +59,7 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div >
             <div class='flex items-center justify-center mt-20'>
                 <div class='w-full max-w-lg px-10 py-8 mx-auto MainColor2 rounded-lg shadow-xl'>
                     <div class='max-w-md mx-auto space-y-6'>
@@ -69,7 +69,7 @@ const Login = () => {
                             </div>
                         </div>
                         <form>
-                            <table border="1" width="300px" align="center">
+                            <table border="1" width="300px" align="center" className="content-around h-28">
                                 <tr>
                                     <td width="100px" className="text-white">아이디</td>
                                     <td align="left" width="200px">
@@ -97,7 +97,7 @@ const Login = () => {
                                     </td>
                                 </tr>
                             </table>
-                            <div className="flex justify-center mt-3">
+                            <div className="flex flex-col text-center mt-3">
 
                                 <div>
                                     <input
@@ -107,18 +107,21 @@ const Login = () => {
                                         className="text-gray-400 Main text-sm rounded-lg py-1 px-32"
                                     ></input>
                                 </div>
+                                <div className="border-b-4 border-white pb-4 my-2">
                                 <div>
                                     <input
                                         type="button"
                                         value="회원가입"
                                         onClick={handleMemberForm}
+                                        className="text-sm text-white"
                                     ></input>
+                                </div>
                                 </div>
                                 <div>
                                     <input
                                         onClick={handleNoLogin}
                                         value="로그인 없이 이용"
-                                        className="text-gray-400 Main text-sm rounded-lg py-1 px-32"
+                                        className="text-gray-400 Main text-sm rounded-lg py-1 px-32 mt-3"
                                         type="button"
                                     ></input>
                                 </div>
