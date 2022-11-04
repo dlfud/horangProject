@@ -27,6 +27,25 @@ const CommentComment = ({
     getData3();
   }, [activity]);
 
+  const checkDelete = (id) => {
+    if (window.confirm("삭제할건가요? 정말요? 다시는 돌이킬 수 없어요! 다시 생각해 보세요! 삭제하실 건가요?")) {
+        const comDelete = async (e) => {
+          await axios({
+            url: `${url}/${sort}CommentCommentDelete/${id}`,
+            method: "POST",
+          });
+          setActivity(activity + 1);
+          setCheck("false");
+          return;
+        }
+        comDelete();
+        return;
+      }
+    else{
+      alert("취소");
+    }
+  }
+
   return (
     <>
     <div>
@@ -71,64 +90,103 @@ const CommentComment = ({
             <div>{commentComment.commentCommentContent}</div>
         )
         }
+
+        {check === "delete" + commentComment.commentCommentId ? 
+          <>
+          {checkDelete(commentComment.commentCommentId)}
+          </>
+        :
+        null}
+
         {
-            check === "trueUpdate" + commentComment.commentCommentId ? null :
-            <>
-                {onoff ?
-                    <button onClick={() => { setCheck("trueUpdate" + commentComment.commentCommentId); }}>
-                        수정
-                    </button>
-                    :
-                    <button onClick={() => { setCheck("password" + commentComment.commentCommentId); }}>
-                        수정
-                    </button>
-                }
-            </>
+          check === "trueUpdate" + commentComment.commentCommentId ? null :
+          <>
+              {onoff ?
+                <> 
+                  <button onClick={() => {setCheck("update" + commentComment.commentCommentId);}}>
+                    수정
+                  </button>
+                  <button onClick={() => {setCheck("delete" + commentComment.commentCommentId);}}>
+                    삭제
+                  </button>
+                </>
+                : 
+                <> 
+                  <button onClick={() => {setCheck("passwordUpdate" + commentComment.commentCommentId);}}>
+                    수정
+                  </button>
+                  <button onClick={() => {setCheck("passwordDelete" + commentComment.commentCommentId);}}>
+                    삭제
+                  </button>
+                </>
+              }
+          </>
         }
         {
-            check === "password" + commentComment.commentCommentId ?
-            <form onSubmit={async (e) => {
-                e.preventDefault();
-                const data = await axios({
-                    url: `${url}/commentCheckPassword`,
-                    method: "POST",
-                    data: { password },
-                });
-                if (data.data !== null) {
-                    console.log("들어옴");
-                    setPassword("");
-                    setCheck("trueUpdate" + commentComment.commentCommentId);
-                    console.log("성공");
-                } else {
-                    console.log("오류");
-                }
-            }}>
-                <input
-                    type="password"
-                    placeholder="비밀번호확인"
-                    value={password}
-                    onChange={(e) => { setPassword(e.target.value) }}>
-                </input>
-                <button>
-                    확인
-                </button>
-            </form>
-            :
-            null
-        }
-            
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await axios({
-                  url: `${url}/${sort}CommentCommentDelete/${commentComment.commentCommentId}`,
+          check === "passwordUpdate" + commentComment.commentCommentId ?
+          <form onSubmit={async (e) => {
+              e.preventDefault();
+              const data = await axios({
+                  url: `${url}/commentCheckPassword`,
                   method: "POST",
-                });
-                setActivity(activity + 1);
-              }}
-            >
-              <button>삭제</button>
-            </form>
+                  data: { password, commentId:commentComment.commentCommentId },
+              });
+              if (data.data[0].cnt === 1) {
+                  setPassword("");
+                  setCheck("trueUpdate" + commentComment.commentCommentId);
+                  console.log("성공");
+              } else {
+                  alert("비밀번호 쓰세요");
+                  setPassword("");
+                  console.log("오류");
+              }
+          }}>
+              <input
+                  type="password"
+                  placeholder="비밀번호확인"
+                  value={password}
+                  onChange={(e) => { setPassword(e.target.value) }}>
+              </input>
+              <button>
+                  확인
+              </button>
+          </form>
+          :
+          null
+        }
+
+        {check === "passwordDelete" + commentComment.commentCommentId ? 
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            const data = await axios({
+              url: `${url}/commentCheckPassword`,
+              method: "POST",
+              data: { password, commentId:commentComment.commentCommentId },
+            });
+            if (data.data[0].cnt === 1) {
+              setPassword("");
+              setCheck("delete" + commentComment.commentCommentId);
+              console.log("성공");
+            } else {
+              console.log(commentComment.commentCommentId)
+              alert("비밀번호 쓰라요");
+              setPassword("");
+              console.log("오류");
+            }
+          }}>
+            <input 
+              type="password"
+              placeholder="비밀번호확인"
+              value={password}
+              onChange={(e) => {setPassword(e.target.value)}}>
+            </input>
+            <button>
+              확인
+            </button>
+          </form>
+          :
+          null}
+            
           </div>
         ) : null
       )}
