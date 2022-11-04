@@ -41,8 +41,8 @@ router.post("/secretPostCreate", (request, response) => {
     [request.body.title, request.body.content, request.body.member_id],
     function (err, result) {
       if (err) throw err;
-      console.log("비밀게시물 생성 완료");
-      response.redirect("/");
+      response.send("success");
+      //반환값이 경로(로그인화면)로 되어 있어서 게시물 생성 후 home화면으로 안감
     }
   );
 });
@@ -155,7 +155,7 @@ router.post("/postCreate", (request, response) => {
     function (err, result) {
       if (err) throw err;
       console.log("비밀게시물 생성 완료");
-      response.redirect("/");
+      response.send("success");
     }
   );
 });
@@ -379,7 +379,7 @@ router.post("/search", (req, res) => {
 
 router.post("/secretSearch", (req, res) => {
   console.log(req.body.searchTitle);
-  const sql = `SELECT * FROM secretPost WHERE title LIKE "%${req.body.searchTitle}%" ORDER BY id DESC`; 
+  const sql = `SELECT * FROM secretPost WHERE title LIKE "%${req.body.searchTitle}%" ORDER BY id DESC`;
   db.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
@@ -389,33 +389,31 @@ router.post("/secretSearch", (req, res) => {
 /* 댓글 수정 시 비밀번호 확인 */
 router.post("/checkPassword", (req, res) => {
   const sql = `select count(*) as 'cnt' from postComment where commentPassword = "${req.body.password}" and commentId = ${req.body.commentId}`;
-  db.query(sql, function (err, result){
-    if(err) throw err;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     res.send(result);
-  })
-})
+  });
+});
 
 /* 대댓글 수정 시 비밀번호 확인 */
 router.post("/commentCheckPassword", (req, res) => {
   const sql = `select count(*) as 'cnt' from postCommentComment where commentCommentPassword = "${req.body.password}" and commentCommentId = ${req.body.commentId}`;
-  db.query(sql, function (err, result){
-    if(err) throw err;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     res.send(result);
-  })
-})
-
+  });
+});
 
 /* ID 중복 체크 */
 
 router.post("/idCheck", (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   const sql = `SELECT COUNT(memberId) AS 'cnt' FROM member WHERE memberId = "${req.body.id}";`;
-  db.query(sql, function (err, result){
-    if(err) throw err;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     console.log(result);
     res.send(result);
-  })
-})
-
+  });
+});
 
 module.exports = router;
