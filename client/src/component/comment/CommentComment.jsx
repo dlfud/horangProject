@@ -28,7 +28,7 @@ const CommentComment = ({
   }, [activity]);
 
   const checkDelete = (id) => {
-    if (window.confirm("삭제할건가요? 정말요? 다시는 돌이킬 수 없어요! 다시 생각해 보세요! 삭제하실 건가요?")) {
+    if (window.confirm("삭제할건가요? 정말요? 다시는 돌이킬 수 없어요! 다시 생각해 보세요! 삭제하실 건가요? 2번의 기회를 드릴게요! 잘 생각해보세요! 물론 취소도 기회를 2번! (ps. 삭제 한번 누르면 삭제됨)")) {
         const comDelete = async (e) => {
           await axios({
             url: `${url}/${sort}CommentCommentDelete/${id}`,

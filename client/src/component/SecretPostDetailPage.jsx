@@ -7,8 +7,9 @@ const SecretPostDetailPage = () => {
 
   return (
     <>
-      <h1>비밀 게시물 상세페이지</h1>
+      <div className="px-4 py-5 bg-white mt-12 border">
       <DetailPage method="1" id={id} />
+      </div>
     </>
   );
 };
