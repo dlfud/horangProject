@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {url} from "../../configIp";
+import { url } from "../../configIp";
 
 const Create = ({ method, onoff }) => {
   const nav = useNavigate();
@@ -77,7 +77,8 @@ const Create = ({ method, onoff }) => {
             ></input>
           </div>
           <div>
-            <button type="submit">확인</button>
+            <button type="submit"
+            className="text-gray-400 Main text-sm rounded-lg py-1 px-64">확인</button>
           </div>
         </form>
       </div>
