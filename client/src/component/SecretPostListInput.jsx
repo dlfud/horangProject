@@ -1,12 +1,22 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 
 
 const SecretPostListInput = ({ offset, limit, secretPost, secretPostComment}) => {
 
   let countSecretPost = 0;
+  const [secretPostOX, setSecretPostOX] = useState(false);
+
+  useEffect(() => {
+    postNullCheck();
+  })
+  const postNullCheck = () => {
+    if (secretPost.length !== 0) {
+      setSecretPostOX(true);
+    }
+  }
 
   const countSecretPostComment = (id) => secretPostComment.map((_comment, index) => {
     if (_comment.secretPost_id === id) {
@@ -20,6 +30,7 @@ const SecretPostListInput = ({ offset, limit, secretPost, secretPostComment}) =>
       <p className="font-bold text-2xl">게시물</p>
       <div className="container flex justify-between PostHeight mx-2">
         <div className="mr-9">
+          {secretPostOX?
           <table >
             <thead className="bg-gray-50">
               <tr className="whitespace-nowrap">
@@ -46,6 +57,11 @@ const SecretPostListInput = ({ offset, limit, secretPost, secretPostComment}) =>
               </tbody>
             )}
           </table>
+            :
+            <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">
+              게시물을 생성해주세요
+            </div>
+          }
           <div className="text-right mt-4">
             <Link to="/secretPostCreate" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
           </div>

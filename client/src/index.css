@@ -60,6 +60,12 @@ body{
   padding:10px; 
 }
 
+.postOXWidth{
+  min-width : 1300px;
+  max-width : 1300px;
+  padding:10px; 
+}
+
 [aria-current] {
   background: #DCD6F7;
   font-weight: bold;
