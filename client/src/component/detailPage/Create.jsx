@@ -50,39 +50,52 @@ const Create = ({ method, onoff }) => {
           }}
 
         >
-          <div>
-            <label>
-              <strong>제목</strong>
-            </label>
-            <input
-              type="text"
-              placeholder="제목"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            ></input>
-          </div>
-          <div>
-            <label>
-              <strong>내용</strong>
-            </label>
-            <input
-              type="text"
-              placeholder="내용"
-              value={content}
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            ></input>
-          </div>
-          <div className="text-sm text-red-500">
-            제목과 내용을 입력하여 주세요
-          </div>
-          <div>
-            <button type="submit"
-              className="text-gray-400 Main text-sm rounded-lg py-1 px-64">확인</button>
-          </div>
+         <table border="1" width="360px" align="center" className="content-around h-40">
+              <tr>
+                <td width="100px" className="text-center">제목</td>
+                <td align="left" width="200px">
+                  <input
+                    type="text"
+                    size="20"
+                    placeholder="제목"
+                    value={title}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
+                    className="rounded-lg text-xs px-6 py-1 text-center"
+                  ></input>
+                </td>
+              </tr>
+              <tr>
+                <td width="100px" className="text-center">내용</td>
+                <td align="left" width="200px">
+                  <input
+                    type="password"
+                    size="20"
+                    placeholder="내용"
+                    value={content}
+                    onChange={(e) => {
+                     setContent(e.target.value);
+                    }}
+                    className="rounded-lg text-xs px-6 py-1 text-center"
+                  ></input>
+                </td>
+              </tr>
+             
+              <tr>
+                <td width="100px"></td>
+                <td align="left" width="200px" className="text-xs text-red-500">
+                 제목과 내용을 입력하여 주세요
+                </td>
+              </tr>
+	             <tr>
+                <td width="100px"></td>
+                <td align="right" width="200px">
+                 <button type="submit"
+                  className="text-gray-400 Main text-sm rounded-lg py-1 px-10">확인</button>
+                </td>
+              </tr>
+            </table>
         </form>
       </div>
     </>
