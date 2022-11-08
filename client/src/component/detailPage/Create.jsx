@@ -44,9 +44,9 @@ const Create = ({ method, onoff }) => {
               }
               //navigate 기능을 활용하여 Access-Control-Allow-Origin 관련 오류를 막을 수 있음?
               // 그냥 보내면 server에서 create를 못읽음
-              console.log("성공");
+              alert("게시물 생성이 완료되었습니다.");
             } else {
-              console.log("오류");
+              alert("오류가 발생하였습니다.");
             }
           }}
         >

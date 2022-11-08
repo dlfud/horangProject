@@ -95,8 +95,8 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
                     글쓰기
                   </button>
                 </Link>
-                :
-                <button className=" p-2 MainColor2 text-sm font-bold" onClick={loginout}>
+                : 
+                <button className=" p-2 MainColor2 text-sm font-bold  rounded-lg" onClick={loginout}>
                   글쓰기
                 </button>
               }

@@ -63,7 +63,7 @@ const SecretPostListInput = ({ offset, limit, secretPost, secretPostComment}) =>
             </div>
           }
           <div className="text-right mt-4">
-            <Link to="/secretPostCreate" className=" p-2 MainColor2 text-sm font-bold"> 글쓰기  </Link>
+            <Link to="/secretPostCreate" className=" p-2 MainColor2 text-sm font-bold  rounded-lg"> 글쓰기  </Link>
           </div>
         </div>
       </div >
