@@ -35,7 +35,6 @@ const Create = ({ method, onoff }) => {
                 member_id: memberId,
               },
             });
-
             if (data.data !== null) {
               if (sort === "post") {
                 nav("/home");
@@ -49,6 +48,7 @@ const Create = ({ method, onoff }) => {
               alert("오류가 발생하였습니다.");
             }
           }}
+
         >
           <div>
             <label>
@@ -76,9 +76,12 @@ const Create = ({ method, onoff }) => {
               }}
             ></input>
           </div>
+          <div className="text-sm text-red-500">
+            제목과 내용을 입력하여 주세요
+          </div>
           <div>
             <button type="submit"
-            className="text-gray-400 Main text-sm rounded-lg py-1 px-64">확인</button>
+              className="text-gray-400 Main text-sm rounded-lg py-1 px-64">확인</button>
           </div>
         </form>
       </div>
