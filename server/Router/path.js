@@ -149,15 +149,20 @@ router.get("/postDetailPage/:id", async (request, response) => {
 /* 익명 게시글 생성 */
 router.post("/postCreate", (request, response) => {
   const sql = "INSERT INTO Post (title, content, member_id) VALUES (?,?,?)";
-  db.query(
-    sql,
-    [request.body.title, request.body.content, request.body.member_id],
-    function (err, result) {
-      if (err) throw err;
-      console.log("비밀게시물 생성 완료");
-      response.send("success");
-    }
-  );
+  if (request.body.title === '' || request.body.content === '') {
+    console.log("비밀게시물 생성 실패");
+    
+  } else {
+    db.query(
+      sql,
+      [request.body.title, request.body.content, request.body.member_id],
+      function (err, result) {
+        if (err) throw err;
+        console.log("비밀게시물 생성 완료");
+        response.send("success");
+      }
+    );
+  }
 });
 
 /* 익명 게시글 수정 */
