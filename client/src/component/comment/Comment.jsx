@@ -4,6 +4,7 @@ import { useState } from "react";
 import CommentComment from "./CommentComment";
 import CommentCreate from "./CommentCreate";
 import { url } from "../../configIp";
+import CommentCommentCreate from "./CommentCommentCreate";
 
 const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   const [check, setCheck] = useState("false");
@@ -24,11 +25,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   }, [activity, id]);
 
   const checkDelete = (id) => {
-    if (
-      window.confirm(
-        "삭제할건가요? 정말요? 다시는 돌이킬 수 없어요! 다시 생각해 보세요! 삭제하실 건가요? 2번의 기회를 드릴게요! 잘 생각해보세요! 물론 취소도 기회를 2번! (ps. 삭제 한번 누르면 삭제됨)"
-      )
-    ) {
+    if (window.confirm("삭제할건가요? 정말요? 다시는 돌이킬 수 없어요! 다시 생각해 보세요!")) {
       const comDelete = async (e) => {
         await axios({
           url: `${url}/${sort}CommentDelete/${id}`,
@@ -49,8 +46,8 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
   return (
     <>
       {comment.map((comment, index) => (
-        <div className="flex">
-          <div className="bg-white w-full sm:max-w-7xl md:w-1/3 h-auto px-3 py-2 flex flex-col space-y-2">
+        <div key={index} className="flex">
+          <div className="bg-white w-full px-3 py-2 flex flex-col space-y-2">
             <div className="flex items-center space-x-2">
               <div className="flex items-center justify-center space-x-2">
                 <div className="block">
@@ -126,124 +123,125 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
                     <div className="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
                       {check === "update" + comment.commentId ? null : (
                         <>
-                          <a href="#" className="hover:underline">
-                            <small>댓글생성</small>
-                          </a>
-                          {onoff ? (
-                            <>
-                              <button
-                                className="hover:underline"
-                                onClick={() => {
-                                  setCheck("update" + comment.commentId);
-                                }}
-                              >
-                                수정
-                              </button>
-                              <button
-                                className="hover:underline"
-                                onClick={() => {
-                                  setCheck("delete" + comment.commentId);
-                                }}
-                              >
-                                삭제
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              <a href="#" className="hover:underline">
-                                <small>댓글생성</small>
-                              </a>
-                              <button
-                                className="hover:underline"
-                                onClick={() => {
-                                  setCheck("passwordUpdate" + comment.commentId);
-                                }}
-                              >
-                                수정
-                              </button>
-                              <button
-                                className="hover:underline"
-                                onClick={() => {
-                                  setCheck("passwordDelete" + comment.commentId);
-                                }}
-                              >
-                                삭제
-                              </button>
-                            </>
-                          )}
+                          <button
+                            className="hover:underline"
+                            onClick={() => {
+                              setCheck("passwordUpdate" + comment.commentId);
+                            }}
+                          >
+                            수정
+                          </button>
+                          <button
+                            className="hover:underline"
+                            onClick={() => {
+                              setCheck("passwordDelete" + comment.commentId);
+                            }}
+                          >
+                            삭제
+                          </button>
                         </>
                       )}
-
-                      {check === "passwordUpdate" + comment.commentId ? (
-                        <form
-                          onSubmit={async (e) => {
-                            e.preventDefault();
-                            const data = await axios({
-                              url: `${url}/checkPassword`,
-                              method: "POST",
-                              data: { password, commentId: comment.commentId },
-                            });
-                            if (data.data.cnt === 1) {
-                              console.log("들어옴");
-                              setPassword("");
-                              setCheck("update" + comment.commentId);
-                              console.log("성공");
-                            } else {
-                              alert("비밀번호를 입력해주세요");
-                              console.log("오류");
-                            }
+                      {check === "true" + comment.commentId ? null : (
+                        <button
+                          className="cursor-pointer"
+                          onClick={(e) => {
+                            setCheck("true" + comment.commentId);
                           }}
                         >
-                          <input
-                            type="password"
-                            placeholder="비밀번호확인"
-                            value={password}
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                            }}
-                          ></input>
-                          <button>확인</button>
-                        </form>
-                      ) : null}
-
-                      {check === "passwordDelete" + comment.commentId ? (
-                        <form
-                          onSubmit={async (e) => {
-                            e.preventDefault();
-                            const data = await axios({
-                              url: `${url}/checkPassword`,
-                              method: "POST",
-                              data: { password, commentId: comment.commentId },
-                            });
-                            console.log("싫어!", data.data);
-                            if (data.data[0].cnt === 1) {
-                              setPassword("");
-                              setCheck("delete" + comment.commentId);
-                              console.log("성공");
-                            } else {
-                              alert("비번 입력해");
-                              console.log("오류");
-                            }
-                          }}
-                        >
-                          <input
-                            type="password"
-                            placeholder="비밀번호확인"
-                            value={password}
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                            }}
-                          ></input>
-                          <button>확인</button>
-                        </form>
-                      ) : null}
+                          대댓글생성
+                        </button>
+                      )}
                     </div>
                   </div>
+                  {check === "passwordUpdate" + comment.commentId ? (
+                    <form
+                      onSubmit={async (e) => {
+                        e.preventDefault();
+                        const data = await axios({
+                          url: `${url}/checkPassword`,
+                          method: "POST",
+                          data: { password, commentId: comment.commentId },
+                        });
+                        if (data.data[0].cnt === 1) {
+                          setPassword("");
+                          setCheck("update" + comment.commentId);
+                          console.log("성공");
+                        } else {
+                          alert("비밀번호를 입력해주세요");
+                          setPassword("");
+                          console.log("오류");
+                        }
+                      }}
+                    >
+                      <label>
+                        <strong>비밀번호 : </strong>
+                      </label>
+                      <input
+                        className="border"
+                        type="password"
+                        placeholder="비밀번호확인"
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                      ></input>
+                      <button>확인</button>
+                    </form>
+                  ) : null}
 
-                  <div className="flex items-center space-x-2 space-y-2">
-                    <div className="group relative flex flex-shrink-0 self-start pt-2">
-                      <img src="" alt="" className="h-8 w-8 object-fill rounded-full" />
-                    </div>
+                  {check === "passwordDelete" + comment.commentId ? (
+                    <form
+                      onSubmit={async (e) => {
+                        e.preventDefault();
+                        const data = await axios({
+                          url: `${url}/checkPassword`,
+                          method: "POST",
+                          data: { password, commentId: comment.commentId },
+                        });
+                        if (data.data[0].cnt === 1) {
+                          setPassword("");
+                          setCheck("delete" + comment.commentId);
+                          console.log("성공");
+                        } else {
+                          alert("비번 입력해");
+                          setPassword("");
+                          console.log("오류");
+                        }
+                      }}
+                    >
+                      <label>
+                        <strong>비밀번호 : </strong>
+                      </label>
+                      <input
+                        className="border"
+                        type="password"
+                        placeholder="비밀번호확인"
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                      ></input>
+                      <button>확인</button>
+                    </form>
+                  ) : null}
+
+                  {check === "true" + comment.commentId ? (
+                    <>
+                      <div className="border">
+                        <CommentCommentCreate
+                          sort={sort}
+                          activity={activity}
+                          setActivity={setActivity}
+                          id={id}
+                          onoff={onoff}
+                          setCheck={setCheck}
+                          comment={comment}
+                        />
+                      </div>
+                    </>
+                  ) : null}
+
+                  <div className="flex flex-col space-x-2 space-y-2">
                     <CommentComment
                       sort={sort}
                       id={id}
@@ -252,30 +250,6 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
                       setActivity={setActivity}
                       onoff={onoff}
                     />
-                    <div className="flex items-center justify-center space-x-2">
-                      <div className="block">
-                        <div className="bg-gray-100 w-auto rounded-xl px-2 pb-2">
-                          <div className="font-medium">
-                            <div className="text-sm">
-                              <small>닉네임</small>
-                            </div>
-                          </div>
-                          <div className="text-xs">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita, maiores!
-                          </div>
-                        </div>
-                        <div className="flex justify-start items-center text-xs w-full">
-                          <div className="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
-                            <a href="#" className="hover:underline">
-                              <small>수정</small>
-                            </a>
-                            <a href="#" className="hover:underline">
-                              <small>삭제</small>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -283,6 +257,7 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
           </div>
         </div>
       ))}
+      <hr />
       <CommentCreate sort={sort} activity={activity} setActivity={setActivity} id={id} onoff={onoff} />
     </>
   );

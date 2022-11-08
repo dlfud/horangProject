@@ -20,8 +20,7 @@ router.get("/secretPost", (request, response) => {
 /* 비밀 게시글 상세페이지 */
 router.get("/secretPostDetailPage/:id", async (request, response) => {
   const sql1 = "SELECT * FROM secretPost WHERE id = " + request.params.id;
-  const sql2 =
-    "UPDATE secretPost SET view = view + 1 WHERE id = " + request.params.id;
+  const sql2 = "UPDATE secretPost SET view = view + 1 WHERE id = " + request.params.id;
   await db.query(sql1, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -34,17 +33,12 @@ router.get("/secretPostDetailPage/:id", async (request, response) => {
 
 /* 비밀게시글 생성 */
 router.post("/secretPostCreate", (request, response) => {
-  const sql =
-    "INSERT INTO secretPost (title, content, member_id) VALUES (?,?,?)";
-  db.query(
-    sql,
-    [request.body.title, request.body.content, request.body.member_id],
-    function (err, result) {
-      if (err) throw err;
-      response.send("success");
-      //반환값이 경로(로그인화면)로 되어 있어서 게시물 생성 후 home화면으로 안감
-    }
-  );
+  const sql = "INSERT INTO secretPost (title, content, member_id) VALUES (?,?,?)";
+  db.query(sql, [request.body.title, request.body.content, request.body.member_id], function (err, result) {
+    if (err) throw err;
+    response.send("success");
+    //반환값이 경로(로그인화면)로 되어 있어서 게시물 생성 후 home화면으로 안감
+  });
 });
 
 /* 비밀 게시글 업데이트 */
@@ -70,8 +64,7 @@ router.post("/secretPostDelete/:id", (request, response) => {
 
 /* 비밀 게시글 댓글 조회*/
 router.get("/secretPostComment/:id", (request, response) => {
-  const sql =
-    "SELECT * FROM secretPostComment WHERE secretPost_id = ? ORDER BY commentId DESC";
+  const sql = "SELECT * FROM secretPostComment WHERE secretPost_id = ? ORDER BY commentId DESC";
   db.query(sql, [request.params.id], function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -80,22 +73,16 @@ router.get("/secretPostComment/:id", (request, response) => {
 
 /* 비밀 게시글 댓글 생성*/
 router.post("/secretPostCommentCreate/:id", (request, response) => {
-  const sql =
-    "INSERT INTO secretPostComment (commentNick, commentContent, secretPost_id) VALUES (?,?,?)";
-  db.query(
-    sql,
-    [request.body.nick, request.body.newContent, request.params.id],
-    function (err, result) {
-      if (err) throw err;
-      response.send("success");
-    }
-  );
+  const sql = "INSERT INTO secretPostComment (commentNick, commentContent, secretPost_id) VALUES (?,?,?)";
+  db.query(sql, [request.body.nick, request.body.newContent, request.params.id], function (err, result) {
+    if (err) throw err;
+    response.send("success");
+  });
 });
 
 /* 비밀 게시글 댓글 개수*/
 router.get("/secretPostCommentCount", (request, response) => {
-  const sql =
-    "SELECT secretPost_id, COUNT(commentId) count FROM secretPostComment GROUP BY secretPost_id";
+  const sql = "SELECT secretPost_id, COUNT(commentId) count FROM secretPostComment GROUP BY secretPost_id";
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -104,8 +91,7 @@ router.get("/secretPostCommentCount", (request, response) => {
 
 /* 비밀 게시글 댓글 삭제 */
 router.post("/secretPostCommentDelete/:id", (request, response) => {
-  const sql =
-    "DELETE FROM secretPostComment WHERE commentId = " + request.params.id;
+  const sql = "DELETE FROM secretPostComment WHERE commentId = " + request.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send("success");
@@ -114,9 +100,7 @@ router.post("/secretPostCommentDelete/:id", (request, response) => {
 
 /* 비밀 게시글 댓글 수정 */
 router.patch("/secretPostCommentUpdate/:id", (request, response) => {
-  const sql =
-    "UPDATE secretPostComment SET commentContent = ? WHERE commentId = " +
-    request.params.id;
+  const sql = "UPDATE secretPostComment SET commentContent = ? WHERE commentId = " + request.params.id;
   db.query(sql, [request.body.content], function (err, result) {
     if (err) throw err;
     response.send("success");
@@ -135,8 +119,7 @@ router.get("/post", (request, response) => {
 /* 익명 게시글 상세 페이지 */
 router.get("/postDetailPage/:id", async (request, response) => {
   const sql = "SELECT * FROM post WHERE id = " + request.params.id;
-  const sql2 =
-    "UPDATE post SET view = view + 1 WHERE id = " + request.params.id;
+  const sql2 = "UPDATE post SET view = view + 1 WHERE id = " + request.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -149,19 +132,14 @@ router.get("/postDetailPage/:id", async (request, response) => {
 /* 익명 게시글 생성 */
 router.post("/postCreate", (request, response) => {
   const sql = "INSERT INTO Post (title, content, member_id) VALUES (?,?,?)";
-  if (request.body.title === '' || request.body.content === '') {
+  if (request.body.title === "" || request.body.content === "") {
     console.log("비밀게시물 생성 실패");
-    
   } else {
-    db.query(
-      sql,
-      [request.body.title, request.body.content, request.body.member_id],
-      function (err, result) {
-        if (err) throw err;
-        console.log("비밀게시물 생성 완료");
-        response.send("success");
-      }
-    );
+    db.query(sql, [request.body.title, request.body.content, request.body.member_id], function (err, result) {
+      if (err) throw err;
+      console.log("비밀게시물 생성 완료");
+      response.send("success");
+    });
   }
 });
 
@@ -187,8 +165,7 @@ router.post("/postDelete/:id", (request, response) => {
 
 /* 익명 게시글 댓글 개수*/
 router.get("/postCommentCount", (request, response) => {
-  const sql =
-    "SELECT post_id, COUNT(commentId) count FROM postComment GROUP BY post_id";
+  const sql = "SELECT post_id, COUNT(commentId) count FROM postComment GROUP BY post_id";
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -197,8 +174,7 @@ router.get("/postCommentCount", (request, response) => {
 
 /* 익명 게시글 댓글 조회 */
 router.get("/postComment/:id", (request, response) => {
-  const sql =
-    "SELECT * FROM postComment WHERE post_id = ? ORDER BY commentId DESC";
+  const sql = "SELECT * FROM postComment WHERE post_id = ? ORDER BY commentId DESC";
   db.query(sql, [request.params.id], function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -207,16 +183,10 @@ router.get("/postComment/:id", (request, response) => {
 
 /* 익명 게시글 댓글 생성 */
 router.post("/postCommentCreate/:id", (request, response) => {
-  const sql =
-    "INSERT INTO postComment (commentNick, commentPassword, commentContent, post_id) VALUES (?,?,?,?)";
+  const sql = "INSERT INTO postComment (commentNick, commentPassword, commentContent, post_id) VALUES (?,?,?,?)";
   db.query(
     sql,
-    [
-      request.body.nick,
-      request.body.password,
-      request.body.newContent,
-      request.params.id,
-    ],
+    [request.body.nick, request.body.password, request.body.newContent, request.params.id],
     function (err, result) {
       if (err) throw err;
       response.send("success");
@@ -235,9 +205,7 @@ router.post("/postCommentDelete/:id", (request, response) => {
 
 /* 익명 게시글 댓글 수정 */
 router.patch("/postCommentUpdate/:id", (request, response) => {
-  const sql =
-    "UPDATE postComment SET commentContent = ? WHERE commentId = " +
-    request.params.id;
+  const sql = "UPDATE postComment SET commentContent = ? WHERE commentId = " + request.params.id;
   db.query(sql, [request.body.content], function (err, result) {
     if (err) throw err;
     response.send("success");
@@ -274,8 +242,7 @@ router.post("/login", (req, res) => {
 
 //익명게시판 대댓글 조회
 router.get("/postCommentComment/:id", (request, response) => {
-  const sql =
-    "SELECT * FROM postCommentComment WHERE post_id = ? ORDER BY commentCommentId DESC";
+  const sql = "SELECT * FROM postCommentComment WHERE post_id = ? ORDER BY commentCommentId DESC";
   db.query(sql, [request.params.id], function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -287,13 +254,7 @@ router.post("/postCommentCommentCreate", (request, response) => {
     "INSERT INTO postCommentComment (commentCommentNick, commentCommentPassword, postComment_id, post_id, commentCommentContent) VALUES (?,?,?,?,?)";
   db.query(
     sql,
-    [
-      request.body.nick,
-      request.body.password,
-      request.body.commentId,
-      request.body.id,
-      request.body.content,
-    ],
+    [request.body.nick, request.body.password, request.body.commentId, request.body.id, request.body.content],
     function (err, result) {
       if (err) throw err;
       response.send("success");
@@ -302,9 +263,7 @@ router.post("/postCommentCommentCreate", (request, response) => {
 });
 //익명게시판 대댓글 수정
 router.patch("/postCommentCommentUpdate/:id", (request, response) => {
-  const sql =
-    "UPDATE postCommentComment SET commentCommentContent = ? WHERE commentCommentId = " +
-    request.params.id;
+  const sql = "UPDATE postCommentComment SET commentCommentContent = ? WHERE commentCommentId = " + request.params.id;
   db.query(sql, [request.body.content], function (err, result) {
     if (err) throw err;
     response.send("success");
@@ -313,8 +272,7 @@ router.patch("/postCommentCommentUpdate/:id", (request, response) => {
 
 //익명게시판 대댓글 삭제
 router.post("/postCommentCommentDelete/:id", (req, res) => {
-  const sql =
-    "DELETE FROM postCommentComment WHERE commentCommentId = " + req.params.id;
+  const sql = "DELETE FROM postCommentComment WHERE commentCommentId = " + req.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
     res.send("success");
@@ -323,8 +281,7 @@ router.post("/postCommentCommentDelete/:id", (req, res) => {
 
 //비밀게시판 대댓글 조회
 router.get("/secretPostCommentComment/:id", (request, response) => {
-  const sql =
-    "SELECT * FROM secretPostCommentComment WHERE secretPost_id = ? ORDER BY commentCommentId DESC";
+  const sql = "SELECT * FROM secretPostCommentComment WHERE secretPost_id = ? ORDER BY commentCommentId DESC";
   db.query(sql, [request.params.id], function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -337,12 +294,7 @@ router.post("/secretPostCommentCommentCreate", (request, response) => {
     "INSERT INTO secretPostCommentComment (commentCommentNick, secretPostComment_id, secretPost_id, commentCommentContent) VALUES (?,?,?,?)";
   db.query(
     sql,
-    [
-      request.body.nick,
-      request.body.commentId,
-      request.body.id,
-      request.body.content,
-    ],
+    [request.body.nick, request.body.commentId, request.body.id, request.body.content],
     function (err, result) {
       if (err) throw err;
       response.send("success");
@@ -353,9 +305,8 @@ router.post("/secretPostCommentCommentCreate", (request, response) => {
 //비밀게시판 대댓글 수정
 router.patch("/secretPostCommentCommentUpdate/:id", (request, response) => {
   const sql =
-    "UPDATE secretPostCommentComment SET commentCommentContent = ? WHERE commentCommentId = " +
-    request.params.id;
-  db.query(sql, [request.body.commentContent], function (err, result) {
+    "UPDATE secretPostCommentComment SET commentCommentContent = ? WHERE commentCommentId = " + request.params.id;
+  db.query(sql, [request.body.content], function (err, result) {
     if (err) throw err;
     response.send("success");
   });
@@ -363,9 +314,7 @@ router.patch("/secretPostCommentCommentUpdate/:id", (request, response) => {
 
 //비밀게시판 대댓글 삭제
 router.post("/secretPostCommentCommentDelete/:id", (req, res) => {
-  const sql =
-    "DELETE FROM secretPostCommentComment WHERE commentCommentId = " +
-    req.params.id;
+  const sql = "DELETE FROM secretPostCommentComment WHERE commentCommentId = " + req.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
     res.send("success");
@@ -391,7 +340,7 @@ router.post("/secretSearch", (req, res) => {
   });
 });
 
-/* 댓글 수정 시 비밀번호 확인 */
+/* 댓글 수정, 삭제 시 비밀번호 확인 */
 router.post("/checkPassword", (req, res) => {
   const sql = `select count(*) as 'cnt' from postComment where commentPassword = "${req.body.password}" and commentId = ${req.body.commentId}`;
   db.query(sql, function (err, result) {
@@ -400,7 +349,7 @@ router.post("/checkPassword", (req, res) => {
   });
 });
 
-/* 대댓글 수정 시 비밀번호 확인 */
+/* 대댓글 수정, 삭제 시 비밀번호 확인 */
 router.post("/commentCheckPassword", (req, res) => {
   const sql = `select count(*) as 'cnt' from postCommentComment where commentCommentPassword = "${req.body.password}" and commentCommentId = ${req.body.commentId}`;
   db.query(sql, function (err, result) {

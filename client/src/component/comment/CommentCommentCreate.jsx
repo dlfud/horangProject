@@ -1,16 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
-import {url} from "../../configIp";
+import { url } from "../../configIp";
 
-const CommentCommentCreate = ({
-  sort,
-  activity,
-  setActivity,
-  id,
-  onoff,
-  setCheck,
-  comment,
-}) => {
+const CommentCommentCreate = ({ sort, activity, setActivity, id, onoff, setCheck, comment }) => {
   const [content, setContent] = useState("");
   const [nick, setNick] = useState("");
   const [password, setPassword] = useState("");
@@ -41,13 +33,14 @@ const CommentCommentCreate = ({
           }
         }}
       >
-        <div className="inline-block mt-12">
+        <div className="inline-block">
           {onoff ? null : (
             <div>
               <label>
-                <strong>닉네임</strong>
+                <strong>닉네임 : </strong>
               </label>
               <input
+                className="border"
                 type="text"
                 placeholder="닉네임"
                 value={nick}
@@ -56,9 +49,10 @@ const CommentCommentCreate = ({
                 }}
               ></input>
               <label>
-                <strong>비밀번호</strong>
+                <strong>비밀번호 : </strong>
               </label>
               <input
+                className="border"
                 type="password"
                 placeholder="비밀번호"
                 value={password}
@@ -69,9 +63,10 @@ const CommentCommentCreate = ({
             </div>
           )}
           <label>
-            <strong>대댓글</strong>
+            <strong>대댓글 : </strong>
           </label>
           <input
+            className="border"
             type="text"
             placeholder="내용"
             value={content}
@@ -80,7 +75,7 @@ const CommentCommentCreate = ({
             }}
           ></input>
         </div>
-        <div className="inline-block border-2">
+        <div className="inline-block ml-3 border-2">
           <button type="submit">확인</button>
         </div>
       </form>

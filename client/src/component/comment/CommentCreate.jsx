@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import {url} from "../../configIp";
+import { url } from "../../configIp";
 
 const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
   const [newContent, setNewContent] = useState("");
@@ -36,9 +36,10 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
         {onoff ? null : (
           <div>
             <label>
-              <strong>닉네임</strong>
+              <strong>닉네임 : </strong>
             </label>
             <input
+              className="w-60 border"
               type="text"
               placeholder="닉네임"
               value={nick}
@@ -47,9 +48,10 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
               }}
             ></input>
             <label>
-              <strong>비밀번호</strong>
+              <strong>비밀번호 : </strong>
             </label>
             <input
+              className="w-60 border"
               type="password"
               placeholder="비밀번호"
               value={password}
@@ -60,9 +62,10 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
           </div>
         )}
         <label>
-          <strong>댓글</strong>
+          <strong>댓글 : </strong>
         </label>
         <input
+          className="w-3/4 border"
           type="text"
           placeholder="내용"
           value={newContent}
@@ -72,7 +75,9 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
         ></input>
       </div>
       <div className="float-right">
-        <button type="submit" className="inline-block border-2">확인</button>
+        <button type="submit" className="inline-block border-2">
+          확인
+        </button>
       </div>
     </form>
   );
