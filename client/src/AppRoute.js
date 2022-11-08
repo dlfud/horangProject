@@ -12,53 +12,64 @@ import Login from "./component/Login.jsx";
 import SecretHome from "./component/SecretHome.jsx";
 import { useState } from "react";
 
-
 const AppRoute = () => {
   const [onoff, setOnoff] = useState(false);
 
   const loginout = () => {
     console.log(window.sessionStorage.getItem("id"));
-    if(window.sessionStorage.getItem("id")===null){
+    if (window.sessionStorage.getItem("id") === null) {
       setOnoff(false);
-    }else{
+    } else {
       setOnoff(true);
     }
-  }
+  };
   return (
     <>
-
       <BrowserRouter>
         <header className="LOGObackgroundColor">
-          {
-            onoff ?
-              <Link to="/secrethome">
-                <img src={horangLoGo} alt="horangLoGo" onClick={loginout} />
-              </Link>
-              :
-              <Link to="/home">
-                <img src={horangLoGo} alt="horangLoGo" onClick={loginout} />
-              </Link>
-          }
+          {onoff ? (
+            <Link to="/secrethome">
+              <img src={horangLoGo} alt="horangLoGo" onClick={loginout} />
+            </Link>
+          ) : (
+            <Link to="/home">
+              <img src={horangLoGo} alt="horangLoGo" onClick={loginout} />
+            </Link>
+          )}
         </header>
 
         <Routes>
           <Route exact path="/home" element={<Home />} />
-          <Route exact path="/secretPostCreate" element={<SecretPostCreate />} />
-          <Route exact path="/secretPostDetailPage/:id" element={<SecretPostDetailPage />} />
-          <Route exact path="/secretPostUpdate/:id" element={<SecretPostUpdate />} />
+          <Route
+            exact
+            path="/secretPostCreate"
+            element={<SecretPostCreate />}
+          />
+          <Route
+            exact
+            path="/secretPostDetailPage/:id"
+            element={<SecretPostDetailPage />}
+          />
+          <Route
+            exact
+            path="/secretPostUpdate/:id"
+            element={<SecretPostUpdate />}
+          />
 
           <Route exact path="/postCreate" element={<PostCreate />} />
-          <Route exact path="/postDetailPage/:id" element={<PostDetailPage />} />
+          <Route
+            exact
+            path="/postDetailPage/:id"
+            element={<PostDetailPage />}
+          />
           <Route exact path="/postUpdate/:id" element={<PostUpdate />} />
           <Route exact path="/join" element={<Join />} />
           <Route exact path="/" element={<Login />} />
           <Route exact path="/secrethome" element={<SecretHome />} />
         </Routes>
-
-        
-        </BrowserRouter>
+      </BrowserRouter>
     </>
-  )
+  );
 };
 
 export default AppRoute;

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import e from "cors";
 import { url } from "../configIp";
 
 const Join = () => {
@@ -40,9 +39,9 @@ const Join = () => {
   const onchangePwMember = () => {
 
     if ((pwRef.current.value.length < 10 || pwRef.current.value.length > 20)) {
-      setPwerrMsg("비밀번호는 공백없는" + "\n" + " 10자리~20자리 이내로 입력해주세요")
+      setPwerrMsg("비밀번호는 공백없는 10자리~20자리 이내로 입력해주세요");
     } else if ((pwRef.current.value.search(/\s/) > -1)) {
-      setPwerrMsg("비밀번호는 공백없는 10자리~20자리 이내로 입력해주세요")
+      setPwerrMsg("비밀번호는 공백없는 10자리~20자리 이내로 입력해주세요");
     } else {
       setPwerrMsg("");
       setPwMemberErr(true);
@@ -59,17 +58,19 @@ const Join = () => {
   }
 
   const onchangeEmailMember = () => {
+    console.log(emailRef.current.value);
     if ((emailRegEx.test(emailRef.current.value)) === false) {
       setEmailerrMsg("이메일형식에 맞춰 입력해주세요")
-    } else {
+    } else  {
       setEmailerrMsg("");
       setEmailMemberErr(true);
     }
+   
   }
 
 
   const handleMember = () => {
-    if (usingId == false) {
+    if (usingId === false) {
       alert("아이디 중복 확인을 진행하여 주시길 바랍니다.");
       return false;
     }
@@ -118,7 +119,7 @@ const Join = () => {
       .then((res) => {
 
         console.log("ID중복 체크 =>", res.data[0].cnt);
-        if (res.data[0].cnt == 1) {
+        if (res.data[0].cnt === 1) {
           alert("아이디가 중복되었습니다.");
         }
         else {
