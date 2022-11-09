@@ -46,24 +46,41 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
                     <thead className="bg-gray-50 border">
                       <tr className="whitespace-nowrap">
                         <th className="px-6 py-2 text-xs text-gray-500 ">No</th>
-                        <th className="px-6 py-2 text-xs text-gray-500">제목</th>
-                        <th className="px-6 py-2 text-xs text-gray-500">작성일</th>
-                        <th className="px-6 py-2 text-xs text-gray-500">조회수</th>
+                        <th className="px-6 py-2 text-xs text-gray-500">
+                          제목
+                        </th>
+                        <th className="px-6 py-2 text-xs text-gray-500">
+                          작성일
+                        </th>
+                        <th className="px-6 py-2 text-xs text-gray-500">
+                          조회수
+                        </th>
                       </tr>
                     </thead>
 
                     {post.slice(offset, offset + limit).map((post, index) => (
-                      <tbody key={index} className="bg-white divide-y divide-gray-300 border">
+                      <tbody
+                        key={index}
+                        className="bg-white divide-y divide-gray-300 border"
+                      >
                         <tr className="whitespace-nowrap">
-                          <td className="px-6 py-4 text-sm text-gray-500 text-center tdWidth">{post.id}</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 text-center tdWidth">
+                            {post.id}
+                          </td>
                           <td className="px-6 py-4 TitleWidth">
-                            <Link to={`/postDetailPage/${post.id}`}>{post.title}</Link>
-                            <span className="text-violet-300 ml-3 tdWidth">{countPostComment(post.id)}</span>
+                            <Link to={`/postDetailPage/${post.id}`}>
+                              {post.title}
+                            </Link>
+                            <span className="text-violet-300 ml-3 tdWidth">
+                              {countPostComment(post.id)}
+                            </span>
                           </td>
                           <td className="px-6 py-4 text-sm text-center tdWidth ">
                             {moment(post.create_date).format("YY.MM.DD")}
                           </td>
-                          <td className="px-6 py-4  text-sm  text-center tdWidth">{post.view}</td>
+                          <td className="px-6 py-4  text-sm  text-center tdWidth">
+                            {post.view}
+                          </td>
                         </tr>
                       </tbody>
                     ))}
@@ -71,16 +88,23 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
                 </div>
               </>
             ) : (
-              <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">게시물을 생성해주세요</div>
+              <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">
+                게시물을 생성해주세요
+              </div>
             )}
             <div className="text-right mt-4">
               {onoff ? (
-                <Link to="/postCreate" className=" p-2 MainColor2 text-sm font-bold">
+                <Link
+                  to="/postCreate"
+                  className=" p-2 MainColor2 text-sm font-bold"
+                >
                   <button onClick={loginout}>글쓰기</button>
                 </Link>
-              )
-                : 
-                <button className=" p-2 MainColor2 text-sm font-bold  rounded-lg" onClick={loginout}>
+              ) : (
+                <button
+                  className=" p-2 MainColor2 text-sm font-bold  rounded-lg"
+                  onClick={loginout}
+                >
                   글쓰기
                 </button>
               )}
