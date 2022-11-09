@@ -4,7 +4,7 @@ import { url } from "../../configIp";
 
 const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
   const [newContent, setNewContent] = useState("");
-  const [nick, setNick] = useState("");
+  const [nick, setNick] = useState(window.sessionStorage.getItem("id"));
   const [password, setPassword] = useState("");
 
   return (
@@ -61,6 +61,7 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
             ></input>
           </div>
         )}
+
         <label>
           <strong>댓글 : </strong>
         </label>

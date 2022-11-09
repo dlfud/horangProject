@@ -71,7 +71,6 @@ CREATE TABLE secretPostComment(
     commentContent TEXT NOT NULL,
     commentCreateDate DATETIME DEFAULT NOW(),
     commentNick TEXT NOT NULL,
-    commentPassword TEXT NOT NULL,
     secretPost_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPost_id) REFERENCES secretPost(id) ON DELETE CASCADE
 );
@@ -83,7 +82,6 @@ CREATE TABLE secretPostCommentComment(
     commentCommentContent TEXT NOT NULL,
     commentCommentCreateDate DATETIME DEFAULT NOW(),
     commentCommentNick TEXT NOT NULL,
-    commentCommentPassword TEXT NOT NULL,
     secretPostComment_id INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY(secretPostComment_id) REFERENCES secretPostComment(commentId) ON DELETE CASCADE,
     secretPost_id INT(11) UNSIGNED NOT NULL,
