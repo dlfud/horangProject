@@ -63,7 +63,7 @@ const DetailPage = ({ method, id }) => {
               목록
             </button>
 
-            {onoff ? (
+            {window.sessionStorage.getItem("id") === detail.member_id ? (
               <>
                 <Link to={`/${sort}Update/${id}`} className="float-left border-2 mr-2">
                   수정

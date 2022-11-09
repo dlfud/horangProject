@@ -4,7 +4,7 @@ import { url } from "../../configIp";
 
 const CommentCommentCreate = ({ sort, activity, setActivity, id, onoff, setCheck, comment }) => {
   const [content, setContent] = useState("");
-  const [nick, setNick] = useState("");
+  const [nick, setNick] = useState(window.sessionStorage.getItem("id"));
   const [password, setPassword] = useState("");
   return (
     <>
@@ -62,6 +62,7 @@ const CommentCommentCreate = ({ sort, activity, setActivity, id, onoff, setCheck
               ></input>
             </div>
           )}
+
           <label>
             <strong>대댓글 : </strong>
           </label>
@@ -77,6 +78,15 @@ const CommentCommentCreate = ({ sort, activity, setActivity, id, onoff, setCheck
         </div>
         <div className="inline-block ml-3 border-2">
           <button type="submit">확인</button>
+        </div>
+        <div className="inline-block border-2">
+          <button
+            onClick={() => {
+              setCheck("false");
+            }}
+          >
+            취소
+          </button>
         </div>
       </form>
     </>

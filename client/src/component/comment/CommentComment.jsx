@@ -70,7 +70,7 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                   <div className="bg-gray-100 w-auto rounded-xl px-2 pb-2">
                     <div className="font-medium">
                       <div className="text-sm">
-                        <small>닉네임</small>
+                        <small>{comment.commentNick}</small>
                       </div>
                     </div>
                     <div className="text-xs">
@@ -105,7 +105,7 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                 <div className="bg-gray-100 w-auto rounded-xl px-2 pb-2">
                   <div className="font-medium">
                     <div className="text-sm">
-                      <small>닉네임</small>
+                      <small>{comment.commentNick}</small>
                     </div>
                   </div>
                   <div className="text-xs">{commentComment.commentCommentContent}</div>
@@ -145,7 +145,7 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                   onSubmit={async (e) => {
                     e.preventDefault();
                     const data = await axios({
-                      url: `${url}/commentCheckPassword`,
+                      url: `${url}/${sort}CommentCheckPassword`,
                       method: "POST",
                       data: { password, commentId: commentComment.commentCommentId },
                     });
@@ -173,6 +173,13 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                     }}
                   ></input>
                   <button>확인</button>
+                  <button
+                    onClick={() => {
+                      setCheck("false");
+                    }}
+                  >
+                    취소
+                  </button>
                 </form>
               ) : null}
 
@@ -181,7 +188,7 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                   onSubmit={async (e) => {
                     e.preventDefault();
                     const data = await axios({
-                      url: `${url}/commentCheckPassword`,
+                      url: `${url}/${sort}CommentCheckPassword`,
                       method: "POST",
                       data: { password, commentId: commentComment.commentCommentId },
                     });
@@ -210,6 +217,13 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                     }}
                   ></input>
                   <button>확인</button>
+                  <button
+                    onClick={() => {
+                      setCheck("false");
+                    }}
+                  >
+                    취소
+                  </button>
                 </form>
               ) : null}
             </div>

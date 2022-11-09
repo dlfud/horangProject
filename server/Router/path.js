@@ -394,8 +394,8 @@ router.post("/secretSearch", (req, res) => {
   });
 });
 
-/* 댓글 수정, 삭제 시 비밀번호 확인 */
-router.post("/checkPassword", (req, res) => {
+/* 익명게시판 댓글 수정, 삭제 시 비밀번호 확인 */
+router.post("/postCheckPassword", (req, res) => {
   const sql = `select count(*) as 'cnt' from postComment where commentPassword = "${req.body.password}" and commentId = ${req.body.commentId}`;
   db.query(sql, function (err, result) {
     if (err) throw err;
@@ -403,14 +403,32 @@ router.post("/checkPassword", (req, res) => {
   });
 });
 
-/* 대댓글 수정, 삭제 시 비밀번호 확인 */
-router.post("/commentCheckPassword", (req, res) => {
+// /* 비밀게시판 댓글 수정, 삭제 시 비밀번호 확인 */
+// router.post("/secretPostCheckPassword", (req, res) => {
+//   const sql = `select count(*) as 'cnt' from secretPostComment where commentPassword = "${req.body.password}" and commentId = ${req.body.commentId}`;
+//   db.query(sql, function (err, result) {
+//     if (err) throw err;
+//     res.send(result);
+//   });
+// });
+
+/* 익명게시판 대댓글 수정, 삭제 시 비밀번호 확인 */
+router.post("/postCommentCheckPassword", (req, res) => {
   const sql = `select count(*) as 'cnt' from postCommentComment where commentCommentPassword = "${req.body.password}" and commentCommentId = ${req.body.commentId}`;
   db.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
   });
 });
+
+// /* 비밀게시판 대댓글 수정, 삭제 시 비밀번호 확인 */
+// router.post("/secretPostCommentCheckPassword", (req, res) => {
+//   const sql = `select count(*) as 'cnt' from secretPostCommentComment where commentCommentPassword = "${req.body.password}" and commentCommentId = ${req.body.commentId}`;
+//   db.query(sql, function (err, result) {
+//     if (err) throw err;
+//     res.send(result);
+//   });
+// });
 
 /* ID 중복 체크 */
 
