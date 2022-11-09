@@ -26,7 +26,7 @@ const SecretPostCreate = () => {
             <div className="flex justify-center font-bold text-2xl mb-4">
               비밀 게시물 업로드
             </div>
-            <div className="border-b-8 mb-4"></div>
+            <div className="border-b-8  border-white  mb-4"></div>
             <div>
               <Create method="1" onoff={onoff} />
             </div>
