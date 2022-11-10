@@ -120,22 +120,49 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                 <div className="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
                   {check === "trueUpdate" + commentComment.commentCommentId ? null : (
                     <>
-                      <button
-                        className="hover:underline"
-                        onClick={() => {
-                          setCheck("passwordUpdate" + commentComment.commentCommentId);
-                        }}
-                      >
-                        수정
-                      </button>
-                      <button
-                        className="hover:underline"
-                        onClick={() => {
-                          setCheck("passwordDelete" + commentComment.commentCommentId);
-                        }}
-                      >
-                        삭제
-                      </button>
+                      {window.sessionStorage.getItem("id") === commentComment.commentCommentNick ? (
+                        <>
+                          <button
+                            className="hover:underline"
+                            onClick={() => {
+                              setCheck("trueUpdate" + commentComment.commentCommentId);
+                            }}
+                          >
+                            수정
+                          </button>
+                          <button
+                            className="hover:underline"
+                            onClick={() => {
+                              setCheck("delete" + commentComment.commentCommentId);
+                            }}
+                          >
+                            삭제
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          {onoff ? null : (
+                            <>
+                              <button
+                                className="hover:underline"
+                                onClick={() => {
+                                  setCheck("passwordUpdate" + comment.commentId);
+                                }}
+                              >
+                                수정
+                              </button>
+                              <button
+                                className="hover:underline"
+                                onClick={() => {
+                                  setCheck("passwordDelete" + comment.commentId);
+                                }}
+                              >
+                                삭제
+                              </button>
+                            </>
+                          )}
+                        </>
+                      )}
                     </>
                   )}
                 </div>
