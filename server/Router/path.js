@@ -5,7 +5,6 @@ const router = express.Router();
 /* 연결확인 */
 db.connect(function (err) {
   if (err) throw err;
-  console.log("Connected");
 });
 
 /* 비밀 게시글 조회 */
@@ -23,7 +22,6 @@ router.get("/secretPostDetailPage/:id", async (request, response) => {
   const sql2 = "UPDATE secretPost SET view = view + 1 WHERE id = " + request.params.id;
   await db.query(sql1, function (err, result) {
     if (err) throw err;
-    console.log(result);
     response.send(result);
   });
   await db.query(sql2, function (err, result) {
@@ -35,7 +33,6 @@ router.get("/secretPostDetailPage/:id", async (request, response) => {
 router.post("/secretPostCreate", (request, response) => {
   const sql = "INSERT INTO secretPost (title, content, member_id) VALUES (?,?,?)";
   if (request.body.title === "" || request.body.content === "") {
-    console.log("비밀게시물 생성 실패");
   } else {
     db.query(sql, [request.body.title, request.body.content, request.body.member_id], function (err, result) {
       if (err) throw err;
@@ -49,24 +46,20 @@ router.post("/secretPostCreate", (request, response) => {
 router.post("/secretPostUpdate/:id", (request, response) => {
   const sql = "UPDATE secretPost SET ? WHERE id = " + request.params.id;
   if (request.body.title === "" || request.body.content === "") {
-    console.log("비밀게시물 업데이트 실패");
   } else {
     db.query(sql, request.body, function (err, result) {
       if (err) throw err;
       response.send("success");
-      console.log("비밀게시물 업데이트 완료");
     });
   }
 });
 
 /* 비밀 게시글 삭제 */
 router.post("/secretPostDelete/:id", (request, response) => {
-  console.log("비밀게시물 삭제 준비");
   const sql = "DELETE FROM secretPost WHERE id = " + request.params.id;
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send("success");
-    console.log("비밀게시물 삭제 완료");
   });
 });
 
@@ -141,11 +134,9 @@ router.get("/postDetailPage/:id", async (request, response) => {
 router.post("/postCreate", (request, response) => {
   const sql = "INSERT INTO Post (title, content, member_id) VALUES (?,?,?)";
   if (request.body.title === "" || request.body.content === "") {
-    console.log("비밀게시물 생성 실패");
   } else {
     db.query(sql, [request.body.title, request.body.content, request.body.member_id], function (err, result) {
       if (err) throw err;
-      console.log("비밀게시물 생성 완료");
       response.send("success");
     });
   }
@@ -155,12 +146,10 @@ router.post("/postCreate", (request, response) => {
 router.post("/postUpdate/:id", (request, response) => {
   const sql = "UPDATE post SET ? WHERE id = " + request.params.id;
   if (request.body.title === "" || request.body.content === "") {
-    console.log("비밀게시물 업데이트 실패");
   } else {
     db.query(sql, request.body, function (err, result) {
       if (err) throw err;
       response.send("success");
-      console.log("익명게시물 업데이트 완료");
     });
   }
 });
@@ -171,7 +160,6 @@ router.post("/postDelete/:id", (request, response) => {
   db.query(sql, function (err, result) {
     if (err) throw err;
     response.send("success");
-    console.log("익명게시물 삭제 완료");
   });
 });
 
@@ -226,7 +214,6 @@ router.patch("/postCommentUpdate/:id", (request, response) => {
 
 /* 회원등록 */
 router.post("/join", (req, res) => {
-  console.log(req.body);
   let memberId = req.body.id;
   let password = req.body.pw;
   let email = req.body.email;
@@ -240,7 +227,6 @@ router.post("/join", (req, res) => {
 
 /* 로그인 */
 router.post("/login", (req, res) => {
-  console.log(req.body);
   let memberId = req.body.id;
   let password = req.body.pw;
 
@@ -374,7 +360,6 @@ router.post("/idCheck", (req, res) => {
   const sql = `SELECT COUNT(memberId) AS 'cnt' FROM member WHERE memberId = "${req.body.id}";`;
   db.query(sql, function (err, result) {
     if (err) throw err;
-    console.log(result);
     res.send(result);
   });
 });
@@ -384,7 +369,6 @@ router.post("/myPost", (req, res) => {
   const sql = `select * from post WHERE member_id = "${req.body.nick}" ORDER BY id DESC`;
   db.query(sql, function (err, result) {
     if (err) throw err;
-    console.log(result);
     res.send(result);
   });
 });
