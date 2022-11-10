@@ -31,18 +31,12 @@ const MyPost = () => {
 
     getData1();
     getData2();
-
-    postNullCheck();
   }, []);
 
-  const postNullCheck = () => {
-    if (myPosts.length || mySecretPosts.length !== 0) {
-      setPostOX(true);
-    }
-  };
   return (
     <>
-      {postOX ? (
+      <div>익명게시판</div>
+      {myPosts !== null ? (
         <>
           <div className="shadow overflow-auto">
             <table className="mt-5">
@@ -72,7 +66,14 @@ const MyPost = () => {
               ))}
             </table>
           </div>
+        </>
+      ) : (
+        <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">익명게시물이 없습니다.</div>
+      )}
 
+      <div>비밀게시판</div>
+      {mySecretPosts !== null ? (
+        <>
           <div className="shadow overflow-auto">
             <table className="mt-5">
               <thead className="bg-gray-50 border">
@@ -103,7 +104,7 @@ const MyPost = () => {
           </div>
         </>
       ) : (
-        <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">게시물이 없습니다.</div>
+        <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">비밀게시물이 없습니다.</div>
       )}
     </>
   );
