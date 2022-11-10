@@ -181,7 +181,7 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                       setCheck("trueUpdate" + commentComment.commentCommentId);
                       console.log("성공");
                     } else {
-                      alert("비밀번호 쓰세요");
+                      alert("비밀번호가 틀립니다");
                       setPassword("");
                       console.log("오류");
                     }
@@ -225,7 +225,7 @@ const CommentComment = ({ sort, id, comment, activity, setActivity, onoff }) => 
                       console.log("성공");
                     } else {
                       console.log(commentComment.commentCommentId);
-                      alert("비밀번호 쓰라요");
+                      alert("비밀번호가 틀립니다");
                       setPassword("");
                       console.log("오류");
                     }
