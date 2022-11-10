@@ -11,6 +11,7 @@ import PostUpdate from "./component/PostUpdate.jsx";
 import Login from "./component/Login.jsx";
 import SecretHome from "./component/SecretHome.jsx";
 import { useState } from "react";
+import MyPost from "./component/MyPost.jsx";
 
 const AppRoute = () => {
   const [onoff, setOnoff] = useState(false);
@@ -40,32 +41,18 @@ const AppRoute = () => {
 
         <Routes>
           <Route exact path="/home" element={<Home />} />
-          <Route
-            exact
-            path="/secretPostCreate"
-            element={<SecretPostCreate />}
-          />
-          <Route
-            exact
-            path="/secretPostDetailPage/:id"
-            element={<SecretPostDetailPage />}
-          />
-          <Route
-            exact
-            path="/secretPostUpdate/:id"
-            element={<SecretPostUpdate />}
-          />
+          <Route exact path="/secretPostCreate" element={<SecretPostCreate />} />
+          <Route exact path="/secretPostDetailPage/:id" element={<SecretPostDetailPage />} />
+          <Route exact path="/secretPostUpdate/:id" element={<SecretPostUpdate />} />
 
           <Route exact path="/postCreate" element={<PostCreate />} />
-          <Route
-            exact
-            path="/postDetailPage/:id"
-            element={<PostDetailPage />}
-          />
+          <Route exact path="/postDetailPage/:id" element={<PostDetailPage />} />
           <Route exact path="/postUpdate/:id" element={<PostUpdate />} />
           <Route exact path="/join" element={<Join />} />
           <Route exact path="/" element={<Login />} />
           <Route exact path="/secrethome" element={<SecretHome />} />
+
+          <Route exact path="/myPost" element={<MyPost />} />
         </Routes>
       </BrowserRouter>
     </>
