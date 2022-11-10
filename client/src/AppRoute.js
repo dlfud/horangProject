@@ -17,7 +17,6 @@ const AppRoute = () => {
   const [onoff, setOnoff] = useState(false);
 
   const loginout = () => {
-    console.log(window.sessionStorage.getItem("id"));
     if (window.sessionStorage.getItem("id") === null) {
       setOnoff(false);
     } else {

@@ -4,9 +4,7 @@ const Nav = ({ onoff }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log("로그아웃");
     window.sessionStorage.clear();
-    console.log("로그아웃 완료", window.sessionStorage.getItem("id"));
     navigate("/");
   };
 

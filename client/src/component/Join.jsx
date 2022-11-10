@@ -4,11 +4,10 @@ import axios from "axios";
 import { url } from "../configIp";
 
 const Join = () => {
-  const [iderrMsg, setIderrMsg] = useState('');
-  const [pwerrMsg, setPwerrMsg] = useState('');
-  const [passworderrMsg, setPassworderrMsg] = useState('');
-  const [emailerrMsg, setEmailerrMsg] = useState('');
-
+  const [iderrMsg, setIderrMsg] = useState("");
+  const [pwerrMsg, setPwerrMsg] = useState("");
+  const [passworderrMsg, setPassworderrMsg] = useState("");
+  const [emailerrMsg, setEmailerrMsg] = useState("");
 
   const [idMemberErr, setIdMemberErr] = useState(false);
   const [pwMemberErr, setPwMemberErr] = useState(false);
@@ -25,28 +24,25 @@ const Join = () => {
 
   const navigate = useNavigate();
 
-
-
   const onchangeIdMember = () => {
     if (idRef.current.value.length < 1 || idRef.current.value.length > 9) {
-      setIderrMsg("아이디는 1~8자에 맞춰 입력해주세요")
+      setIderrMsg("아이디는 1~8자에 맞춰 입력해주세요");
     } else {
-      setIderrMsg("")
+      setIderrMsg("");
       setIdMemberErr(true);
     }
-  }
+  };
 
   const onchangePwMember = () => {
-
-    if ((pwRef.current.value.length < 10 || pwRef.current.value.length > 20)) {
+    if (pwRef.current.value.length < 10 || pwRef.current.value.length > 20) {
       setPwerrMsg("비밀번호는 공백없는 10자리~20자리 이내로 입력해주세요");
-    } else if ((pwRef.current.value.search(/\s/) > -1)) {
+    } else if (pwRef.current.value.search(/\s/) > -1) {
       setPwerrMsg("비밀번호는 공백없는 10자리~20자리 이내로 입력해주세요");
     } else {
       setPwerrMsg("");
       setPwMemberErr(true);
     }
-  }
+  };
 
   const onchangePasswordMember = () => {
     if (pwRef.current.value !== passwordRef.current.value) {
@@ -55,19 +51,16 @@ const Join = () => {
       setPassworderrMsg("");
       setPasswordMemberErr(true);
     }
-  }
+  };
 
   const onchangeEmailMember = () => {
-    console.log(emailRef.current.value);
-    if ((emailRegEx.test(emailRef.current.value)) === false) {
-      setEmailerrMsg("이메일형식에 맞춰 입력해주세요")
-    } else  {
+    if (emailRegEx.test(emailRef.current.value) === false) {
+      setEmailerrMsg("이메일형식에 맞춰 입력해주세요");
+    } else {
       setEmailerrMsg("");
       setEmailMemberErr(true);
     }
-   
-  }
-
+  };
 
   const handleMember = () => {
     if (usingId === false) {
@@ -90,7 +83,6 @@ const Join = () => {
       return false;
     }
 
-
     axios
       .post(`${url}/join`, {
         id: idRef.current.value,
@@ -107,22 +99,18 @@ const Join = () => {
       .catch((e) => {
         console.error(e);
       });
-  }
+  };
 
   const checkID = (e) => {
     e.preventDefault();
-    console.log("아이디 중복 확인 시작", idRef.current.value)
     axios
       .post(`${url}/idCheck`, {
         id: idRef.current.value,
       })
       .then((res) => {
-
-        console.log("ID중복 체크 =>", res.data[0].cnt);
         if (res.data[0].cnt === 1) {
           alert("아이디가 중복되었습니다.");
-        }
-        else {
+        } else {
           alert("사용가능한 아이디입니다.");
           setUsingId(true);
         }
@@ -130,12 +118,12 @@ const Join = () => {
       .catch((e) => {
         console.error(e);
       });
-  }
+  };
 
   return (
     <div className="flex items-center justify-center mt-20">
-      <div className='w-full max-w-lg px-10 py-8 mx-auto MainColor2 rounded-lg shadow-xl'>
-        <div className='max-w-md mx-auto space-y-6'>
+      <div className="w-full max-w-lg px-10 py-8 mx-auto MainColor2 rounded-lg shadow-xl">
+        <div className="max-w-md mx-auto space-y-6">
           <div className="border-b-4 border-white mb-4">
             <div className="flex justify-center text-white font-bold text-4xl mb-4">
               <p> JOIN</p>
@@ -144,7 +132,9 @@ const Join = () => {
           <form>
             <table border="1" width="360px" align="center" className="content-around h-40">
               <tr>
-                <td width="100px" className="text-center text-white">ID</td>
+                <td width="100px" className="text-center text-white">
+                  ID
+                </td>
                 <td align="left" width="200px">
                   <input
                     type="text"
@@ -158,14 +148,10 @@ const Join = () => {
                   ></input>
                 </td>
                 <td width="60px">
-                  <button
-                    onClick={checkID}
-                    className="float-right mr-6 rounded-lg text-xs text-white"
-                  >
+                  <button onClick={checkID} className="float-right mr-6 rounded-lg text-xs text-white">
                     확인
                   </button>
                 </td>
-
               </tr>
               <tr>
                 <td></td>
@@ -175,7 +161,9 @@ const Join = () => {
               </tr>
 
               <tr>
-                <td width="100px" className="text-center text-white">PW</td>
+                <td width="100px" className="text-center text-white">
+                  PW
+                </td>
                 <td align="left" width="200px">
                   <input
                     type="password"
@@ -196,7 +184,9 @@ const Join = () => {
                 </td>
               </tr>
               <tr>
-                <td width="100px" className="text-center text-white" >PW 확인</td>
+                <td width="100px" className="text-center text-white">
+                  PW 확인
+                </td>
                 <td align="left" width="200px">
                   <input
                     type="password"
@@ -217,7 +207,9 @@ const Join = () => {
                 </td>
               </tr>
               <tr>
-                <td width="100px" className="text-center text-white">Email</td>
+                <td width="100px" className="text-center text-white">
+                  Email
+                </td>
                 <td align="left" width="200px">
                   <input
                     type="email"
@@ -228,7 +220,8 @@ const Join = () => {
                     onChange={onchangeEmailMember}
                     placeholder="이메일을 입력하세요"
                     className="rounded-lg text-xs px-6 py-1 text-center"
-                    required autofocus
+                    required
+                    autofocus
                   ></input>
                 </td>
               </tr>
@@ -253,11 +246,7 @@ const Join = () => {
         </div>
       </div>
     </div>
-
   );
-
 };
 
-
 export default Join;
-

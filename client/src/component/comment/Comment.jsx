@@ -31,7 +31,6 @@ const Comment = ({ sort, activity, setActivity, id, onoff }) => {
           url: `${url}/${sort}CommentDelete/${id}`,
           method: "POST",
         });
-        console.log("됐지롱");
         setActivity(activity + 1);
         setCheck("false");
         return;
