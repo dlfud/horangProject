@@ -9,6 +9,7 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
 
   useEffect(() => {
     postNullCheck();
+    loginout();
   });
   const countPostComment = (id) =>
     postComment.map((_comment, index) => {
@@ -96,14 +97,14 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
               {onoff ? (
                 <Link
                   to="/postCreate"
-                  className=" p-2 MainColor2 text-sm font-bold"
+                  className=" p-2 MainColor2 text-sm font-bold rounded-lg" 
                 >
-                  <button onClick={loginout}>글쓰기</button>
+                  <button >글쓰기</button>
                 </Link>
               ) : (
                 <button
-                  className=" p-2 MainColor2 text-sm font-bold  rounded-lg"
-                  onClick={loginout}
+                  className=" p-2 MainColor2 text-sm font-bold rounded-lg"
+                  
                 >
                   글쓰기
                 </button>
