@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import { url } from "../configIp";
 import Pagination from "./Pagination";
 import SecretPagination from "./SecretPagination";
+import Nav from "./Nav";
 
 const MyPost = () => {
   const [myPosts, setMyPosts] = useState([]);
   const [mySecretPosts, setMySecretPosts] = useState([]);
+  const [onoff, setOnoff] = useState(false);
   const nick = window.sessionStorage.getItem("id");
   const [limit, setLimit] = useState(3);
   const [page, setPage] = useState(1);
@@ -33,6 +35,17 @@ const MyPost = () => {
       });
       setMySecretPosts(data.data);
     };
+
+    const loginout = () => {
+      console.log(window.sessionStorage.getItem("id"));
+      if (window.sessionStorage.getItem("id") === null) {
+        setOnoff(false);
+      } else {
+        setOnoff(true);
+      }
+    };
+
+    loginout();
 
     getData1();
     getData2();
@@ -74,24 +87,21 @@ const MyPost = () => {
                     ))}
                   </table>
                   <div className=" text-center">
-                    <Pagination
-                      total={myPosts.length}
-                      limit={limit}
-                      page={page}
-                      setPage={setPage}
-                    />
+                    <Pagination total={myPosts.length} limit={limit} page={page} setPage={setPage} />
                   </div>
                 </div>
               </>
             ) : (
-              <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5 text-center mx-auto">익명게시물이 없습니다.</div>
+              <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5 text-center mx-auto">
+                익명게시물이 없습니다.
+              </div>
             )}
           </div>
           <div>
             <div className="text-4xl">비밀게시판</div>
-            {mySecretPosts.length !== 0 ?
+            {mySecretPosts.length !== 0 ? (
               <>
-               <div className="overflow-auto ">
+                <div className="overflow-auto ">
                   <table className="mt-5">
                     <thead className="bg-gray-50">
                       <tr className="whitespace-nowrap">
@@ -128,9 +138,11 @@ const MyPost = () => {
                   </div>
                 </div>
               </>
-              :
-              <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5 text-center mx-auto">비밀게시물이 없습니다.</div>
-            }
+            ) : (
+              <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5 text-center mx-auto">
+                비밀게시물이 없습니다.
+              </div>
+            )}
           </div>
         </div>
       </div>
