@@ -381,7 +381,7 @@ router.post("/idCheck", (req, res) => {
 
 /* 익명게시판 내글 가져오기 */
 router.post("/myPost", (req, res) => {
-  const sql = `select * from post WHERE member_id = "${req.body.nick}"`;
+  const sql = `select * from post WHERE member_id = "${req.body.nick}" ORDER BY id DESC`;
   db.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -391,7 +391,7 @@ router.post("/myPost", (req, res) => {
 
 /* 비밀게시판 내글 가져오기 */
 router.post("/mySecretPost", (req, res) => {
-  const sql = `select * from secretPost WHERE member_id = "${req.body.nick}"`;
+  const sql = `select * from secretPost WHERE member_id = "${req.body.nick}" ORDER BY id DESC`;
   db.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
