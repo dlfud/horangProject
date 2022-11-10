@@ -23,7 +23,6 @@ const CommentCreate = ({ sort, activity, setActivity, id, onoff }) => {
 
         if (data.data !== null) {
           setActivity(activity + 1);
-          setNick("");
           setPassword("");
           setNewContent("");
           console.log("성공");

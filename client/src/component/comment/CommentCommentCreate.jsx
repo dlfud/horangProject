@@ -25,6 +25,7 @@ const CommentCommentCreate = ({ sort, activity, setActivity, id, onoff, setCheck
 
           if (data.data !== null) {
             setActivity(activity + 1);
+            setNick(window.sessionStorage.getItem("id"));
             setCheck("false");
             setContent("");
             console.log("성공");
