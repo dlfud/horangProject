@@ -51,11 +51,12 @@ router.post("/secretPostUpdate/:id", (request, response) => {
   if (request.body.title === "" || request.body.content === "") {
     console.log("비밀게시물 업데이트 실패");
   } else {
-  db.query(sql, request.body, function (err, result) {
-    if (err) throw err;
-    response.send("success");
-    console.log("비밀게시물 업데이트 완료");
-  });}
+    db.query(sql, request.body, function (err, result) {
+      if (err) throw err;
+      response.send("success");
+      console.log("비밀게시물 업데이트 완료");
+    });
+  }
 });
 
 /* 비밀 게시글 삭제 */
@@ -156,11 +157,12 @@ router.post("/postUpdate/:id", (request, response) => {
   if (request.body.title === "" || request.body.content === "") {
     console.log("비밀게시물 업데이트 실패");
   } else {
-  db.query(sql, request.body, function (err, result) {
-    if (err) throw err;
-    response.send("success");
-    console.log("익명게시물 업데이트 완료");
-  });}
+    db.query(sql, request.body, function (err, result) {
+      if (err) throw err;
+      response.send("success");
+      console.log("익명게시물 업데이트 완료");
+    });
+  }
 });
 
 /* 익명 게시글 삭제 */
@@ -333,7 +335,6 @@ router.post("/secretPostCommentCommentDelete/:id", (req, res) => {
 
 // 검색
 router.post("/search", (req, res) => {
-  console.log(req.body.searchTitle);
   const sql = `SELECT * FROM post WHERE title LIKE "%${req.body.searchTitle}%" ORDER BY id DESC`;
   db.query(sql, function (err, result) {
     if (err) throw err;
@@ -342,7 +343,6 @@ router.post("/search", (req, res) => {
 });
 
 router.post("/secretSearch", (req, res) => {
-  console.log(req.body.searchTitle);
   const sql = `SELECT * FROM secretPost WHERE title LIKE "%${req.body.searchTitle}%" ORDER BY id DESC`;
   db.query(sql, function (err, result) {
     if (err) throw err;
@@ -371,11 +371,29 @@ router.post("/postCommentCheckPassword", (req, res) => {
 /* ID 중복 체크 */
 
 router.post("/idCheck", (req, res) => {
-  console.log(req.body);
   const sql = `SELECT COUNT(memberId) AS 'cnt' FROM member WHERE memberId = "${req.body.id}";`;
   db.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
+    res.send(result);
+  });
+});
+
+/* 익명게시판 내글 가져오기 */
+router.post("/myPost", (req, res) => {
+  const sql = `select * from post WHERE member_id = "${req.body.nick}"`;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });
+});
+
+/* 비밀게시판 내글 가져오기 */
+router.post("/mySecretPost", (req, res) => {
+  const sql = `select * from secretPost WHERE member_id = "${req.body.nick}"`;
+  db.query(sql, function (err, result) {
+    if (err) throw err;
     res.send(result);
   });
 });
