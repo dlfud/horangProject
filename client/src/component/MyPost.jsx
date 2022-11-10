@@ -37,7 +37,6 @@ const MyPost = () => {
     };
 
     const loginout = () => {
-      console.log(window.sessionStorage.getItem("id"));
       if (window.sessionStorage.getItem("id") === null) {
         setOnoff(false);
       } else {

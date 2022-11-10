@@ -53,7 +53,8 @@ const DetailPage = ({ method, id }) => {
         <strong className="text-2xl inline-block">
           <div>{detail.title}</div>
         </strong>
-        <div className="inline-block float-right">조회수 : {detail.view}</div>
+        <div className="inline-block float-right ml-3">조회수 : {detail.view}</div>
+        <div className="inline-block float-right">작성자 : {detail.member_id}</div>
         <hr />
         <div>
           <div className="p-9">{detail.content}</div>

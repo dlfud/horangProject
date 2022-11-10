@@ -40,7 +40,6 @@ const HomeR = () => {
     getData2();
 
     const loginout = () => {
-      console.log(window.sessionStorage.getItem("id"));
       if (window.sessionStorage.getItem("id") === null) {
         setOnoff(false);
       } else {
@@ -53,7 +52,6 @@ const HomeR = () => {
   }, []);
 
   const postNullCheck = () => {
-    console.log("게시물 유무 확인", post);
     if (post !== null) {
       setPostOX(true);
     }
