@@ -54,11 +54,14 @@ router.post("/secretPostCreate", (request, response) => {
 /* 비밀 게시글 업데이트 */
 router.post("/secretPostUpdate/:id", (request, response) => {
   const sql = "UPDATE secretPost SET ? WHERE id = " + request.params.id;
+  if (request.body.title === "" || request.body.content === "") {
+    console.log("비밀게시물 업데이트 실패");
+  } else {
   db.query(sql, request.body, function (err, result) {
     if (err) throw err;
     response.send("success");
     console.log("비밀게시물 업데이트 완료");
-  });
+  });}
 });
 
 /* 비밀 게시글 삭제 */
@@ -171,11 +174,14 @@ router.post("/postCreate", (request, response) => {
 /* 익명 게시글 수정 */
 router.post("/postUpdate/:id", (request, response) => {
   const sql = "UPDATE post SET ? WHERE id = " + request.params.id;
+  if (request.body.title === "" || request.body.content === "") {
+    console.log("비밀게시물 업데이트 실패");
+  } else {
   db.query(sql, request.body, function (err, result) {
     if (err) throw err;
     response.send("success");
     console.log("익명게시물 업데이트 완료");
-  });
+  });}
 });
 
 /* 익명 게시글 삭제 */
