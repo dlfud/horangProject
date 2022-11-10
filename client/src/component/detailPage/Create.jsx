@@ -70,7 +70,7 @@ const Create = ({ method, onoff }) => {
                 <td width="100px" className="text-center">내용</td>
                 <td align="left" width="200px">
                   <input
-                    type="password"
+                    type="text"
                     size="20"
                     placeholder="내용"
                     value={content}
