@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const PostListInput = ({ offset, limit, post, postComment }) => {
   let count = 0;
   const [onoff, setOnoff] = useState(false);
   const [postOX, setPostOX] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     postNullCheck();
-    loginout();
   });
   const countPostComment = (id) =>
     postComment.map((_comment, index) => {
@@ -22,9 +22,9 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
   const loginout = () => {
     if (window.sessionStorage.getItem("id") === null) {
       alert("로그인 필요");
-      setOnoff(false);
+      navigate("/home");
     } else {
-      setOnoff(true);
+      navigate("/postCreate");
     }
   };
 
@@ -74,13 +74,7 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
               <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">게시물을 생성해주세요</div>
             )}
             <div className="text-right mt-4">
-              {onoff ? (
-                <Link to="/postCreate" className=" p-2 MainColor2 text-sm font-bold rounded-lg">
-                  <button>글쓰기</button>
-                </Link>
-              ) : (
-                <button className=" p-2 MainColor2 text-sm font-bold rounded-lg">글쓰기</button>
-              )}
+              <button onClick={loginout}>글쓰기</button>
             </div>
           </div>
         </div>
