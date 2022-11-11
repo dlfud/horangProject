@@ -61,5 +61,8 @@
 ##### 게시글 생성
 ![](https://media.discordapp.net/attachments/997361298448846909/1040439481532166184/image.png?width=717&height=214)
 
+##### 게시글 삭제
+![](https://media.discordapp.net/attachments/997361298448846909/1040439266284687380/image.png?width=717&height=297)
+
 ## ![](https://media.discordapp.net/attachments/986886165049262091/1024883450727112744/40x40.png) 기술 설명서
 https://wiken.io/ken/10711
