@@ -74,7 +74,9 @@ const PostListInput = ({ offset, limit, post, postComment }) => {
               <div className="bg-white divide-y divide-gray-300 border postOXWidth mt-5">게시물을 생성해주세요</div>
             )}
             <div className="text-right mt-4">
-              <button onClick={loginout}>글쓰기</button>
+              <button className=" p-2 MainColor2 text-sm font-bold  rounded-lg" onClick={loginout}>
+                글쓰기
+              </button>
             </div>
           </div>
         </div>

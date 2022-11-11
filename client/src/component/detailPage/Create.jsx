@@ -20,6 +20,14 @@ const Create = ({ method, onoff }) => {
     memberId = window.sessionStorage.getItem("id");
   }
 
+  const cancle = () => {
+    if (sort === "post") {
+      nav("/home");
+    } else {
+      nav("/secrethome");
+    }
+  };
+
   return (
     <>
       <div>
@@ -48,54 +56,61 @@ const Create = ({ method, onoff }) => {
               alert("오류가 발생하였습니다.");
             }
           }}
-
         >
-         <table border="1" width="360px" align="center" className="content-around h-40">
-              <tr>
-                <td width="100px" className="text-center">제목</td>
-                <td align="left" width="200px">
-                  <input
-                    type="text"
-                    size="20"
-                    placeholder="제목"
-                    value={title}
-                    onChange={(e) => {
-                      setTitle(e.target.value);
-                    }}
-                    className="rounded-lg text-xs px-6 py-1 text-center"
-                  ></input>
-                </td>
-              </tr>
-              <tr>
-                <td width="100px" className="text-center">내용</td>
-                <td align="left" width="200px">
-                  <input
-                    type="text"
-                    size="20"
-                    placeholder="내용"
-                    value={content}
-                    onChange={(e) => {
-                     setContent(e.target.value);
-                    }}
-                    className="rounded-lg text-xs px-6 py-1 text-center"
-                  ></input>
-                </td>
-              </tr>
-             
-              <tr>
-                <td width="100px"></td>
-                <td align="left" width="200px" className="text-xs text-red-500">
-                 제목과 내용을 입력하여 주세요
-                </td>
-              </tr>
-	             <tr>
-                <td width="100px"></td>
-                <td align="right" width="200px">
-                 <button type="submit"
-                  className="text-gray-400 Main text-sm rounded-lg py-1 px-10">확인</button>
-                </td>
-              </tr>
-            </table>
+          <table border="1" width="360px" align="center" className="content-around h-40">
+            <tr>
+              <td width="100px" className="text-center">
+                제목
+              </td>
+              <td align="left" width="200px">
+                <input
+                  type="text"
+                  size="20"
+                  placeholder="제목"
+                  value={title}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  className="rounded-lg text-xs px-6 py-1 text-center"
+                ></input>
+              </td>
+            </tr>
+            <tr>
+              <td width="100px" className="text-center">
+                내용
+              </td>
+              <td align="left" width="200px">
+                <input
+                  type="text"
+                  size="20"
+                  placeholder="내용"
+                  value={content}
+                  onChange={(e) => {
+                    setContent(e.target.value);
+                  }}
+                  className="rounded-lg text-xs px-6 py-1 text-center"
+                ></input>
+              </td>
+            </tr>
+
+            <tr>
+              <td width="100px"></td>
+              <td align="left" width="200px" className="text-xs text-red-500">
+                제목과 내용을 입력하여 주세요
+              </td>
+            </tr>
+            <tr>
+              <td width="100px"></td>
+              <td align="right" width="200px">
+                <button type="submit" className="text-gray-400 Main text-sm rounded-lg py-1 px-10">
+                  확인
+                </button>
+                <button onClick={cancle} className="text-gray-400 Main text-sm rounded-lg py-1 px-10">
+                  취소
+                </button>
+              </td>
+            </tr>
+          </table>
         </form>
       </div>
     </>
