@@ -1,11 +1,9 @@
-# 🐯 teamHORNG
-
 # 🐯 teamHORNG 익명 게시판 프로젝트
-## 🐯 개발 환경
+## 개발 환경
 * VScode
 * SQLyog
 * GitHuB
-## 🐯 사용 기술
+## 사용 기술
 
 ### 백엔드
 
@@ -22,57 +20,31 @@
 * Javascript
 * tailwind
 
-## 🐯 Description
+## Description
 * React와 Node.js를 이용한 익명 게시판
 
-## 🐯 Main Service
+## Main Service
 * 익명게시판 서비스
 * 비밀게시판 서비스
 * 내글 보기 서비스
 * 게시글 검색 서비스
 
-## 🐯 Prerequisite
+## ERD 다이어그램
 
-* implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-*	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-*	implementation 'org.springframework.boot:spring-boot-starter-security'
-*	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-*	implementation 'org.springframework.boot:spring-boot-starter-web'
-*	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-*	compileOnly 'org.projectlombok:lombok'
-*	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-*	runtimeOnly 'mysql:mysql-connector-java'
-*	annotationProcessor 'org.projectlombok:lombok'
-*	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-*	testImplementation 'org.springframework.security:spring-security-test'
-*	implementation 'org.springframework.boot:spring-boot-starter-security'
-*	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-*	implementation 'org.springframework.boot:spring-boot-starter-validation'
-*	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-*	implementation 'org.springframework.boot:spring-boot-starter-web'
-*	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-*	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-*	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-*	runtimeOnly 'mysql:mysql-connector-java'
-*	annotationProcessor 'org.projectlombok:lombok'
-*	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+![](https://media.discordapp.net/attachments/997361298448846909/1040443455610028073/image.png?width=717&height=520)
 
-## ![](https://media.discordapp.net/attachments/986886165049262091/1024883450727112744/40x40.png) ERD 다이어그램
-
-![](https://media.discordapp.net/attachments/993375184193077272/1024901054166478898/unknown.png?width=904&height=630)
-
-## ![](https://media.discordapp.net/attachments/986886165049262091/1024883450727112744/40x40.png) 메인 서비스
+## 메인 서비스
 
 ### 회원가입 / 로그인
 
-##### 회원가입 화면(이메일 중복 시 화면)
-![](https://media.discordapp.net/attachments/1021608475320651849/1024889526201630770/614eb2a0f86a6fd9.PNG?width=588&height=629)
+##### 회원가입 화면
+![](https://media.discordapp.net/attachments/997361298448846909/1040444582120402994/image.png?width=717&height=239)
 
-##### 로그인 화면(로그인 실패 시 화면)
-![](https://media.discordapp.net/attachments/1021608475320651849/1024889510158409809/10ae33da93b4d300.PNG?width=561&height=603)
+##### 로그인 화면
+![](https://media.discordapp.net/attachments/997361298448846909/1040435084420984832/image.png?width=717&height=232)
 
-##### 스토리 메인 화면
-![스토리](https://user-images.githubusercontent.com/99649645/193164344-1e891999-043f-4dfd-90f8-d5715ac61694.JPG)
+##### 로그인 전 메인화면
+![스토리](https://media.discordapp.net/attachments/997361298448846909/1040436512308867112/image.png?width=717&height=216)
 
 ##### 스토리 좋아요 화면
 ![스토리 - 스토리 화면에서 댓글 등록](https://user-images.githubusercontent.com/99649645/193164499-655b83bc-371b-4aeb-9ce5-e40f1f602a74.JPG)
