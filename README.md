@@ -1,3 +1,6 @@
+협력했던 호랑 프로젝트 내 깃허브로 옮겨옴
+https://github.com/Parkseonho/Newhorang
+
 # 🐯 teamHORNG 익명 게시판 프로젝트
 ## 개발 환경
 * VScode
